@@ -1,5 +1,4 @@
 class Survey < ActiveRecord::Base
-	has_many :forms
-	has_many :persons
+	has_many :questions
 	belongs_to :creator, :class_name => 'Person', :foreign_key => 'creator_id'
 end
