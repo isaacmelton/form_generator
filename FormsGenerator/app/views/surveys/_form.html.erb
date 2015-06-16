@@ -20,6 +20,8 @@
 <div class="field">
 <%= builder.label :question, "Question" %><br \>
 <%= builder.text_area :question, :rows => 3 %>
+<%= builder.check_box :_destroy %>
+<%=  builder.label :_destroy, "Remove Question"%>
 </div>
 <% end %>
 

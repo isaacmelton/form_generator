@@ -6,7 +6,7 @@
 <%= @survey.title %>
 
 <ol>
-<% for question in @survey.questions %>
+<%=h for question in @survey.questions %>
 <li><%=h question.question %></li>
 <% end %>
 </ol>
