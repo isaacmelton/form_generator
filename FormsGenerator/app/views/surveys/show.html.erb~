@@ -6,8 +6,13 @@
 <%= @survey.title %>
 
 <ol>
-<%=h for question in @survey.questions %>
+<% for question in @survey.questions %>
 <li><%=h question.question %></li>
+<ul>
+<% for answer in question.answers %>
+<li><%=h answer.answer %></li>
+<% end %>
+</ul>
 <% end %>
 </ol>
 
