@@ -4,6 +4,6 @@
 <%= f.check_box :_destroy %>
 <%= f.label :_destroy, "Remove Question"%>
 </div>
-<% f.fields_for :answers do |builder| %>
+<%= f.fields_for :answers do |builder| %>
 <%= render 'answer_fields', :f => builder %>
 <% end %>
