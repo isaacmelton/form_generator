@@ -7,7 +7,7 @@
 
 <ol>
 <% for question in @survey.questions %>
-<div class="question">
+<div class="question" id="<%= question.id %>">
 <li><%= question.question %></li>
 
 <ul>
