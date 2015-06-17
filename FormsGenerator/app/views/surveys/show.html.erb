@@ -7,6 +7,7 @@
 
 <ol>
 <% for question in @survey.questions %>
+<div class="question">
 <li><%= question.question %></li>
 
 <ul>
@@ -18,6 +19,7 @@
 
 <% end %>
 </ul>
+</div>
 <% end %>
 </ol>
 
