@@ -1,7 +1,7 @@
-<div class="field">
+<div class="fields">
 <%= f.label :answer, "Answer" %>
 <%= f.text_field :answer %>
-<%= f.check_box :_destroy %>
-<%= f.label :_destroy, "Remove"%>
+<%= f.hidden_field :_destroy %>
+<%= link_to_function "remove", "remove_fields(this)" %>
 </div>
-<% end %>
+

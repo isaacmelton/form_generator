@@ -7,10 +7,15 @@
 
 <ol>
 <% for question in @survey.questions %>
-<li><%=h question.question %></li>
+<li><%= question.question %></li>
+
 <ul>
-<% for answer in question.answers %>
-<li><%=h answer.answer %></li>
+
+<% question.answers.each do |answer| %>
+
+<li><%= radio_button_tag(:answer, answer.answer ) %>
+<%= label_tag(:answer_tag, answer.answer ) %></li>
+
 <% end %>
 </ul>
 <% end %>
