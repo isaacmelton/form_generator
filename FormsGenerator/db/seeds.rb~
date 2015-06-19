@@ -86,6 +86,8 @@ RecordedAnswer.create(user_id: 10, answer_id: 48, survey_id: 5)
 RecordedAnswer.create(user_id: 10, answer_id: 53, survey_id: 5)
 RecordedAnswer.create(user_id: 10, answer_id: 56, survey_id: 5)
 
+58,59,60,61     62,63,64,65     66,67,68,69
+
 RecordedAnswer.create(user_id: 1, answer_id: 59, survey_id: 6)
 RecordedAnswer.create(user_id: 1, answer_id: 62, survey_id: 6)
 RecordedAnswer.create(user_id: 1, answer_id: 66, survey_id: 6)

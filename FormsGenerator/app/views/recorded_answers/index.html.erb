@@ -1,0 +1,31 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Recorded Answers</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>User</th>
+      <th>Answer</th>
+      <th>Survey</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @recorded_answers.each do |recorded_answer| %>
+      <tr>
+        <td><%= recorded_answer.user_id %></td>
+        <td><%= recorded_answer.answer_id %></td>
+        <td><%= recorded_answer.survey_id %></td>
+        <td><%= link_to 'Show', recorded_answer %></td>
+        <td><%= link_to 'Edit', edit_recorded_answer_path(recorded_answer) %></td>
+        <td><%= link_to 'Destroy', recorded_answer, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Recorded answer', new_recorded_answer_path %>
