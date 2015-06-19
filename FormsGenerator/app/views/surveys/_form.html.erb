@@ -13,7 +13,8 @@
 
   <div class="field">
     <%= f.label :person_id %>    
-    <%= f.text_field :person_id %>
+    <%= f.select :person_id, options_for_select(1..10), { prompt: "Select Creator ID" } %>
+
   </div>
   <div class="field">
     <%= f.label :title %><br>
