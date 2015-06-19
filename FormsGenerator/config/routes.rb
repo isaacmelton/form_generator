@@ -1,4 +1,9 @@
 Rails.application.routes.draw do
+  resources :recorded_answers
+  resources :recorded_answers
+  resources :records
+  resources :records
+  resources :recorded_answers
   get 'landing/index'
 
   resources :people

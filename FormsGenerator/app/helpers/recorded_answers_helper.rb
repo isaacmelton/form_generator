@@ -1,0 +1,2 @@
+module RecordedAnswersHelper
+end
