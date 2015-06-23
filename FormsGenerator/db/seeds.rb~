@@ -6,6 +6,22 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
+Person.create(first_name: "James", last_name: "Jones", email: "jjones@example.com", city: "Atlanta", state: "GA", country: "USA", sex: "M")
+Person.create(first_name: "John", last_name: "Doe", email: "jdoe@example.com", city: "Charlottesville", state: "VA", country: "USA", sex: "M")
+Person.create(first_name: "Andrew", last_name: "Smith", email: "asmith@example.com", city: "Memphis", state: "TN", country: "USA", sex: "M")
+Person.create(first_name: "Simon", last_name: "West", email: "swest@example.com", city: "Madison", state: "WI", country: "USA", sex: "M")
+Person.create(first_name: "Richard", last_name: "Matheson", email: "rmatheson@example.com", city: "Macon", state: "GA", country: "USA", sex: "M")
+
+Person.create(first_name: "Jennifer", last_name: "Dyer", email: "jdyer@example.com", city: "Omaha", state: "NE", country: "USA", sex: "F")
+Person.create(first_name: "Jane", last_name: "Doe", email: "janedoe@example.com", city: "Sacramento", state: "CA", country: "USA", sex: "F")
+Person.create(first_name: "Erica", last_name: "Melton", email: "emelton@example.com", city: "Cleveland", state: "OH", country: "USA", sex: "F")
+Person.create(first_name: "Rebecca", last_name: "Johnson", email: "rjohnson@example.com", city: "Houston", state: "TX", country: "USA", sex: "F")
+Person.create(first_name: "Anna", last_name: "Jones", email: "ajones@example.com", city: "Atlanta", state: "GA", country: "USA", sex: "F")
+
+RecordedAnswer.create(user_id: 1, answer_id: 13, survey_id: 2)
+RecordedAnswer.create(user_id: 1, answer_id: 18, survey_id: 2)
+RecordedAnswer.create(user_id: 1, answer_id: 21, survey_id: 2)
+
 RecordedAnswer.create(user_id: 2, answer_id: 13, survey_id: 2)
 RecordedAnswer.create(user_id: 2, answer_id: 17, survey_id: 2)
 RecordedAnswer.create(user_id: 2, answer_id: 24, survey_id: 2)
@@ -37,10 +53,6 @@ RecordedAnswer.create(user_id: 9, answer_id: 21, survey_id: 2)
 RecordedAnswer.create(user_id: 10, answer_id: 14, survey_id: 2)
 RecordedAnswer.create(user_id: 10, answer_id: 20, survey_id: 2)
 RecordedAnswer.create(user_id: 10, answer_id: 23, survey_id: 2)
-
-RecordedAnswer.create(user_id: 1, answer_id: 13, survey_id: 2)
-RecordedAnswer.create(user_id: 1, answer_id: 18, survey_id: 2)
-RecordedAnswer.create(user_id: 1, answer_id: 21, survey_id: 2)
 
 RecordedAnswer.create(user_id: 2, answer_id: 27, survey_id: 3)
 RecordedAnswer.create(user_id: 2, answer_id: 28, survey_id: 3)

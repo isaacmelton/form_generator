@@ -53,8 +53,8 @@ ActiveRecord::Schema.define(version: 20150619013249) do
   end
 
   create_table "surveys", force: :cascade do |t|
-    t.datetime "updated_at", null: false
     t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.integer  "person_id"
     t.string   "title"
   end
