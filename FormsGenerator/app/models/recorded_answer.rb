@@ -4,14 +4,22 @@ class RecordedAnswer < ActiveRecord::Base
     array = Array.new
     tmphsh = Hash.new
     result = RecordedAnswer.connection.select_all("SELECT answers.question_id AS question_id,
-                                                       answers.answer, COUNT(answer_id) AS choice_count
+                                                       answers.answer, COUNT(answer_id) AS choice_count,
+                                                       tottable.total AS total
                                                    FROM recorded_answers
                                                    INNER JOIN answers
                                                    ON answer_id = answers.id
-                                                   GROUP BY answer_id, question_id")
+                                                   LEFT JOIN (SELECT answers.question_id AS question_id,
+                                                                     COUNT(answer_id) AS total
+                                                              FROM recorded_answers
+                                                              INNER JOIN answers
+                                                              ON answer_id = answers.id
+                                                              GROUP BY answers.question_id) AS tottable
+                                                   ON answers.question_id = tottable.question_id
+                                                   GROUP BY answer_id, answers.question_id")
     array = result.each do |row|
       row.each do |k, x|
-        if tmphsh.count < 4
+        if tmphsh.count < 5
           tmphsh[k] = x
         else
           tmphsh[k] = x
@@ -19,18 +27,6 @@ class RecordedAnswer < ActiveRecord::Base
         end
       end
     end
-#    q_id = array[0]["question_id"]
-#    t = 0
-#    array = array.each do |ary|
-#      if q_id == ary["question_id"] then
-#        t = t + ary["choice_count"]
-#      else
-#        q_id = ary["question_id"]
-#        ary["total"] = t
-#        t = ary["choice_count"]
-#      end
-#    end
-#    array.last["total"] = t
     return array
   end
 
