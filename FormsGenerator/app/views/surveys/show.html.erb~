@@ -5,21 +5,29 @@
 </div>
 <%= @survey.title %>
 
+
+<%= form_tag (controller: "recorded_answer", action: "create", method: "post") do %>
 <ol>
 <% for question in @survey.questions %>
+<div class="question" id="<%= question.id %>">
 <li><%= question.question %></li>
 
 <ul>
 
+
 <% question.answers.each do |answer| %>
 
-<li><%= radio_button_tag(:answer, answer.answer ) %>
+<li><%= radio_button_tag(question.id, answer.answer ) %>
 <%= label_tag(:answer_tag, answer.answer ) %></li>
 
 <% end %>
 </ul>
+</div>
 <% end %>
 </ol>
+<%= submit_tag "Submit" %>
+</br>
 
+<% end %>
 <%= link_to 'Edit', edit_survey_path(@survey) %> 
 <%= link_to 'Back', surveys_path %>

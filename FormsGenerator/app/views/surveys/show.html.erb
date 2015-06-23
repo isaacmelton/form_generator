@@ -12,6 +12,7 @@
 
 <ul>
 
+
 <% question.answers.each do |answer| %>
 
 <li><%= radio_button_tag(question.id, answer.answer ) %>
@@ -24,5 +25,6 @@
 </ol>
 <%= submit_tag "Submit" %>
 </br>
+
 <%= link_to 'Edit', edit_survey_path(@survey) %> 
 <%= link_to 'Back', surveys_path %>
