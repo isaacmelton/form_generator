@@ -4,7 +4,11 @@ class AnswersController < ApplicationController
   # GET /answers
   # GET /answers.json
   def index
-    @answers = Answer.all
+    if params[:blah].nil? then
+      @text = 'ohai!'
+    else
+      @answers = Answer.all
+    end
   end
 
   # GET /answers/1
@@ -69,6 +73,6 @@ class AnswersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def answer_params
-      params.require(:answer).permit(:answer, :question_id, )
+      params.require(:answer).permit(:answer)
     end
 end

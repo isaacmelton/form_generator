@@ -6,9 +6,65 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-RecordedAnswer.create(user_id: 7, answer_id: 25, survey_id: 3)
-RecordedAnswer.create(user_id: 7, answer_id: 29, survey_id: 3)
-RecordedAnswer.create(user_id: 7, answer_id: 34, survey_id: 3)
+RecordedAnswer.create(user_id: 1, answer_id: 13, survey_id: 2)
+RecordedAnswer.create(user_id: 1, answer_id: 18, survey_id: 2)
+RecordedAnswer.create(user_id: 1, answer_id: 21, survey_id: 2)
+
+RecordedAnswer.create(user_id: 2, answer_id: 13, survey_id: 2)
+RecordedAnswer.create(user_id: 2, answer_id: 17, survey_id: 2)
+RecordedAnswer.create(user_id: 2, answer_id: 24, survey_id: 2)
+
+RecordedAnswer.create(user_id: 3, answer_id: 14, survey_id: 2)
+RecordedAnswer.create(user_id: 3, answer_id: 18, survey_id: 2)
+RecordedAnswer.create(user_id: 3, answer_id: 21, survey_id: 2)
+
+RecordedAnswer.create(user_id: 4, answer_id: 16, survey_id: 2)
+RecordedAnswer.create(user_id: 4, answer_id: 19, survey_id: 2)
+RecordedAnswer.create(user_id: 4, answer_id: 22, survey_id: 2)
+
+RecordedAnswer.create(user_id: 5, answer_id: 16, survey_id: 2)
+RecordedAnswer.create(user_id: 5, answer_id: 18, survey_id: 2)
+RecordedAnswer.create(user_id: 5, answer_id: 23, survey_id: 2)
+
+RecordedAnswer.create(user_id: 6, answer_id: 13, survey_id: 2)
+RecordedAnswer.create(user_id: 6, answer_id: 18, survey_id: 2)
+RecordedAnswer.create(user_id: 6, answer_id: 22, survey_id: 2)
+
+RecordedAnswer.create(user_id: 7, answer_id: 15, survey_id: 2)
+RecordedAnswer.create(user_id: 7, answer_id: 17, survey_id: 2)
+RecordedAnswer.create(user_id: 7, answer_id: 24, survey_id: 2)
+
+RecordedAnswer.create(user_id: 9, answer_id: 16, survey_id: 2)
+RecordedAnswer.create(user_id: 9, answer_id: 20, survey_id: 2)
+RecordedAnswer.create(user_id: 9, answer_id: 21, survey_id: 2)
+
+RecordedAnswer.create(user_id: 10, answer_id: 14, survey_id: 2)
+RecordedAnswer.create(user_id: 10, answer_id: 20, survey_id: 2)
+RecordedAnswer.create(user_id: 10, answer_id: 23, survey_id: 2)
+
+RecordedAnswer.create(user_id: 2, answer_id: 27, survey_id: 3)
+RecordedAnswer.create(user_id: 2, answer_id: 28, survey_id: 3)
+RecordedAnswer.create(user_id: 2, answer_id: 32, survey_id: 3)
+
+RecordedAnswer.create(user_id: 3, answer_id: 25, survey_id: 3)
+RecordedAnswer.create(user_id: 3, answer_id: 29, survey_id: 3)
+RecordedAnswer.create(user_id: 3, answer_id: 33, survey_id: 3)
+
+RecordedAnswer.create(user_id: 4, answer_id: 25, survey_id: 3)
+RecordedAnswer.create(user_id: 4, answer_id: 29, survey_id: 3)
+RecordedAnswer.create(user_id: 4, answer_id: 34, survey_id: 3)
+
+RecordedAnswer.create(user_id: 5, answer_id: 26, survey_id: 3)
+RecordedAnswer.create(user_id: 5, answer_id: 31, survey_id: 3)
+RecordedAnswer.create(user_id: 5, answer_id: 35, survey_id: 3)
+
+RecordedAnswer.create(user_id: 6, answer_id: 26, survey_id: 3)
+RecordedAnswer.create(user_id: 6, answer_id: 31, survey_id: 3)
+RecordedAnswer.create(user_id: 6, answer_id: 35, survey_id: 3)
+
+RecordedAnswer.create(user_id: 7, answer_id: 26, survey_id: 3)
+RecordedAnswer.create(user_id: 7, answer_id: 31, survey_id: 3)
+RecordedAnswer.create(user_id: 7, answer_id: 35, survey_id: 3)
 
 RecordedAnswer.create(user_id: 8, answer_id: 26, survey_id: 3)
 RecordedAnswer.create(user_id: 8, answer_id: 31, survey_id: 3)

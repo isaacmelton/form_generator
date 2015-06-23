@@ -1,33 +1,28 @@
 <p id="notice"><%= notice %></p>
 
-<% if !@text.nil? then %>
-  <h1>Who are you?</h1>
-<% else %>
+<h1>Listing Answers</h1>
 
-  <h1>Which survey of yours do you wish to view?</h1>
-  <table>
-    <thead>
+<table>
+  <thead>
+    <tr>
+      <th>Answers</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @answers.each do |answer| %>
       <tr>
-        <th>Answer</th>
-        <th colspan="3"></th>
+	<td><%= answer.id %></td>
+        <td><%= answer.answer %></td>
+        <td><%= link_to 'Show', answer %></td>
+        <td><%= link_to 'Edit', edit_question_path(answer) %></td>
+        <td><%= link_to 'Destroy', answer, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
-    </thead>
-
-    <tbody>
-      <% @answers.each do |answer| %>
-        <tr>
-  	<td><%= answer.id %></td>
-          <td><%= answer.answer %></td>
-          <td><%= link_to 'Show', answer %></td>
-          <td><%= link_to 'Edit', edit_answer_path(answer) %></td>
-          <td><%= link_to 'Destroy', answer, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
-
-<% end %>
+    <% end %>
+  </tbody>
+</table>
 
 <br>
 
-<%= link_to 'New Answer', new_answer_path %>
+<%= link_to 'New Question', new_question_path %>
