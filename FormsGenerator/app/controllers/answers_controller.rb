@@ -4,7 +4,11 @@ class AnswersController < ApplicationController
   # GET /answers
   # GET /answers.json
   def index
-    @answers = Answer.all
+    if params[:blah].nil? then
+      @text = 'ohai!'
+    else
+      @answers = Answer.all
+    end
   end
 
   # GET /answers/1

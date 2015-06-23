@@ -4,7 +4,15 @@ class RecordedAnswersController < ApplicationController
   # GET /recorded_answers
   # GET /recorded_answers.json
   def index
+    @survey = Survey.all
     @recorded_answers = RecordedAnswer.all
+  end
+
+  def statistics
+    survey_id = params[:post][:survey_id]
+    @survey = Survey.getSurveyByID(survey_id)
+    @questions = Question.where(survey_id: survey_id)
+    @answer_votes = RecordedAnswer.getVotesPerAnswer()
   end
 
   # GET /recorded_answers/1
@@ -24,7 +32,7 @@ class RecordedAnswersController < ApplicationController
   # POST /recorded_answers
   # POST /recorded_answers.json
   def create
-    @recorded_answer = RecordedAnswer.new(recorded_answer_params)
+    @recorded_answer = RecordedAnswer.new(:user_id => params[:user_id], :answer_id => params[:answer_id], :survey_id => params[:survey_id])
 
     respond_to do |format|
       if @recorded_answer.save
@@ -41,7 +49,7 @@ class RecordedAnswersController < ApplicationController
   # PATCH/PUT /recorded_answers/1.json
   def update
     respond_to do |format|
-      if @recorded_answer.update(recorded_answer_params)
+      if @recorded_answer.update(:user_id => params[:user_id], :answer_id => params[:answer_id], :survey_id => params[:survey_id])
         format.html { redirect_to @recorded_answer, notice: 'Recorded answer was successfully updated.' }
         format.json { render :show, status: :ok, location: @recorded_answer }
       else
