@@ -3,15 +3,14 @@
 <div>
 <strong>Title</strong>
 </div>
+<%= form_tag("/submit_form", method: "get") do %>
 <%= @survey.title %>
 
 <ol>
 <% for question in @survey.questions %>
 <div class="question" id="<%= question.id %>">
 <li><%= question.question %></li>
-
 <ul>
-
 
 <% question.answers.each do |answer| %>
 
@@ -24,6 +23,7 @@
 <% end %>
 </ol>
 <%= submit_tag "Submit" %>
+<% end %>
 </br>
 
 <%= link_to 'Edit', edit_survey_path(@survey) %> 
