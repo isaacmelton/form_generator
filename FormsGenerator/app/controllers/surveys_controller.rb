@@ -26,7 +26,7 @@ class SurveysController < ApplicationController
   end
 
   def submit_form
-    #@survey = Survey.where(:id => params[:survey_id])
+    #@survey = Survey.find(params[:id])
     @survey = Survey.new
   end
 

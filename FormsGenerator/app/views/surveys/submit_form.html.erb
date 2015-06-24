@@ -1,0 +1,11 @@
+Your form has been submitted!
+
+<%= @survey.title %>
+
+<% @survey.questions.each do |q| %>
+
+	<%= q.question %>
+	<%= q.question.answer %>
+	<br>
+
+<% end %>
