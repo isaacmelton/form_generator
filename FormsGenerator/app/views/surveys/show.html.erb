@@ -5,6 +5,7 @@
 </div>
 <%= form_tag("/submit_form", method: "get") do %>
 <%= @survey.title %>
+<%= hidden_field_tag :id, @survey.id %>
 <ol>
 <% for question in @survey.questions %>
 <div class="question" id="<%= question.id %>">

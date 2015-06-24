@@ -26,8 +26,14 @@ class SurveysController < ApplicationController
   end
 
   def submit_form
+    # FIXME assign this to the correct survey.
     #@survey = Survey.find(params[:id])
     @survey = Survey.new
+    # FIXME get the params that are getting passed in and add them to
+    # @survey.question.answer <---
+    # ^ This will be a foreach type of implementation
+    # Save the survey and pass it to the next page
+    @survey.save
   end
 
   # POST /surveys
