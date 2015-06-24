@@ -14,7 +14,7 @@
 
 <% question.answers.each do |answer| %>
 
-<li><%= radio_button_tag(question.id, answer.answer ) %>
+<li><%= radio_button_tag(question.id, answer.id ) %>
 <%= label_tag(:answer_tag, answer.answer ) %></li>
 
 <% end %>

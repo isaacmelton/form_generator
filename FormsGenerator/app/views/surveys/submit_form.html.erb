@@ -1,11 +1,14 @@
 Your form has been submitted!
-
-<%= @survey.title %>
-
+<br><br>
+<h2><%= @survey.title %></h2>
+<%= @answer.id %>
+<br>
 <% @survey.questions.each do |q| %>
 
 	<%= q.question %>
-	<%= q.question.answer %>
+
 	<br>
 
 <% end %>
+
+<%= link_to 'Back', surveys_path %>
