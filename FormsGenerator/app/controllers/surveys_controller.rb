@@ -30,10 +30,12 @@ class SurveysController < ApplicationController
     # FIXME get the question and answer ids and set them.
     @survey.questions.each do |q|
       @question = Question.where(q.id)
-      if params[q.id].nil?
-        @answer = Answer.new
-      else
+      if !params[q.id].nil?
         @answer = Answer.question_id.where(params[q.id])
+        q.answer = @answer
+        q.save
+      else
+        @answer = Answer.new
       end
     end
     # @survey.question.answer <---

@@ -7,11 +7,10 @@
 <%= @survey.title %>
 <%= hidden_field_tag :id, @survey.id %>
 <ol>
-<% for question in @survey.questions %>
+<% for question in @survey.questions  %>
 <div class="question" id="<%= question.id %>">
 <li><%= question.question %></li>
 <ul>
-
 <% question.answers.each do |answer| %>
 
 <li><%= radio_button_tag(question.id, answer.id ) %>
