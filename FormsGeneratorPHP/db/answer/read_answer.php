@@ -1,5 +1,5 @@
-<?php 
-include('config.php'); 
+<?php
+
 echo "<table border=1 >"; 
 echo "<tr>"; 
 echo "<td><b>Id</b></td>"; 
@@ -8,8 +8,8 @@ echo "<td><b>Created At</b></td>";
 echo "<td><b>Updated At</b></td>"; 
 echo "<td><b>Question Id</b></td>"; 
 echo "</tr>"; 
-$result = mysql_query("SELECT * FROM `answers`") or trigger_error(mysql_error()); 
-while($row = mysql_fetch_array($result)){ 
+$result = $db->query("SELECT * FROM `answers`") or trigger_error(mysql_error());
+while($row = $result->fetch(PDO::FETCH_ASSOC)){
 foreach($row AS $key => $value) { $row[$key] = stripslashes($value); } 
 echo "<tr>";  
 echo "<td valign='top'>" . nl2br( $row['id']) . "</td>";  
@@ -21,5 +21,5 @@ echo "<td valign='top'><a href=update_answer.php?id={$row['id']}>Edit</a></td><t
 echo "</tr>"; 
 } 
 echo "</table>"; 
-echo "<a href=create_answe.php>New Row</a>"; 
+echo "<a href=create_answer.php>New Row</a>";
 ?>
