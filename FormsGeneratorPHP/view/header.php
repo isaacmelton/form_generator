@@ -1,15 +1,3 @@
-<?php
-// determine the absolute path to the style sheet main.css
-$uri = $_SERVER['REQUEST_URI'];
-$dirs = explode('/', $uri);
-$i = 1;
-$path = '/';
-while ($dirs[$i] != "FormsGeneratorPHP") {
-    $path .= $dirs[$i] . '/';
-    $i += 1;
-}
-$path .= 'FormsGeneratorPHP/';
-?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
