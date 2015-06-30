@@ -7,5 +7,7 @@
 
         <?php include 'db/answer/read_answer.php'; ?>
 
+
+
     </div>
 <?php include 'view/footer.php'; ?>
