@@ -1,27 +1,13 @@
-<?php 
-    if (session_status() == PHP_SESSION_NONE) {
-        session_start();
-    }
-?>
-
-<?php // include HEADER_STUFF_GOES_HERE ?>
-
-<?php 
-    // $takers will wait until users are added to the DB
-    if (!isset($surveys)) || (!isset($authors)) /* || (!isset($takers)) */ { 
-        header("Location: index.php"); 
-    } 
-?>
-
 <p>
     Hey look!  This is where you choose either the survey or author (or ultimately survey-taker) you want to inspect statistics-wise.
 </p>
 
-<form action="surveys" method="post" id="aligned">
-    <select name="id">
+<form action="" method="post" id="aligned">
+    <input type="hidden" name="action" value="surveys" />
+    <select name="survey_id">
         <?php foreach ($surveys as $survey): ?>
             <option value="<?php echo $survey['id']; ?>">
-                <?php echo $survey['name']; ?>
+                <?php echo $survey['title']; ?>
             </option>
         <?php endforeach; ?>
     </select>
@@ -31,8 +17,9 @@
 
 <br />
 
-<form action="authors" method="post" id="aligned">
-    <select name="id">
+<form action="" method="post" id="aligned">
+    <input type="hidden" name="action" value="authors" />
+    <select name="author_id">
         <?php foreach ($authors as $author): ?>
             <option value="<?php echo $author['id']; ?>">
                 <?php echo $author['email']; ?>
