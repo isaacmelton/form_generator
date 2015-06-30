@@ -1,15 +1,20 @@
 <?php 
 include('config.php'); 
+
 if (isset($_GET['id']) ) { 
 $id = (int) $_GET['id']; 
 if (isset($_POST['submitted'])) { 
-foreach($_POST AS $key => $value) { $_POST[$key] = mysql_real_escape_string($value); } 
-$sql = "UPDATE `people` SET  `first_name` =  '{$_POST['first_name']}' ,  `last_name` =  '{$_POST['last_name']}' ,  `email` =  '{$_POST['email']}' ,  `city` =  '{$_POST['city']}' ,  `state` =  '{$_POST['state']}' ,  `country` =  '{$_POST['country']}' ,  `sex` =  '{$_POST['sex']}' ,  `created_at` =  '{$_POST['created_at']}' ,  `updated_at` =  '{$_POST['updated_at']}'   WHERE `id` = '$id' "; 
-mysql_query($sql) or die(mysql_error()); 
-echo (mysql_affected_rows()) ? "Edited row.<br />" : "Nothing changed. <br />"; 
+
+$sql = $db->prepare("UPDATE `people` SET  `first_name` =  '{$_POST['first_name']}' ,  `last_name` =  '{$_POST['last_name']}' ,  `email` =  '{$_POST['email']}' ,  `city` =  '{$_POST['city']}' ,  `state` =  '{$_POST['state']}' ,  `country` =  '{$_POST['country']}' ,  `sex` =  '{$_POST['sex']}' ,  `created_at` =  '{$_POST['created_at']}' ,  `updated_at` =  '{$_POST['updated_at']}'   WHERE `id` = '$id' "); 
+$count = $sql->execute() or die(print_r($sql->errorInfo()));
+
+
+echo ($count > 0)) ? "Edited row.<br />" : "Nothing changed. <br />"; 
 echo "<a href='read_people.php'>Back To Listing</a>"; 
 } 
-$row = mysql_fetch_array ( mysql_query("SELECT * FROM `people` WHERE `id` = '$id' ")); 
+$result = $db->query("SELECT * FROM `people` WHERE `id` = '$id' "); 
+$row = $result->fetch(PDO::FETCH_ASSOC);
+
 ?>
 
 <form action='' method='POST'> 

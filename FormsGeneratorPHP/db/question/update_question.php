@@ -3,13 +3,16 @@ include('config.php');
 if (isset($_GET['id']) ) { 
 $id = (int) $_GET['id']; 
 if (isset($_POST['submitted'])) { 
-foreach($_POST AS $key => $value) { $_POST[$key] = mysql_real_escape_string($value); } 
-$sql = "UPDATE `questions` SET  `question` =  '{$_POST['question']}' ,  `created_at` =  '{$_POST['created_at']}' ,  `updated_at` =  '{$_POST['updated_at']}' ,  `survey_id` =  '{$_POST['survey_id']}'   WHERE `id` = '$id' "; 
-mysql_query($sql) or die(mysql_error()); 
-echo (mysql_affected_rows()) ? "Edited row.<br />" : "Nothing changed. <br />"; 
+
+$sql = $db->prepare("UPDATE `questions` SET  `question` =  '{$_POST['question']}' ,  `created_at` =  '{$_POST['created_at']}' ,  `updated_at` =  '{$_POST['updated_at']}' ,  `survey_id` =  '{$_POST['survey_id']}'   WHERE `id` = '$id' "); 
+$count = $sql->execute() or die(print_r($sql->errorInfo()));
+
+echo ($count > 0) ? "Edited row.<br />" : "Nothing changed. <br />"; 
 echo "<a href='read_question.php'>Back To Listing</a>"; 
 } 
-$row = mysql_fetch_array ( mysql_query("SELECT * FROM `questions` WHERE `id` = '$id' ")); 
+
+$result = $db->query("SELECT * FROM `questions` WHERE `id` = '$id' "); 
+$row = $result->fetch(PDO::FETCH_ASSOC);
 ?>
 
 <form action='' method='POST'> 
