@@ -1,9 +1,11 @@
 <?php 
 include('config.php'); 
 if (isset($_POST['submitted'])) { 
-foreach($_POST AS $key => $value) { $_POST[$key] = mysql_real_escape_string($value); } 
-$sql = "INSERT INTO `surveys` ( `created_at` ,  `updated_at` ,  `person_id` ,  `title`  ) VALUES(  '{$_POST['created_at']}' ,  '{$_POST['updated_at']}' ,  '{$_POST['person_id']}' ,  '{$_POST['title']}'  ) "; 
-mysql_query($sql) or die(mysql_error()); 
+$sql = $db->prepare("INSERT INTO `surveys` ( `created_at` ,  `updated_at` ,  `person_id` ,  `title`  )
+ VALUES(  '{$_POST['created_at']}' ,  '{$_POST['updated_at']}' ,  '{$_POST['person_id']}' ,  '{$_POST['title']}'  ) "); 
+
+    $sql->execute() or die(print_r($sql->errorInfo()));
+	
 echo "Added row.<br />"; 
 echo "<a href='read_survey.php'>Back To Listing</a>"; 
 } 
