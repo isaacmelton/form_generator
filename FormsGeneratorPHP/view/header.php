@@ -17,7 +17,7 @@ $path .= '';
 <head>
     <title>Forms Generator</title>
     <link rel="stylesheet" type="text/css"
-          href="<?php echo $path . 'main.css'; ?>" />
+          href="<?php echo $path . 'css/main.css'; ?>" />
 </head>
 
 <!-- the body section -->
