@@ -1,4 +1,4 @@
-<? 
+<?php 
 include('config.php'); 
 $id = (int) $_GET['id']; 
 mysql_query("DELETE FROM `people` WHERE `id` = '$id' ") ; 
