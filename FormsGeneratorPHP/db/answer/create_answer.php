@@ -1,9 +1,8 @@
-<?php 
-include('config.php'); 
-if (isset($_POST['submitted'])) { 
-foreach($_POST AS $key => $value) { $_POST[$key] = mysql_real_escape_string($value); } 
-$sql = "INSERT INTO `answers` ( `answer` ,  `created_at` ,  `updated_at` ,  `question_id`  ) VALUES(  '{$_POST['answer']}' ,  '{$_POST['created_at']}' ,  '{$_POST['updated_at']}' ,  '{$_POST['question_id']}'  ) "; 
-mysql_query($sql) or die(mysql_error()); 
+<?php
+if (isset($_POST['submitted'])) {
+    $sql = $db->prepare("INSERT INTO `answers` ( `answer` ,  `created_at` ,  `updated_at` ,  `question_id`  )
+  VALUES(  '{$_POST['answer']}' ,  '{$_POST['created_at']}' ,  '{$_POST['updated_at']}' ,  '{$_POST['question_id']}'  ) ");
+    $sql->execute() or die(print_r($sql->errorInfo()));
 echo "Added row.<br />"; 
 echo "<a href='read_answer.php'>Back To Listing</a>"; 
 } 
