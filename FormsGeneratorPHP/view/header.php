@@ -29,6 +29,9 @@ $path .= '';
         <h1>Forms Generator</h1>
         <p>Interactive Forms Generation</p>
         <ul class="nav"><li><a href="http://<?php echo $_SERVER['HTTP_HOST'].$path; ?>">Home</a></li></ul>
+        <ul class="nav"><li><a href="http://<?php echo $_SERVER['HTTP_HOST'].$path; ?>">Link 2</a></li></ul>
+        <ul class="nav"><li><a href="http://<?php echo $_SERVER['HTTP_HOST'].$path; ?>">Link 3</a></li></ul>
+        <ul class="nav"><li><a href="http://<?php echo $_SERVER['HTTP_HOST'].$path; ?>">Link 4</a></li></ul>
     </div>
 
 
