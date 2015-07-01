@@ -1,3 +1,6 @@
-Options -Indexes
-
-
+ RewriteEngine On
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteCond $1 !^(index\.php|assets|editor|css|js|scripts|templates|images|img|media|xml|user_guide|robots\.txt|favicon\.ico)
+  RewriteCond $1 !\.(css|js|jpe?g|gif|png|tiff)$
+  RewriteRule ^(.+)$ ?nav=$1 [L,QSA]
