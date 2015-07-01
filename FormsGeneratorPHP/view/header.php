@@ -52,7 +52,7 @@ $path .= '';
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
         <li class="active"><a href="http://<?php echo $_SERVER['HTTP_HOST'].$path; ?>">Home <span class="sr-only">(current)</span></a></li>
-		<li class="active"><a href="http://<?php echo $_SERVER['HTTP_HOST'].$path; ?>">Link 2<span class="sr-only">(current)</span></a></li>
+		<li class="active"><a href="/create">Create Form<span class="sr-only">(current)</span></a></li>
 	    <li class="active"><a href="http://<?php echo $_SERVER['HTTP_HOST'].$path; ?>">Link 3<span class="sr-only">(current)</span></a></li>
 		<li class="active"><a href="http://<?php echo $_SERVER['HTTP_HOST'].$path; ?>">Link 4<span class="sr-only">(current)</span></a></li>
 
@@ -66,7 +66,6 @@ $path .= '';
         <p>Interactive Forms Generation</p>
         <p>Enter links/buttons to create survey/take survey, etc here.</p>
     </div>
-
 </div>
 
    
