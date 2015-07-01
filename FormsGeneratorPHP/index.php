@@ -28,7 +28,7 @@ switch ($nav) {
     case 'view_statistics':
         include "statistics/index.php";
     default;
-        echo 'Default Nav. Change this in index.php';
+        echo '<h1>This is the default page. Check index.php</h1>';
         break;
 }
 include 'view/footer.php';
