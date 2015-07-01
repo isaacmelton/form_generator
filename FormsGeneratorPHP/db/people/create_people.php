@@ -1,5 +1,4 @@
-<?php 
-include('config.php'); 
+<?php
 if (isset($_POST['submitted'])) { 
 $sql = $db->prepare("INSERT INTO `people` ( `first_name` ,  `last_name` ,  `email` ,  `city` ,  `state` ,  `country` ,  `sex` ,  `created_at` ,  `updated_at`  ) 
 VALUES(  '{$_POST['first_name']}' ,  '{$_POST['last_name']}' ,  '{$_POST['email']}' ,  '{$_POST['city']}' ,  '{$_POST['state']}' ,  '{$_POST['country']}' ,  '{$_POST['sex']}' ,  '{$_POST['created_at']}' ,  '{$_POST['updated_at']}'  ) "); 

@@ -1,5 +1,4 @@
-<?php 
-include('config.php'); 
+<?php
 if (isset($_POST['submitted'])) { 
 $sql = $db->prepare("INSERT INTO `questions` ( `question` ,  `created_at` ,  `updated_at` ,  `survey_id`  )
  VALUES(  '{$_POST['question']}' ,  '{$_POST['created_at']}' ,  '{$_POST['updated_at']}' ,  '{$_POST['survey_id']}'  ) "); 

@@ -1,5 +1,4 @@
-<?php 
-include('config.php'); 
+<?php
 echo "<table class=table >"; 
 echo "<tr>"; 
 echo "<td><b>Id</b></td>"; 

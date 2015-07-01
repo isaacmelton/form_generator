@@ -1,5 +1,4 @@
-<?php 
-include('config.php'); 
+<?php
 
 if (isset($_GET['id']) ) { 
 $id = (int) $_GET['id']; 
