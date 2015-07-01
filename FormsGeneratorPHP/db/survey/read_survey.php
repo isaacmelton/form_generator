@@ -1,6 +1,6 @@
 <?php 
 include('config.php'); 
-echo "<table border=1 >"; 
+echo "<table class=table >"; 
 echo "<tr>"; 
 echo "<td><b>Id</b></td>"; 
 echo "<td><b>Created At</b></td>"; 
@@ -8,8 +8,8 @@ echo "<td><b>Updated At</b></td>";
 echo "<td><b>Person Id</b></td>"; 
 echo "<td><b>Title</b></td>"; 
 echo "</tr>"; 
-$result = mysql_query("SELECT * FROM `surveys`") or trigger_error(mysql_error()); 
-while($row = mysql_fetch_array($result)){ 
+$result = $db->query("SELECT * FROM `surveys`") or trigger_error(mysql_error());
+while($row = $result->fetch(PDO::FETCH_ASSOC)){
 foreach($row AS $key => $value) { $row[$key] = stripslashes($value); } 
 echo "<tr>";  
 echo "<td valign='top'>" . nl2br( $row['id']) . "</td>";  

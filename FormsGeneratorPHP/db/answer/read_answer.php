@@ -1,6 +1,6 @@
 <?php
 
-echo "<table border=1 >"; 
+echo "<table class=table>"; 
 echo "<tr>"; 
 echo "<td><b>Id</b></td>"; 
 echo "<td><b>Answer</b></td>"; 
