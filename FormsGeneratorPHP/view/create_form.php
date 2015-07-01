@@ -1,3 +1,3 @@
 <?php
 
-echo "<h1>HELLo</h1>";
+echo "<h1>Coming Soon.</h1>";
