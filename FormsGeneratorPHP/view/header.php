@@ -53,8 +53,8 @@ $path .= '';
       <ul class="nav navbar-nav">
         <li class="active"><a href="http://<?php echo $_SERVER['HTTP_HOST'].$path; ?>">Home <span class="sr-only">(current)</span></a></li>
 		<li class="active"><a href="/create">Create Form<span class="sr-only">(current)</span></a></li>
-	    <li class="active"><a href="/view">View Surveys<span class="sr-only">(current)</span></a></li>
-		<li class="active"><a href="/statistics/">View Statistics<span class="sr-only">(current)</span></a></li>
+	    <li class="active"><a href="/view_survey">View Surveys<span class="sr-only">(current)</span></a></li>
+		<li class="active"><a href="/statistics">View Statistics<span class="sr-only">(current)</span></a></li>
 
       </ul>
     </div><!-- /.navbar-collapse -->

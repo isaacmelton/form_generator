@@ -22,6 +22,11 @@ switch ($nav) {
     case 'create':
         include 'view/create_form.php';
         break;
+    case 'view_survey':
+        include 'db/survey/read_survey.php';
+        break;
+    case 'statistics':
+        include "statistics/index.php";
     default;
         echo 'Default Nav. Change this in index.php';
         break;
