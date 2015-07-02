@@ -65,10 +65,12 @@ function get_survey_stats_by_id($survey_id) {
     questions.question AS question,
     answers.answer AS answer,
     COUNT(answer_id) AS choice_count,
-    tottable.total AS total
-    FROM recorded_answers
-    INNER JOIN answers
-    ON answer_id = answers.id
+    tottable.total AS total,
+    questions.id AS question_id,
+    answers.id AS answer_id
+    FROM answers
+    LEFT JOIN recorded_answers
+    ON answers.id = recorded_answers.answer_id
     LEFT JOIN (SELECT answers.question_id AS question_id,
                COUNT(answer_id) AS total
                FROM recorded_answers
@@ -83,7 +85,8 @@ function get_survey_stats_by_id($survey_id) {
     INNER JOIN people
     ON surveys.person_id = people.id
     WHERE surveys.id = :survey_id
-    GROUP BY answer_id, answers.question_id";
+    GROUP BY answer_id, answers.question_id
+    ORDER BY question_id";
     try {
         $statement = $db->prepare($query);
         $statement->bindValue(':survey_id', $survey_id);

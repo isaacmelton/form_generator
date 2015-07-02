@@ -28,5 +28,3 @@
 <br />
 
 <br />
-
-<?php print_r($survey); ?>
