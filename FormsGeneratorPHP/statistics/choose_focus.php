@@ -1,5 +1,6 @@
+<?php if (empty($author_id)): ?>
 <p>
-    Hey look!  This is where you choose either the survey or author (or ultimately survey-taker) you want to inspect statistics-wise.
+You can choose which survey you want to look at, or you can narrow it down by author.  Possibly later, you'll be able to view user statistics and author statistics.
 </p>
 
 <form action="" method="post" id="aligned">
@@ -29,5 +30,25 @@
     <br />
     <input type="submit" value="Inspect" />
 </form>
+<?php else: ?>
+<p>
+   Now that you've narrowed it down, choose which survey you want to look at it.
+</p>
+
+<form action="" method="post" id="aligned">
+    <input type="hidden" name="action" value="surveys" />
+    <select name="survey_id">
+        <?php foreach ($surveys as $survey): ?>
+            <option value="<?php echo $survey['id']; ?>">
+                <?php echo $survey['title']; ?>
+            </option>
+        <?php endforeach; ?>
+    </select>
+    <br />
+    <input type="submit" value="Inspect" />
+</form>
+
+<?php endif; ?>
+
 
 <br />

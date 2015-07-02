@@ -2,8 +2,8 @@
 
 function get_surveys() {
     global $db;
-    $query = 
-    "SELECT * 
+    $query =
+    "SELECT *
     FROM surveys
     ORDER BY title";
     try {
@@ -36,14 +36,34 @@ function get_authors() {
     }
 }
 
-function get_question_stats_by_survey_id($survey_id) {
+function get_surveys_by_author($author_id) {
+  global $db;
+  $query =
+  "SELECT *
+  FROM surveys
+  WHERE person_id = :author_id
+  ORDER BY title";
+  try {
+      $statement = $db->prepare($query);
+      $statement->bindValue(':author_id', $author_id);
+      $statement->execute();
+      $result = $statement->fetchAll();
+      $statement->closeCursor();
+      return $result;
+  } catch (PDOException $e) {
+      display_db_error($e->getMessage());
+  }
+} 
+
+
+function get_survey_stats_by_id($survey_id) {
     global $db;
     $query =
     "SELECT surveys.title AS title,
     CONCAT(people.first_name, ' ', people.last_name) AS name,
     people.email AS email,
     questions.question AS question,
-    answers.answer AS answer, 
+    answers.answer AS answer,
     COUNT(answer_id) AS choice_count,
     tottable.total AS total
     FROM recorded_answers
@@ -63,7 +83,7 @@ function get_question_stats_by_survey_id($survey_id) {
     INNER JOIN people
     ON surveys.person_id = people.id
     WHERE surveys.id = :survey_id
-    GROUP BY answer_id, answers.question_id"
+    GROUP BY answer_id, answers.question_id";
     try {
         $statement = $db->prepare($query);
         $statement->bindValue(':survey_id', $survey_id);
@@ -76,6 +96,7 @@ function get_question_stats_by_survey_id($survey_id) {
     }
 }
 
+/**
 function get_question_stats_by_author_id($author_id) {
     global $db;
     $query =
@@ -83,7 +104,7 @@ function get_question_stats_by_author_id($author_id) {
     CONCAT(people.first_name, ' ', people.last_name) AS name,
     people.email AS email,
     questions.question AS question,
-    answers.answer AS answer, 
+    answers.answer AS answer,
     COUNT(answer_id) AS choice_count,
     tottable.total AS total
     FROM recorded_answers
@@ -114,6 +135,7 @@ function get_question_stats_by_author_id($author_id) {
     } catch (PDOException $e) {
         display_db_error($e->getMessage());
     }
-}
+} **/
 
 ?>
+
