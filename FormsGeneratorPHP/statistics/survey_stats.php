@@ -14,11 +14,18 @@
         if ($qrow['question'] != $uniq):
             echo '<li>' . $qrow['question'] . '</li>'; ?>
             <ul>
-                <?php foreach ($survey as $arow) {
-                    if ($qrow['question'] == $arow['question']) {
-                        echo '<li>' . $arow['answer'] . '</li>';
-                    }
-                } ?>
+                <?php foreach ($survey as $arow):
+                    if ($qrow['question'] == $arow['question']): ?>
+                        <li>
+                            <?php echo $arow['answer']; ?>
+                            <ul><i>
+                                <li>total votes: <?php echo $arow['choice_count']; ?></li>
+                                <?php $percent = round(100 * $arow['choice_count'] / $arow['total'], 1); ?>
+                                <li>percent of votes: <?php echo $percent; ?>%</li>
+                            </i></ul>
+                        </li>
+                    <?php endif;
+                endforeach; ?>
             </ul>
             <?php $uniq = $qrow['question'];
         endif;
