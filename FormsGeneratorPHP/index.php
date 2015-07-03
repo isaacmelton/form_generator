@@ -26,7 +26,7 @@ switch ($nav) {
         include 'db/survey/read_survey.php';
         break;
     case 'view_statistics':
-        include "statistics/index.php";
+        include "statistics/pseudoindex.php";
     default;
         echo '<h1>This is the default page. Check index.php</h1>';
         break;

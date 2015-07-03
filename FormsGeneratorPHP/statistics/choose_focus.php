@@ -1,4 +1,6 @@
-<?php if (empty($author_id)): ?>
+<?php if (empty($survey)):
+    header('Location: index.php');
+elseif (empty($author_id)): ?>
 <p>
 You can choose which survey you want to look at, or you can narrow it down by author.  Possibly later, you'll be able to view user statistics and author statistics.
 </p>
