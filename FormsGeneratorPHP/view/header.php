@@ -1,15 +1,3 @@
-<?php
-// determine the absolute path to the style sheet main.css
-$uri = $_SERVER['REQUEST_URI'];
-$dirs = explode('/', $uri);
-$i = 1;
-$path = '/';
-while ($dirs[$i] != "") {
-    $path .= $dirs[$i] . '/';
-    $i += 1;
-}
-$path .= '';
-?>
 <?php require './model/database.php'; ?>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
@@ -54,7 +42,7 @@ $path .= '';
         <li class="active"><a href="http://<?php echo $_SERVER['HTTP_HOST']; ?>">Home <span class="sr-only">(current)</span></a></li>
 		<li class="active"><a href="/create">Create Form<span class="sr-only">(current)</span></a></li>
 	    <li class="active"><a href="/view_survey">View Surveys<span class="sr-only">(current)</span></a></li>
-		<li class="active"><a href="/statistics">View Statistics<span class="sr-only">(current)</span></a></li>
+		<li class="active"><a href="/view_statistics">View Statistics<span class="sr-only">(current)</span></a></li>
 
       </ul>
     </div><!-- /.navbar-collapse -->
