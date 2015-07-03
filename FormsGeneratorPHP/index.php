@@ -1,6 +1,15 @@
 <?php
 include 'model/database.php';
 
+// Get the action to perform
+if (isset($_POST['action'])) {
+    $action = $_POST['action'];
+} else if (isset($_GET['action'])) {
+    $action = $_GET['action'];
+} else {
+    $action = 'none';
+}
+
 // Get the selected navigaion to perform
 if (isset($_POST['nav'])) {
     $nav = $_POST['nav'];
@@ -10,14 +19,17 @@ if (isset($_POST['nav'])) {
     $nav = 'nav';
 }
 
+//Set a per session cookie.
+if (!isset($_SESSION)) {
+    session_set_cookie_params(0, '/');
+    session_start();
+}
+
 // Show the views.
 include 'view/header.php';
 switch ($nav) {
     case 'nav':
-        echo '<div id="main">';
-        echo '<h2>The new and improved Forms Generator</h2>';
-        include 'db/answer/read_answer.php';
-        echo '</div>';
+        include 'view/main.php';
         break;
     case 'create':
         include 'view/create_form.php';
@@ -26,9 +38,14 @@ switch ($nav) {
         include 'db/survey/read_survey.php';
         break;
     case 'view_statistics':
+<<<<<<< HEAD
         include "statistics/pseudoindex.php";
+=======
+        include "statistics/index.php";
+        break;
+>>>>>>> 951263dfa9109f0245ce29bd6a352e16dd4f6171
     default;
-        echo '<h1>This is the default page. Check index.php</h1>';
+        include "view/main.php";
         break;
 }
 include 'view/footer.php';
