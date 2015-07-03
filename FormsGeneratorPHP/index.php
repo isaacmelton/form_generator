@@ -19,6 +19,12 @@ if (isset($_POST['nav'])) {
     $nav = 'nav';
 }
 
+//Set a per session cookie.
+if (!isset($_SESSION)) {
+    session_set_cookie_params(0, '/');
+    session_start();
+}
+
 // Show the views.
 include 'view/header.php';
 switch ($nav) {
