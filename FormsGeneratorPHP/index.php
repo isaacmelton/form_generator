@@ -35,7 +35,7 @@ switch ($nav) {
         include "statistics/index.php";
         break;
     default;
-        include "view/default.php";
+        include "view/main.php";
         break;
 }
 include 'view/footer.php';
