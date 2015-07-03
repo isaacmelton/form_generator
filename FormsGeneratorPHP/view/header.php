@@ -1,3 +1,15 @@
+<?php
+// determine the absolute path to the style sheet main.css
+$uri = $_SERVER['REQUEST_URI'];
+$dirs = explode('/', $uri);
+$i = 1;
+$path = '/';
+while ($dirs[$i] != "") {
+    $path .= $dirs[$i] . '/';
+    $i += 1;
+}
+$path .= '';
+?>
 <?php require './model/database.php'; ?>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
@@ -60,7 +72,7 @@
 								<input style="float: left; margin-right: 10px;" type="checkbox" name="remember-me" id="remember-me" value="1">
 								<label class="string optional" for="user_remember_me"> Remember me</label>
 								<input class="btn btn-primary btn-block" type="submit" id="sign-in" value="Sign In">
-								<li class="active"><a href="/login" >Sign me up for an account<span class="sr-only">(current)</span></a></li>
+								<li class="active"><a href="/create_user" >Sign me up for an account<span class="sr-only">(current)</span></a></li>
 							</form>
 						</div>
 					</li>

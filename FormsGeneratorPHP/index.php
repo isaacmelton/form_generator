@@ -40,6 +40,9 @@ switch ($nav) {
     case 'view_statistics':
         include "statistics/pseudoindex.php";
         break;
+	case 'create_user':
+        include 'view/create_user.php';
+        break;
     default;
         include "view/main.php";
         break;

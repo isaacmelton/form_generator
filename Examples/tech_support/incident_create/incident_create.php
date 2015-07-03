@@ -12,7 +12,7 @@
                        value="create_incident" />
                 <input type="hidden" name="customer_id"
                        value="<?php echo $customer['customerID']; ?>" />
-
+?>
                 <label>Customer:</label>
                 <span><?php echo $customer['firstName'] . ' ' . $customer['lastName'] ?></span>
                 <br />
