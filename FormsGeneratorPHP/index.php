@@ -24,6 +24,7 @@ switch ($nav) {
         break;
     case 'view_statistics':
         include "statistics/index.php";
+        break;
     default;
         include "view/default.php";
         break;
