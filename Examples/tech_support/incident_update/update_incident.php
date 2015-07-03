@@ -9,7 +9,7 @@
     <?php if ($success) {?>
     
     	<p>This incident was updated.</p>
-    	<p><a href=".">Select Another Incident</a></p>
+    	<p><a href="">Select Another Incident</a></p>
     
     <?php } else {?>
     

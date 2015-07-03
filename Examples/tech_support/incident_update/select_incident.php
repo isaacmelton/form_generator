@@ -8,7 +8,7 @@
         <?php if (count($tech_incidents) == 0) {?>
         
         	<p>There are no open incidents.</p>
-        	<p><a href=".">Refresh List of Incidents</a></p>        	
+        	<p><a href="">Refresh List of Incidents</a></p>
         	
         <?php } else {?>
         
@@ -28,7 +28,7 @@
 	                <td><?php echo $incident['dateOpened']; ?></td>
 	                <td><?php echo $incident['title']; ?></td>
 	                <td><?php echo $incident['description'];?>
-	                <td><form action="." method="post">
+	                <td><form action="" method="post">
 	                    <input type="hidden" name="action"
 	                           value="update_incident" />
 	                    <input type="hidden" name="incidentID"

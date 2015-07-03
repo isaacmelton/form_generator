@@ -31,19 +31,15 @@ switch ($nav) {
     case 'nav':
         include 'view/main.php';
         break;
-    case 'create':
+    case 'create_survey':
         include 'view/create_form.php';
         break;
     case 'view_survey':
         include 'db/survey/read_survey.php';
         break;
     case 'view_statistics':
-<<<<<<< HEAD
         include "statistics/pseudoindex.php";
-=======
-        include "statistics/index.php";
         break;
->>>>>>> 951263dfa9109f0245ce29bd6a352e16dd4f6171
     default;
         include "view/main.php";
         break;

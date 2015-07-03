@@ -19,7 +19,7 @@
         	<?php } ?>
         	
         		<br />
-        		<a href=".">Select Another Incident</a>
+        		<a href="">Select Another Incident</a>
         	
         <?php } else { ?>
         
@@ -35,7 +35,7 @@
 	        <?php echo $technician['firstName']." ".$technician['lastName']; ?>
 	        <br />
 	              
-	        <form action="." method="post">
+	        <form action="" method="post">
 	            <input type="hidden" name="action"
 	            	value="incident_assignment_confirm" />
 	            <input type="submit" value="Assign Incident" />

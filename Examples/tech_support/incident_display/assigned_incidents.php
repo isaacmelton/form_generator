@@ -6,12 +6,12 @@
         <!-- display a list of unassigned incidents -->
         <h2>Assigned Incidents</h2>
         
-        <p><a href=".?action=display_unassigned">View Unassigned Incidents</a>
+        <p><a href="?action=display_unassigned">View Unassigned Incidents</a>
         
         <?php if (count($assigned_incidents) == 0) {?>
         
         	<p>There are no assigned incidents.</p>
-        	<p><a href=".?action='display_assigned'">Refresh List of Incidents</a></p>        	
+        	<p><a href="?action='display_assigned'">Refresh List of Incidents</a></p>
         	
         <?php } else {?>
         

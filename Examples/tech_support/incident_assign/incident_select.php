@@ -21,7 +21,7 @@
                 <td><?php echo $incident['dateOpened']; ?></td>
                 <td><?php echo $incident['title']; ?></td>
                 <td><?php echo $incident['description'];?>
-                <td><form action="." method="post">
+                <td><form action="" method="post">
                     <input type="hidden" name="action"
                            value="incident_assign" />
                     <input type="hidden" name="incidentID"
