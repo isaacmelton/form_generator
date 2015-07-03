@@ -15,7 +15,7 @@
             <tr>
             	<td><?php echo $technician["firstName"]." ".$technician["lastName"];?></td>
                 <td><?php echo $technician['openIncidents']; ?></td>
-                <td><form action="." method="post">
+                <td><form action="" method="post">
                     <input type="hidden" name="action"
                            value="technician_assign" />
                     <input type="hidden" name="techID"

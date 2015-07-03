@@ -23,7 +23,7 @@
                 <td><?php echo $technician['email']; ?></td>
                 <td><?php echo $technician['phone']; ?></td>
                 <td><?php echo $technician['password']; ?></td>
-                <td><form action="." method="post">
+                <td><form action="" method="post">
                     <input type="hidden" name="action"
                            value="delete_technician" />
                     <input type="hidden" name="tech_id"
