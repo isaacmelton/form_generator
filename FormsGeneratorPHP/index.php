@@ -14,10 +14,7 @@ if (isset($_POST['nav'])) {
 include 'view/header.php';
 switch ($nav) {
     case 'nav':
-        echo '<div id="main">';
-        echo '<h2>The new and improved Forms Generator</h2>';
-        include 'db/answer/read_answer.php';
-        echo '</div>';
+        include 'view/main.php';
         break;
     case 'create':
         include 'view/create_form.php';
@@ -28,7 +25,7 @@ switch ($nav) {
     case 'view_statistics':
         include "statistics/index.php";
     default;
-        echo '<h1>This is the default page. Check index.php</h1>';
+        include "view/default.php";
         break;
 }
 include 'view/footer.php';
