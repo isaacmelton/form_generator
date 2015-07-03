@@ -14,7 +14,11 @@
 
 	<link rel="stylesheet" type="text/css"
           href="<?php echo $path . 'css/main.css'; ?>" />
-		  
+
+    <!-- jQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+
+
 </head>
 
 <!-- the body section -->
@@ -40,7 +44,7 @@
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
         <li class="active"><a href="http://<?php echo $_SERVER['HTTP_HOST']; ?>">Home <span class="sr-only">(current)</span></a></li>
-		<li class="active"><a href="/create">Create Form<span class="sr-only">(current)</span></a></li>
+		<li class="active"><a href="/create_survey">Create Form<span class="sr-only">(current)</span></a></li>
 	    <li class="active"><a href="/view_survey">View Surveys<span class="sr-only">(current)</span></a></li>
 		<li class="active"><a href="/view_statistics">View Statistics<span class="sr-only">(current)</span></a></li>
 
