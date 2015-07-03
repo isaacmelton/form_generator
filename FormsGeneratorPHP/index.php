@@ -1,6 +1,15 @@
 <?php
 include 'model/database.php';
 
+// Get the action to perform
+if (isset($_POST['action'])) {
+    $action = $_POST['action'];
+} else if (isset($_GET['action'])) {
+    $action = $_GET['action'];
+} else {
+    $action = 'none';
+}
+
 // Get the selected navigaion to perform
 if (isset($_POST['nav'])) {
     $nav = $_POST['nav'];
