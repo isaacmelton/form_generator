@@ -25,7 +25,7 @@ $path .= '';
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
 
 	<link rel="stylesheet" type="text/css"
-          href="<?php echo $path . 'css/main.css'; ?>" />
+          href="<?php echo 'http://'.$_SERVER['HTTP_HOST'].'/css/main.css'; ?>" />
 
     <!-- jQuery -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
