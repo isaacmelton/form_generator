@@ -1,4 +1,7 @@
 <?php
+//Change this to false to remove debug.
+$debug = true;
+
 include 'model/database.php';
 require('db/survey_db.php');
 
@@ -31,17 +34,7 @@ if (!isset($_SESSION)) {
 
 // Show the views.
 include 'view/header.php';
-
-//DEBUGGING/////////////////////////////
-echo "<div class='debug'><br><h3>Debug Assistance</h3><br>Action: ";
-if (is_array($action)) {
-    echo "Array Keys: ".implode(array_keys($action));
-    echo " Array Data: ".implode($action);
-} else {
-    echo $action;
-}
-echo "<br>Nav: ".$nav."<br><br></div>";
-////////////////////////////////////////
+if ($debug) { include 'view/debug.php'; }
 
 switch ($nav) {
     case 'nav':
