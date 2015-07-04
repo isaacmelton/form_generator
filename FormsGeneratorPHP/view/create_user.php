@@ -3,27 +3,27 @@
 if(isset($_POST['submit'])){
 
     $fName = $_POST['fName'];
-    $lname = $_POST['lName'];
-	$email = $_POST['email'];
-	$city = $_POST['city'];
-	$state = $_POST['state'];
-	$country = $_POST['country'];
-	$sex = $_POST['sex'];
+    $lName = $_POST['lName'];
+    $email = $_POST['email'];
+    $city = $_POST['city'];
+    $state = $_POST['state'];
+    $country = $_POST['country'];
+    $sex = $_POST['sex'];
 
 }
 if(empty($fName) || empty($lName) || empty($email) || empty($city) || empty($state) || empty($country) || empty($sex) ) {
- echo $error = "Invalid data entered. Check fields and try again.";
-    } else {
+    echo $error = "Invalid data entered. Check fields and try again.";
+} else {
 
-	//CODE HERE SUBMITS TO DB
-	
-    }
+    //CODE HERE SUBMITS TO DB
+
+}
 
 ?>
 
 <div>
     <h1>Create an Account</h1>
-<form name="createUser" id="createUser" action="create_user" method="post">
+    <form name="createUser" id="createUser" action="create_user" method="post">
 
         <label>
             First Name:
@@ -55,18 +55,18 @@ if(empty($fName) || empty($lName) || empty($email) || empty($city) || empty($sta
         <input type="text" name="state" required>
         <br>
 
-		<label>
-			Country:
+        <label>
+            Country:
         </label>
         <input type="text" name="country" required>
         <br>
-		
-		<label>
-			Sex:
+
+        <label>
+            Sex:
         </label>
         <input type="text" name="sex" required>
         <br>
-		
+
         <label>
             &nbsp;
         </label>
