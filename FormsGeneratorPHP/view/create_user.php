@@ -2,6 +2,9 @@
 
 if(isset($_POST['submit'])){
 
+    //Remove this, here for testing
+    echo "Post submit set<br>";
+
     $fName = $_POST['fName'];
     $lName = $_POST['lName'];
     $email = $_POST['email'];
@@ -15,6 +18,8 @@ if(empty($fName) || empty($lName) || empty($email) || empty($city) || empty($sta
     echo $error = "Invalid data entered. Check fields and try again.";
 } else {
 
+    //Remove this, here for testing
+    echo "Should submit";
     //CODE HERE SUBMITS TO DB
 
 }
@@ -23,8 +28,7 @@ if(empty($fName) || empty($lName) || empty($email) || empty($city) || empty($sta
 
 <div>
     <h1>Create an Account</h1>
-    <form name="createUser" id="createUser" action="create_user" method="post">
-
+    <form name="createUser" id="createUser" action="./create_user" method="post">
         <label>
             First Name:
         </label>
@@ -70,7 +74,7 @@ if(empty($fName) || empty($lName) || empty($email) || empty($city) || empty($sta
         <label>
             &nbsp;
         </label>
-        <input type="submit" value="Create User">
+        <input type="submit" name="submit" value="Create User">
         <br>
     </form>
 
