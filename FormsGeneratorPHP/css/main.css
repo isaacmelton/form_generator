@@ -1,1 +1,5 @@
 /* Global Stylesheet */
+
+.debug {
+    border: 2px solid blue;
+}
