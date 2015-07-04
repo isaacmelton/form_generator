@@ -1,5 +1,7 @@
 <?php
 include 'model/database.php';
+require('db/survey_db.php');
+
 
 // Get the action to perform
 if (isset($_POST['action'])) {
@@ -49,7 +51,10 @@ switch ($nav) {
         include 'view/create_form.php';
         break;
     case 'view_survey':
-        include 'db/survey/read_survey.php';
+        // Get survey data
+		$surveys = get_surveys();
+        // Display the survey list
+        include('view/survey_list.php');
         break;
     case 'view_statistics':
         include "statistics/pseudoindex.php";
