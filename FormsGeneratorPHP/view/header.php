@@ -56,7 +56,7 @@ $path .= '';
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
         <li class="active"><a href="http://<?php echo $_SERVER['HTTP_HOST']; ?>">Home <span class="sr-only">(current)</span></a></li>
-		<li class="active"><a href="/create_survey">Create Form<span class="sr-only">(current)</span></a></li>
+		<li class="active"><a href="/create_form">Create Form<span class="sr-only">(current)</span></a></li>
 	    <li class="active"><a href="/view_survey">View Surveys<span class="sr-only">(current)</span></a></li>
 		<li class="active"><a href="/view_statistics">View Statistics<span class="sr-only">(current)</span></a></li>
       </ul>

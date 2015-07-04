@@ -45,7 +45,7 @@ switch ($nav) {
     case 'nav':
         include 'view/main.php';
         break;
-    case 'create_survey':
+    case 'create_form':
         include 'view/create_form.php';
         break;
     case 'view_survey':
