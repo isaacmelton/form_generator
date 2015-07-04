@@ -27,6 +27,10 @@ if (!isset($_SESSION)) {
 
 // Show the views.
 include 'view/header.php';
+
+//DEBUGGING
+echo "<br><h3>Debug Assistance</h3><br>Action: ".$action."<br>Nav: ".$nav."<br>";
+
 switch ($nav) {
     case 'nav':
         include 'view/main.php';
