@@ -6,6 +6,8 @@ if (isset($_POST['action'])) {
     $action = $_POST['action'];
 } else if (isset($_GET['action'])) {
     $action = $_GET['action'];
+} else if (!empty($_POST)) {
+    $action = $_POST;
 } else {
     $action = 'none';
 }
@@ -27,6 +29,18 @@ if (!isset($_SESSION)) {
 
 // Show the views.
 include 'view/header.php';
+
+//DEBUGGING/////////////////////////////
+echo "<div class='debug'><br><h3>Debug Assistance</h3><br>Action: ";
+if (is_array($action)) {
+    echo "Array Keys: ".implode(array_keys($action));
+    echo " Array Data: ".implode($action);
+} else {
+    echo $action;
+}
+echo "<br>Nav: ".$nav."<br><br></div>";
+////////////////////////////////////////
+
 switch ($nav) {
     case 'nav':
         include 'view/main.php';
@@ -39,6 +53,9 @@ switch ($nav) {
         break;
     case 'view_statistics':
         include "statistics/pseudoindex.php";
+        break;
+	case 'create_user':
+        include 'view/create_user.php';
         break;
     default;
         include "view/main.php";
