@@ -1,5 +1,5 @@
 <?php
-/**
+
 function get_hash($user_id) {
     global $db;
     $query =
@@ -41,15 +41,13 @@ function confirm_password($user_id, $password) {
     $hash = get_hash($user_id);
     return password_verify($pass, $hash);
 }
-**/
+
 function encrypt($user_id, $password) {
     $options['cost'] = 20;
     $hash = password_hash($password, PASSWORD_DEFAULT);
-//    update_password($user_id, $hash);
+    update_password($user_id, $hash);
     return $hash;
 }
-
-echo encrypt(1, 'password');
 
 ?>
 

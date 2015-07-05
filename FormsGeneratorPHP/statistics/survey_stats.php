@@ -1,3 +1,6 @@
+<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+
 <?php if (empty($survey)):
     header('Location: index.php');
 else: ?>
@@ -20,6 +23,7 @@ else: ?>
                 <?php foreach ($survey as $arow):
                     if ($qrow['question'] == $arow['question']): ?>
                         <li>
+                            <?php $i = 0; ?>
                             <?php echo $arow['answer']; ?>
                             <ul><i>
                                 <li>total votes: <?php echo $arow['choice_count']; ?></li>
@@ -27,6 +31,7 @@ else: ?>
                                 <li>percent of votes: <?php echo $percent; ?>%</li>
                             </i></ul>
                         </li>
+                        <script> </script>
                     <?php endif;
                 endforeach; ?>
             </ul>
