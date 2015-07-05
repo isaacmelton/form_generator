@@ -5,7 +5,7 @@
 
 if(isset($_POST['submit'])) {
 
-    $surveyTitle = $_POST['surveyTitle'];
+    $surveyTitle = $_POST['survey_title'];
     $questions = $_POST['question'];
     $answers = $_POST['answer'];
 
@@ -43,33 +43,57 @@ if(isset($_POST['submit'])) {
 
     try {
         $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
-
     } catch (PDOException $e) {
         echo $e->getMessage();
     }
 }
 ?>
 
+<script>
+
+    var counter = 0;
+    var numberPattern = /\d+/g;
+
+    function addAnswerToQuestion(questionID) {
+        $("#"+questionID+"").append(getAnswer(questionID.match(numberPattern)));
+    }
+
+    function getQuestion(count) {
+        return "<tr class='question_row' id='question_" + count + "'>" +
+            "<td>Question: </td><td><input type='text' name='question[" + count + "]'>" +
+            "</td><td><input type='button' class='add_answer' id='question_"+count+"' onclick='addAnswerToQuestion(this.id);'/></td>";
+    }
+
+    function getAnswer(count) {
+        return "<tr class='answer'><td>Answer for Question " + count
+            + "</td><td><input type='text' name='answer[" + count
+            + "][]'></td>";
+    }
+
+    $(document).ready(function() {
+
+
+        $("#add_question").click(function () {
+            counter++;
+            $("#question_table").append(getQuestion(counter));
+        });
+
+
+
+
+
+    });
+</script>
+
 <form name="createForm" id="createForm" action="create_form" method="post">
 
+    Survey Name: <input type="text" name="survey_title"><br>
+    <input type="button" id="add_question" value="Add a Question"><br>
 
-    Survey Name: <input type="text" name="surveyTitle"><br>
-
-    <table class="question_table">
-        <tr></tr>
+    <table id="question_table">
 
     </table>
-    <table class="itemTable">
-    <input class="cloneable">
-        <tr>
-            <td>Question<input type="text" name="question[]"></td>
-            <td><button id="add_question">+</button></td>
 
-            <td>Answer<input type="text" name="answer[]"></td>
-            <td><button id="add_answer">+</button></td>
-        </tr>
-    </table>
     <div class="eventButtons">
         <input type="submit" name="submit" id="submit" value="Save">
         <input type="reset" name="reset" id="reset" value="Clear"  class="btn">
