@@ -1,5 +1,10 @@
 <?php
+//Change this to false to remove debug.
+$debug = true;
+
 include 'model/database.php';
+require('db/survey_db.php');
+require('db/people_db.php');
 
 // Get the action to perform
 if (isset($_POST['action'])) {
@@ -29,27 +34,20 @@ if (!isset($_SESSION)) {
 
 // Show the views.
 include 'view/header.php';
-
-//DEBUGGING/////////////////////////////
-echo "<div class='debug'><br><h3>Debug Assistance</h3><br>Action: ";
-if (is_array($action)) {
-    echo "Array Keys: ".implode(array_keys($action));
-    echo " Array Data: ".implode($action);
-} else {
-    echo $action;
-}
-echo "<br>Nav: ".$nav."<br><br></div>";
-////////////////////////////////////////
+if ($debug) { include 'view/debug.php'; }
 
 switch ($nav) {
     case 'nav':
         include 'view/main.php';
         break;
-    case 'create_survey':
+    case 'create_form':
         include 'view/create_form.php';
         break;
     case 'view_survey':
-        include 'db/survey/read_survey.php';
+        // Get survey data
+		$surveys = get_surveys();
+        // Display the survey list
+        include('view/survey_list.php');
         break;
     case 'view_statistics':
         include "statistics/pseudoindex.php";
@@ -57,6 +55,7 @@ switch ($nav) {
 	case 'create_user':
         include 'view/create_user.php';
         break;
+	
     default;
         include "view/main.php";
         break;
