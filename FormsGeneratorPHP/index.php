@@ -4,7 +4,7 @@ $debug = true;
 
 include 'model/database.php';
 require('db/survey_db.php');
-
+require('db/people_db.php');
 
 // Get the action to perform
 if (isset($_POST['action'])) {
@@ -55,6 +55,7 @@ switch ($nav) {
 	case 'create_user':
         include 'view/create_user.php';
         break;
+	
     default;
         include "view/main.php";
         break;

@@ -5,26 +5,31 @@ if(isset($_POST['submit'])){
     //Remove this, here for testing
     echo "Post submit set<br>";
 
-    $fName = $_POST['fName'];
-    $lName = $_POST['lName'];
-    $email = $_POST['email'];
-    $city = $_POST['city'];
-    $state = $_POST['state'];
-    $country = $_POST['country'];
-    $sex = $_POST['sex'];
+try {
 
+$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION); // <== add this line
+$sql = "INSERT INTO people (first_name, last_name, email, city, state, country, sex)
+VALUES ('".$_POST["first_name"]."','".$_POST["last_name"]."','".$_POST["email"]."','".$_POST["city"]."','".$_POST["state"]."'
+,'".$_POST["country"]."','".$_POST["sex"]."')";
+if ($db->query($sql)) {
+echo "<script type= 'text/javascript'>alert('New Record Inserted Successfully');</script>";
 }
-if(empty($fName) || empty($lName) || empty($email) || empty($city) || empty($state) || empty($country) || empty($sex) ) {
-    echo $error = "Invalid data entered. Check fields and try again.";
-} else {
+else{
+echo "<script type= 'text/javascript'>alert('Data not successfully Inserted.');</script>";
+}
 
-    //Remove this, here for testing
-    echo "Should submit";
-    //CODE HERE SUBMITS TO DB
+$db = null;
+}
+catch(PDOException $e)
+{
+echo $e->getMessage();
+}
 
 }
 
 ?>
+
+
 
 <div>
     <h1>Create an Account</h1>
@@ -32,13 +37,13 @@ if(empty($fName) || empty($lName) || empty($email) || empty($city) || empty($sta
         <label>
             First Name:
         </label>
-        <input type="text" name="fName" required>
+        <input type="text" name="first_name" required>
         <br>
 
         <label>
             Last Name:
         </label>
-        <input type="text" name="lName" required>
+        <input type="text" name="last_name" required>
         <br>
 
         <label>
