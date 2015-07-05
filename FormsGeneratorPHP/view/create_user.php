@@ -2,9 +2,6 @@
 
 if(isset($_POST['submit'])){
 
-    //Remove this, here for testing
-    echo "Post submit set<br>";
-
 try {
 
 $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION); // <== add this line
