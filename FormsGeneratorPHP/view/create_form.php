@@ -50,26 +50,35 @@ if(isset($_POST['submit'])) {
 ?>
 
 <script>
+
+    var counter = 0;
+    var numberPattern = /\d+/g;
+
+    function addAnswerToQuestion(questionID) {
+        $("#"+questionID+"").append(getAnswer(questionID.match(numberPattern)));
+    }
+
+    function getQuestion(count) {
+        return "<tr class='question_row' id='question_" + count + "'>" +
+            "<td>Question: </td><td><input type='text' name='question[" + count + "]'>" +
+            "</td><td><input type='button' class='add_answer' id='question_"+count+"' onclick='addAnswerToQuestion(this.id);'/></td>";
+    }
+
+    function getAnswer(count) {
+        return "<tr class='answer'><td>Answer for Question " + count
+            + "</td><td><input type='text' name='answer[" + count
+            + "][]'></td>";
+    }
+
     $(document).ready(function() {
-        var counter = 0;
+
+
         $("#add_question").click(function () {
             counter++;
             $("#question_table").append(getQuestion(counter));
         });
 
-        $("#add_answer").click(function() {
-            $("#question_table").append(getAnswer(counter));
-        });
 
-        function getQuestion(count) {
-            return "<tr class='question' id='question_"+count+"'><td>Question: </td><td><input type='text' name='question["+count+"]'></td><td><input type='button' id='add_answer' onclick='alert("+count+")' /></td>";
-        }
-
-        function getAnswer(count) {
-            return "<tr class='answer'><td>Answer for Question " + count
-                + "</td><td><input type='text' name='answer[" + count
-                + "][]'></td>";
-        }
 
 
 
@@ -79,9 +88,9 @@ if(isset($_POST['submit'])) {
 <form name="createForm" id="createForm" action="create_form" method="post">
 
     Survey Name: <input type="text" name="survey_title"><br>
+    <input type="button" id="add_question" value="Add a Question"><br>
 
     <table id="question_table">
-        <tr><td>Add Question</td><td><input type="button" id="add_question" /></td></tr>
 
     </table>
 
