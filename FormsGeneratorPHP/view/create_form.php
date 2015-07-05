@@ -51,25 +51,39 @@ if(isset($_POST['submit'])) {
 }
 ?>
 
-<form name="createForm" id="createForm" action="create_form" method="post">
+<script>
+    $(document).ready(function() {
+        var counter = 0;
+        $("#add_question").click(function () {
+            counter++;
+            $("#question_table").append(getQuestion(counter));
+        });
 
+        $(".add_answer").click(function () {
+            $(this).append(getAnswer(counter));
+        });
+
+        function getQuestion(count) {
+            return "<tr class='question' id='question_"+count+"'><td>Question " + count + "</td><td><input type='text' name='question[]'></td><td><input type='button' class='add_answer' id='question_"+count+"' /></td>";
+        }
+
+        function getAnswer(count) {
+            return "<tr class='answer'><td>Answer for Question " + count
+                + "</td><td><input type='text' name='answer[" + count
+                + "][]'></td>";
+        }
+
+    });
+</script>
+
+<form name="createForm" id="createForm" action="create_form" method="post">
 
     Survey Name: <input type="text" name="surveyTitle"><br>
 
-    <table class="question_table">
-        <tr></tr>
-
+    <table id="question_table">
+        <tr><td>Add Question</td><td><input type="button" id="add_question" name='add_question' /></td></tr>
     </table>
-    <table class="itemTable">
-    <input class="cloneable">
-        <tr>
-            <td>Question<input type="text" name="question[]"></td>
-            <td><button id="add_question">+</button></td>
 
-            <td>Answer<input type="text" name="answer[]"></td>
-            <td><button id="add_answer">+</button></td>
-        </tr>
-    </table>
     <div class="eventButtons">
         <input type="submit" name="submit" id="submit" value="Save">
         <input type="reset" name="reset" id="reset" value="Clear"  class="btn">
