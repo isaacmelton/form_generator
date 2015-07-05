@@ -5,7 +5,7 @@
 
 if(isset($_POST['submit'])) {
 
-    $surveyTitle = $_POST['surveyTitle'];
+    $surveyTitle = $_POST['survey_title'];
     $questions = $_POST['question'];
     $answers = $_POST['answer'];
 
@@ -43,8 +43,6 @@ if(isset($_POST['submit'])) {
 
     try {
         $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
-
     } catch (PDOException $e) {
         echo $e->getMessage();
     }
@@ -59,12 +57,12 @@ if(isset($_POST['submit'])) {
             $("#question_table").append(getQuestion(counter));
         });
 
-        $(".add_answer").click(function () {
-            $(this).append(getAnswer(counter));
+        $("#add_answer").click(function() {
+            $("#question_table").append(getAnswer(counter));
         });
 
         function getQuestion(count) {
-            return "<tr class='question' id='question_"+count+"'><td>Question " + count + "</td><td><input type='text' name='question[]'></td><td><input type='button' class='add_answer' id='question_"+count+"' /></td>";
+            return "<tr class='question' id='question_"+count+"'><td>Question: </td><td><input type='text' name='question["+count+"]'></td><td><input type='button' id='add_answer' onclick='alert("+count+")' /></td>";
         }
 
         function getAnswer(count) {
@@ -73,15 +71,18 @@ if(isset($_POST['submit'])) {
                 + "][]'></td>";
         }
 
+
+
     });
 </script>
 
 <form name="createForm" id="createForm" action="create_form" method="post">
 
-    Survey Name: <input type="text" name="surveyTitle"><br>
+    Survey Name: <input type="text" name="survey_title"><br>
 
     <table id="question_table">
-        <tr><td>Add Question</td><td><input type="button" id="add_question" name='add_question' /></td></tr>
+        <tr><td>Add Question</td><td><input type="button" id="add_question" /></td></tr>
+
     </table>
 
     <div class="eventButtons">
