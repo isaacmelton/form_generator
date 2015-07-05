@@ -1,4 +1,4 @@
-<?php if (empty($survey)):
+<?php if (empty($surveys)):
     header('Location: index.php');
 elseif (empty($author_id)): ?>
 <p>
