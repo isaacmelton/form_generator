@@ -6,4 +6,12 @@ function get_surveys() {
 	$surveys = $db->query($query);
 	return $surveys;
 }
+
+function delete_survey($id) {
+	global $db;
+	$query = "DELETE FROM surveys
+	WHERE id = '$id'";
+	$db->exec($query);
+}
+	
 ?>
