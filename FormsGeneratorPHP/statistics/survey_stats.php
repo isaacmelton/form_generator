@@ -1,5 +1,6 @@
 <script type="text/javascript" src="https://www.google.com/jsapi"></script>
-<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js">
+<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script type="text/javascript">
     
     // Load the Visualization API and the piechart package.
     google.load('visualization', '1', {'packages':['corechart']});
@@ -8,22 +9,26 @@
     google.setOnLoadCallback(drawChart);
       
     function drawChart() {
-        <?php foreach ($questions as $question):
+
+        <?php foreach ($questions as $question): ?>
 
             var jsonData<?php echo $question['question_id']; ?> = $.ajax({
-                url: "get_survey_data.php?sid=<?php echo $question['survey_id']; ?>&qid=<?php echo $question['question_id']; ?>",
+                url: "get_survey_data.php",
                 dataType:"json",
+                data: {sid: "<?php echo $question['survey_id']; ?>", qid: "<?php echo $question['question_id']; ?>"},
+                type: "POST",
                 async: false
                 }).responseText;
             
             // Create our data table out of JSON data loaded from server.
-            var data = new google.visualization.DataTable(jsonData);
+            var data<?php echo $question['question_id']; ?> = new google.visualization.DataTable(jsonData<?php echo $question['question_id']; ?>);
   
             // Instantiate and draw our chart, passing in some options.
-            var chart = new google.visualization.PieChart(document.getElementById('chart<?php echo question.id; ?>'));
-            chart.draw(data, {width: 400, height: 240});
+            var chart<?php echo $question['question_id']; ?> = new google.visualization.PieChart(document.getElementById("chart<?php echo $question['question_id']; ?>"));
+            chart<?php echo $question['question_id']; ?>.draw(data<?php echo $question['question_id']; ?>, {width: 400, height: 240});
 
         <?php endforeach; ?>
+
     }
 </script>
 
@@ -42,7 +47,6 @@ else: ?>
 
 <ol>
     <?php $uniq = null;
-    $i = 0;
     foreach ($survey as $qrow):
         if ($qrow['question'] != $uniq):
             echo '<li>' . $qrow['question'] . '</li>'; ?>
@@ -64,12 +68,13 @@ else: ?>
             <?php $uniq = $qrow['question']; ?>
             <br />
             <div id="chart<?php echo $qrow['question_id']; ?>"></div>
-        <?php $i = $i + 1;
-        endif;
+        <?php endif;
     endforeach; ?>
 </ol>
 
 <br />
 
 <br />
+
+<div id="chart_x"></div>
 <?php endif; ?>
