@@ -55,7 +55,10 @@ switch ($nav) {
 	case 'create_user':
         include 'view/create_user.php';
         break;
-	
+	case 'detailed_survey':
+		$survey = get_survey_by_id($id);
+		include 'view/survey_detailed.php';
+		break;
     default;
         include "view/main.php";
         break;

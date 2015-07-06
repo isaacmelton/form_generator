@@ -13,5 +13,16 @@ function delete_survey($id) {
 	WHERE id = '$id'";
 	$db->exec($query);
 }
+
+function get_survey_by_id($id) {
+	global $db;
+	$query = "SELECT * FROM surveys
+	WHERE id = :id";
+	$statement->$db->prepare($query);
+	$statement->execute();
+	$result = $statement->fetch();
+	$statement->closeCursor();
+	return $result;
+}
 	
 ?>
