@@ -52,22 +52,28 @@ if(isset($_POST['submit'])) {
 <script>
 
     var counter = 0;
+    var answer_counter = 0;
     var numberPattern = /\d+/g;
 
     function addAnswerToQuestion(questionID) {
         $("#"+questionID+"").append(getAnswer(questionID.match(numberPattern)));
     }
 
+    function removeAnswerFromQuestion(answerID) {
+        $("tr").remove(answerID);
+    }
+
     function getQuestion(count) {
         return "<tr class='question_row' id='question_" + count + "'>" +
-            "<td>Question: </td><td><input type='text' name='question[" + count + "]'>" +
-            "</td><td><input type='button' class='add_answer' id='question_"+count+"' onclick='addAnswerToQuestion(this.id);'/></td>";
+            "<td>Question "+count+": </td><td><input type='text' name='question[" + count + "]'>" +
+            "</td><td><input type='button' class='add_answer' value='Add an Answer' id='question_"+count+"' onclick='addAnswerToQuestion(this.id);'/></td></tr><br>";
     }
 
     function getAnswer(count) {
-        return "<tr class='answer'><td>Answer for Question " + count
+        answer_counter++;
+        return "<tr class='answer' id='answer_"+answer_counter+"'><td>Answer for Question " + count
             + "</td><td><input type='text' name='answer[" + count
-            + "][]'></td>";
+            + "][]'></td><td><input type='button' value='Remove' onclick='removeAnswerFromQuestion(\"#answer_"+answer_counter+"\")' /></td></tr>";
     }
 
     $(document).ready(function() {
@@ -78,22 +84,16 @@ if(isset($_POST['submit'])) {
             $("#question_table").append(getQuestion(counter));
         });
 
-
-
-
-
     });
 </script>
 
 <form name="createForm" id="createForm" action="create_form" method="post">
 
     Survey Name: <input type="text" name="survey_title"><br>
-    <input type="button" id="add_question" value="Add a Question"><br>
 
     <table id="question_table">
-
     </table>
-
+    <input type="button" id="add_question" value="Add a Question"><br>
     <div class="eventButtons">
         <input type="submit" name="submit" id="submit" value="Save">
         <input type="reset" name="reset" id="reset" value="Clear"  class="btn">
