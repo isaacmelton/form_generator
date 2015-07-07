@@ -66,7 +66,6 @@ switch ($nav) {
         $answers = get_answers();
         include 'view/survey_detailed.php';
 		break;
-	
     default;
         include "view/main.php";
         break;
