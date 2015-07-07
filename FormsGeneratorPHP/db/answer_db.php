@@ -4,8 +4,11 @@ function get_answers() {
 	global $db;
 	$query = 'SELECT * FROM answers
 	ORDER BY question_id';
-	$surveys = $db->query($query);
-	return $surveys;
+	$statement = $db->prepare($query);
+	$statement->execute();
+	$answers = $statement->fetchAll();
+	$statement->closeCursor();
+	return $answers;
 }
 
 function get_answers_by_id($question_id) {
