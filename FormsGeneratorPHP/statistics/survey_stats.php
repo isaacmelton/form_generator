@@ -33,7 +33,8 @@
 </script>
 
 <?php if (empty($survey)):
-    header('Location: index.php');
+    echo "<meta http-equiv='Location' content='./index.php' >";
+    //header('Location: ./index.php');
 else: ?>
 <p>
     Okay, so uh... this is going to get adjusted depending on the format we plan on using, ultimately, but I'll try to make it somewhat clear what's going on...

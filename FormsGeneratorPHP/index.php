@@ -1,6 +1,6 @@
 <?php
 //Change this to false to remove debug.
-$debug = true;
+$debug = false;
 
 include 'model/database.php';
 require('db/survey_db.php');
