@@ -5,21 +5,25 @@
 		
         <h2><?php echo $survey['title']; ?></h2>
         <table class="table table-hover">
-            <tr>
-                <th>Title</th>
-                <th>Creator</th>
-                <th>&nbsp;</th>
-            </tr>
-            <tr>
-                <td><?php echo $survey['title']; ?></td>
-                <td><?php echo $survey['person_id']; ?></td>
-			<tr>
+			    <tr>
+					<th>Question</th>
+					<th>Question ID</th>
+				</tr>
 				<?php foreach ($questions as $question) : ?>
 				<tr>
-				<td><?php echo $question['question']; ?></td>
+					<td><?php echo $question['question']; ?></td>
+					<td><?php echo $question['id']; ?></td>
+				</tr>
+					<?php foreach ($answers as $answer) : ?>
+					<?php if ($answer['question_id'] == $question['id']) { ?>
+					<tr>
+						<td>&nbsp;&nbsp;&nbsp;<?php echo $answer['answer']; ?></td>
+					</tr>
+					<?php } ?>
+					<?php endforeach ?>
 	            <?php endforeach; ?>
 				</tr>
-            </tr>
+
         </table>
     </div>
 </div>

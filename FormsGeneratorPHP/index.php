@@ -6,6 +6,8 @@ include 'model/database.php';
 require('db/survey_db.php');
 require('db/people_db.php');
 require('db/question_db.php');
+require('db/answer_db.php');
+
 
 
 // Get the action to perform
@@ -61,6 +63,8 @@ switch ($nav) {
     $id = $_POST['id'];
     $survey = get_survey($id);
 	$questions = get_questions($id);
+	$question_ids = get_question_ids_per_survey($id);
+	$answers = get_answers();
     include('view/survey_detailed.php');
 		break;
 	
