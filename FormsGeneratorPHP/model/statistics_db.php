@@ -1,6 +1,6 @@
 <?php
 
-function get_surveys() {
+function get_surveys_by_title() {
     global $db;
     $query =
     "SELECT *

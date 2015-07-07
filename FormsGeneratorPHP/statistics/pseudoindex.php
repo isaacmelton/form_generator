@@ -4,7 +4,6 @@ if (strstr(getcwd(), "statistics") == true) {
     header('Location: ../index.php');
 }
 
-require './model/database.php';
 require './model/statistics_db.php';
 
 if (isset($_POST['action'])) {

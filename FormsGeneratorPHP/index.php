@@ -52,16 +52,16 @@ switch ($nav) {
         include('view/survey_list.php');
         break;
     case 'view_statistics':
-        include "statistics/pseudoindex.php";
+        include 'statistics/pseudoindex.php';
         break;
 	case 'create_user':
         include 'view/create_user.php';
         break;
 	case 'detailed_survey':
-    $id = $_POST['id'];
-    $survey = get_survey($id);
-	$questions = get_questions($id);
-    include('view/survey_detailed.php');
+        $id = $_POST['id'];
+        $survey = get_survey($id);
+        $questions = get_questions($id);
+        include 'view/survey_detailed.php';
 		break;
 	
     default;
