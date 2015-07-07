@@ -57,7 +57,10 @@ else: ?>
                             <?php echo $arow['answer']; ?>
                             <ul><i>
                                 <li>total votes: <?php echo $arow['choice_count']; ?></li>
-                                <?php $percent = round(100 * $arow['choice_count'] / $arow['total'], 1); ?>
+                                <?php if ($arow['total'] > 0) {
+                                    $percent = round(100 * $arow['choice_count'] / $arow['total'], 1);
+                                } else { $percent = 0; }
+                                ?>
                                 <li>percent of votes: <?php echo $percent; ?>%</li>
                             </i></ul>
                         </li>
