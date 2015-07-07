@@ -13,7 +13,12 @@
             <tr>
                 <td><?php echo $survey['title']; ?></td>
                 <td><?php echo $survey['person_id']; ?></td>
-				<td>Questions and whatnot will be displayed here later.</td>
+			<tr>
+				<?php foreach ($questions as $question) : ?>
+				<tr>
+				<td><?php echo $question['question']; ?></td>
+	            <?php endforeach; ?>
+				</tr>
             </tr>
         </table>
     </div>

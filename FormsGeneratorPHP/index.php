@@ -5,6 +5,8 @@ $debug = true;
 include 'model/database.php';
 require('db/survey_db.php');
 require('db/people_db.php');
+require('db/question_db.php');
+
 
 // Get the action to perform
 if (isset($_POST['action'])) {
@@ -58,6 +60,7 @@ switch ($nav) {
 	case 'detailed_survey':
     $id = $_POST['id'];
     $survey = get_survey($id);
+	$questions = get_questions($id);
     include('view/survey_detailed.php');
 		break;
 	
