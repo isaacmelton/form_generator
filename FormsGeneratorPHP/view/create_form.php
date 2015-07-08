@@ -21,14 +21,14 @@ if(isset($_POST['submit'])) {
             foreach ($questions as $question) {
 
                 $sql = "INSERT INTO questions (sequence, question, survey_id, created_at)
-                VALUES ('".$sequence."', '".$question."', '".$survey_id."', '".$now."')";  //TODO
+                        VALUES ('".$sequence."', '".$question."', '".$survey_id."', '".$now."')";  //TODO
                 if ($db->query($sql)) {
                     $question_id = $db->lastInsertId();
 
                     if (isset($answers[($sequence-1)])) {
 
                         $answer_sequence = 1;
-                        foreach ($answers[$sequence-1] as $answer) {
+                        foreach ($answers[($sequence-1)] as $answer) {
                             $sql = "INSERT INTO answers (sequence, answer, created_at, question_id)
                             VALUES ('".$answer_sequence."','".$answer."','".$now."','".$question_id."')";  //TODO
                             if ($db->query($sql)) {
@@ -71,7 +71,7 @@ if(isset($_POST['submit'])) {
     }
 
     function removeQuestionFromSurvey(questionID) {
-        $("tr").remove(questionID);
+        $("div").remove(questionID);
     }
 
     function getQuestion(count) {
@@ -79,7 +79,7 @@ if(isset($_POST['submit'])) {
                     "<tr class='question_row' >" +
                         "<td>Question: </td>" +
                         "<td>" +
-                            "<input type='text' name='question[" + count + "]'>" +
+                            "<input type='text' name='question[]'>" +
                         "</td>" +
                         "<td>" +
                             "<input type='button' value='Remove' onclick='removeQuestionFromSurvey(\"#question_"+count+"\")' />" +
