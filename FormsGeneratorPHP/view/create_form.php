@@ -104,10 +104,9 @@ if(isset($_POST['submit'])) {
 
     $(document).ready(function() {
 
-
         $("#add_question").click(function () {
-            counter++;
             $("#question_table").append(getQuestion(counter));
+            counter++;
         });
 
     });
