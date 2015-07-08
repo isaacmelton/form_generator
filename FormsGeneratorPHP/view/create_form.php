@@ -75,15 +75,17 @@ if(isset($_POST['submit'])) {
     }
 
     function getQuestion(count) {
-        return  "<div id='question_" + count + "'>" +
+        return  "<div class='container create_form_question' id='question_" + count + "'>" +
                     "<tr class='question_row' >" +
-                        "<td>Question: </td>" +
                         "<td>" +
-                            "<input type='text' name='question[]'>" +
+                            "<h4>Question: </h4>" +
                         "</td>" +
                         "<td>" +
-                            "<input type='button' value='Remove' onclick='removeQuestionFromSurvey(\"#question_"+count+"\")' />" +
-                            "<input type='button' class='add_answer' value='Add an Answer' id='question_"+count+"' onclick='addAnswerToQuestion(this.id);'/>" +
+                            "<input class='form-control' type='text' name='question[]'>" +
+                        "</td>" +
+                        "<td>" +
+                            "<input type='button' class='btn btn-default' value='Remove' onclick='removeQuestionFromSurvey(\"#question_"+count+"\")' />" +
+                            "<input type='button' class='btn btn-default add_answer' value='Add an Answer' id='question_"+count+"' onclick='addAnswerToQuestion(this.id);'/>" +
                         "</td>" +
                     "</tr>" +
                 "</div><br>";
@@ -91,13 +93,13 @@ if(isset($_POST['submit'])) {
 
     function getAnswer(count) {
         answer_counter++;
-        return  "<tr class='answer' id='answer_"+answer_counter+"'>" +
-                    "<td>Answer: </td>" +
+        return  "<tr class='a' id='answer_"+answer_counter+"'>" +
                     "<td>" +
-                        "<input type='text' name='answer[" + count + "][]'>" +
                     "</td>" +
                     "<td>" +
-                        "<input type='button' value='Remove' onclick='removeAnswerFromQuestion(\"#answer_"+answer_counter+"\")' />" +
+                        "<h5>Answer: </h5>" +
+                        "<input class='form-control' type='text' name='answer[" + count + "][]'>" +
+                        "<input type='button' class='btn btn-default' value='Remove' onclick='removeAnswerFromQuestion(\"#answer_"+answer_counter+"\")' />" +
                     "</td>" +
                 "</tr>";
     }
@@ -114,13 +116,13 @@ if(isset($_POST['submit'])) {
 
 <form name="createForm" id="createForm" action="create_form" method="post">
 
-    Survey Name: <input type="text" name="survey_title"><br>
+    <h3>Survey Name: </h3><input type="text" class="form-control" name="survey_title"><br>
 
     <table id="question_table">
     </table>
-    <input type="button" id="add_question" value="Add a Question"><br>
+    <input type="button" class="btn btn-default" id="add_question" value="Add a Question"><br>
     <div class="eventButtons">
-        <input type="submit" name="submit" id="submit" value="Save">
-        <input type="reset" name="reset" id="reset" value="Clear"  class="btn">
+        <input class="btn btn-default" type="submit" name="submit" id="submit" value="Save">
+        <input class="btn btn-default" type="reset" name="reset" id="reset" value="Clear"  class="btn">
     </div>
 </form>
