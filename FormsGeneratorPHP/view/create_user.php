@@ -1,28 +1,6 @@
 <?php
 
-if(isset($_POST['submit'])){
 
-try {
-
-$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION); // <== add this line
-$sql = "INSERT INTO people (first_name, last_name, email, city, state, country, sex)
-VALUES ('".$_POST["first_name"]."','".$_POST["last_name"]."','".$_POST["email"]."','".$_POST["city"]."','".$_POST["state"]."'
-,'".$_POST["country"]."','".$_POST["sex"]."')";
-if ($db->query($sql)) {
-echo "<script type= 'text/javascript'>alert('New Record Inserted Successfully');</script>";
-}
-else{
-echo "<script type= 'text/javascript'>alert('Data not successfully Inserted.');</script>";
-}
-
-$db = null;
-}
-catch(PDOException $e)
-{
-echo $e->getMessage();
-}
-
-}
 
 ?>
 
@@ -70,7 +48,8 @@ echo $e->getMessage();
         <label>
             Sex:
         </label>
-        <input type="text" name="sex" required>
+		<input type = 'radio' Name ='sex' value= 'female'>Female
+		<input type = 'radio' Name ='sex' value= 'male'>Male
         <br>
 
         <label>
