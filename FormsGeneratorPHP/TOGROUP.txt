@@ -1,0 +1,9 @@
+So for unit testing, go to this website: https://phpunit.de/manual/current/en/installation.html
+
+Follow the installation instructions for whichever OS you're using.
+
+If you take a look at the testing folder I've created, I've provided a sample_test.php that you can run from the commandline via: phpunit FILE_NAME.php.  You'll NEED to include the first two functions to establish the connection and load the seed.xml.
+
+Let me know if you have any questions. :)
+
+-Forrest
