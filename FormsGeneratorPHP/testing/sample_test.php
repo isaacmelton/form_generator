@@ -27,5 +27,6 @@ class SampleTest extends \PHPUnit_Extensions_Database_TestCase
         $actual = 1;
         $this->assertEquals($expected, $actual);
     }
-}
+	
+}	
 ?>

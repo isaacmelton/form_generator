@@ -98,8 +98,8 @@ if(isset($_POST['submit'])) {
                     "</td>" +
                     "<td>" +
                         "<h5>Answer: </h5>" +
-                        "<input class='form-control' type='text' name='answer[" + count + "][]'>" +
-                        "<input type='button' class='btn btn-default' value='Remove' onclick='removeAnswerFromQuestion(\"#answer_"+answer_counter+"\")' />" +
+                        "<input class='form-control' type='text' name='answer[" + count + "][]' required>" +
+                        "<input type='button' class='btn btn-default' value='Remove' onclick='removeAnswerFromQuestion(\"#answer_"+answer_counter+"\")' required />" +
                     "</td>" +
                 "</tr>";
     }
@@ -116,7 +116,7 @@ if(isset($_POST['submit'])) {
 
 <form name="createForm" id="createForm" action="create_form" method="post">
 
-    <h3>Survey Name: </h3><input type="text" class="form-control" name="survey_title"><br>
+    <h3>Survey Name: </h3><input type="text" class="form-control" name="survey_title" required><br>
 
     <table id="question_table">
     </table>
