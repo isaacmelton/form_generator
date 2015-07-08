@@ -75,16 +75,18 @@ if(isset($_POST['submit'])) {
     }
 
     function getQuestion(count) {
-        return  "<tr class='question_row' id='question_" + count + "'>" +
-                    "<td>Question: </td>" +
-                    "<td>" +
-                        "<input type='text' name='question[" + count + "]'>" +
-                    "</td>" +
-                    "<td>" +
-                        "<input type='button' value='Remove' onclick='removeQuestionFromSurvey(\"#question_"+count+"\")' />" +
-                        "<input type='button' class='add_answer' value='Add an Answer' id='question_"+count+"' onclick='addAnswerToQuestion(this.id);'/>" +
-                    "</td>" +
-                "</tr><br>";
+        return  "<div id='question_" + count + "'>" +
+                    "<tr class='question_row' >" +
+                        "<td>Question: </td>" +
+                        "<td>" +
+                            "<input type='text' name='question[" + count + "]'>" +
+                        "</td>" +
+                        "<td>" +
+                            "<input type='button' value='Remove' onclick='removeQuestionFromSurvey(\"#question_"+count+"\")' />" +
+                            "<input type='button' class='add_answer' value='Add an Answer' id='question_"+count+"' onclick='addAnswerToQuestion(this.id);'/>" +
+                        "</td>" +
+                    "</tr>" +
+                "</div><br>";
     }
 
     function getAnswer(count) {
