@@ -56,7 +56,6 @@ switch ($nav) {
         if (isset($_POST['submit'])){
             include 'view/survey_results.php';
         } else {
-            //something went wrong
             include 'view/main.php';
         }
         break;

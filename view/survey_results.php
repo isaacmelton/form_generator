@@ -6,6 +6,8 @@ if(isset($_POST['survey'])) {
     if(isset($_POST['question'])) {
         if (array_filter($questions)){
             foreach ($questions as $q) {
+
+                //TODO Fix this.
                 $sql = "INSERT INTO recorded_answers (user_id, answer_id, survey_id)
                     VALUES ('1', '" . $q . "', '" . $_POST['survey_id'] . "')";
                 if ($db->query($sql)) {
