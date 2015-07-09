@@ -9,4 +9,7 @@ if (is_array($action)) {
     echo $action;
 }
 echo "<br>Nav: ".$nav."<br><br>";
+
+$post_array_debug = print_r($_POST);
+echo "<p>Post: ".$post_array_debug."</p>";
 echo "</div>";

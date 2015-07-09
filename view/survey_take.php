@@ -6,6 +6,7 @@
         <h2><?php echo $survey['title']; ?></h2>
         <form class="survey" name="take_survey" action="./take_survey" method="post">
 	        <table class="table table-hover">
+				<input type="hidden" name="survey" value="<?php echo $survey['id'] ?>" />
 				    <tr>
 						<th>Question</th>
 						<th>Response</th>
@@ -15,12 +16,11 @@
 							<td><?php echo $question['question']; ?></td>
 							<td></td>
 						</tr>
-
 						<?php foreach ($answers as $answer) : ?>
 							<?php if ($answer['question_id'] == $question['id']) : ?>
 							<tr>
 								<td>&nbsp;&nbsp;&nbsp;<?php echo $answer['answer']; ?></td>
-								<td><input type="radio" name="question_<?php echo $answer['question_id'] ?>" value="<?php echo $answer['id'] ?>"></td>
+								<td><input type="radio" name="question_<?php echo $question['id']?>" value="<?php echo $answer['id'] ?>"></td>
 							</tr>
 							<?php endif; ?>
 						<?php endforeach; ?>

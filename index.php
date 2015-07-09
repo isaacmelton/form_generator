@@ -54,9 +54,7 @@ switch ($nav) {
         break;
     case 'take_survey':
         if (isset($_POST['submit'])){
-            //TODO add survey data to db
-            $surveys = get_surveys();
-            include 'view/survey_list.php';
+            include 'view/survey_results.php';
         } else {
             //something went wrong
             include 'view/main.php';

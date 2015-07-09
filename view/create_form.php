@@ -1,8 +1,5 @@
 <?php
 
-// Ref: http://stackoverflow.com/questions/29225320/saving-multiple-form-data-to-mysql-using-php
-// Ref: http://stackoverflow.com/questions/18156505/insert-multiple-fields-using-foreach-loop
-
 if(isset($_POST['submit'])) {
 
     $surveyTitle = $_POST['survey_title'];
