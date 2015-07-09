@@ -1,4 +1,6 @@
 <?php
+
+//TODO change to prepared statement
 function add_person($first_name, $last_name, $email, $city, $state, $country, $sex) {
     global $db;
     $query =
