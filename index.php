@@ -57,7 +57,6 @@ switch ($nav) {
         break;
 	case 'create_user':
         include 'util/validate_user.php';
-    	add_person($first_name, $last_name, $email, $city, $state, $country, $sex);
         include 'view/create_user.php';
         break;
 	case 'detailed_survey':
