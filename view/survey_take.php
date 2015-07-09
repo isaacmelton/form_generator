@@ -4,7 +4,7 @@
         <!-- display a table of surveys -->
 		
         <h2><?php echo $survey['title']; ?></h2>
-        <form class="survey" name="take_survey" action="take_survey" method="post">
+        <form class="survey" name="take_survey" action="./take_survey" method="post">
 	        <table class="table table-hover">
 				    <tr>
 						<th>Question</th>
@@ -20,7 +20,7 @@
 							<?php if ($answer['question_id'] == $question['id']) : ?>
 							<tr>
 								<td>&nbsp;&nbsp;&nbsp;<?php echo $answer['answer']; ?></td>
-								<td><input type="radio" name="question_<?php echo $answer['question_id'] ?>" value="<?php echo $answer['answer_id'] ?>"></td>
+								<td><input type="radio" name="question_<?php echo $answer['question_id'] ?>" value="<?php echo $answer['id'] ?>"></td>
 							</tr>
 							<?php endif; ?>
 						<?php endforeach; ?>

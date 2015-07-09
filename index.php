@@ -50,7 +50,17 @@ switch ($nav) {
         // Get survey data
 		$surveys = get_surveys();
         // Display the survey list
-        include('view/survey_list.php');
+        include 'view/survey_list.php';
+        break;
+    case 'take_survey':
+        if (isset($_POST['submit'])){
+            //TODO add survey data to db
+            $surveys = get_surveys();
+            include 'view/survey_list.php';
+        } else {
+            //something went wrong
+            include 'view/main.php';
+        }
         break;
     case 'view_statistics':
         include 'statistics/pseudoindex.php';
@@ -65,7 +75,8 @@ switch ($nav) {
         $questions = get_questions($id);
         $question_ids = get_question_ids_per_survey($id);
         $answers = get_answers();
-        include 'view/survey_detailed.php';
+        //include 'view/survey_detailed.php';
+        include 'view/survey_take.php';
 		break;
     default;
         include "view/main.php";

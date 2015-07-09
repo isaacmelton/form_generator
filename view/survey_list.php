@@ -1,3 +1,5 @@
+<?php include './util/notification.php'; ?>
+
  <h2>Survey List</h2>
     <div class="container">
         <?php if (isset($message)) : ?>

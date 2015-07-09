@@ -1,24 +1,9 @@
-<?php
-
-if (array_filter($errors)) {
-    foreach ($errors as $err) {
-        echo "<div class='error'>";
-        echo $err;
-        echo "</div>";
-    }
-}
-
-if (isset($notice)) {
-    echo "<div class='notice'>";
-    echo $notice;
-    echo "</div>";
-}
-
-?>
+<?php include './util/notification.php'; ?>
 
 <div>
     <h1>Create an Account</h1>
     <form class="form-horizontal" role="form" name="createUser" id="createUser" action="./create_user" method="post">
+
       <div class="form-group">
 	  <div class="col-sm-offset-2 col-sm-10">
 		<label>
