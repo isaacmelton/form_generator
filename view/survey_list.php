@@ -15,6 +15,8 @@
                 </tr>
                 <?php foreach ($surveys as $survey) : ?>
 
+                    //TODO this is a hack and should be fixed. For some reason this block is displaying info
+                    //      that does not appear in the db.
                     <?php if(!empty($survey['title'])) { ?>
                         <tr>
                         <td><?php echo $survey['title']; ?></td>
