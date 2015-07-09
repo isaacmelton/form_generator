@@ -14,16 +14,21 @@
                     <th>&nbsp;</th>
                 </tr>
                 <?php foreach ($surveys as $survey) : ?>
-                <tr>
-                    <td><?php echo $survey['title']; ?></td>
-                    <td><?php echo $survey['person_id']; ?></td>
-                    <td><?php echo $survey['id']; ?></td>
-                    <td><form name="showSurvey" id="showSurvey" action="detailed_survey" method="post">
-                        <input type="hidden" name="id"
-                               value="<?php echo $survey['id']; ?>" />
-                        <input type="submit" value="Select" />
-                    </form></td>
-                </tr>
+
+                    <?php if(!empty($survey['title'])) { ?>
+                        <tr>
+                        <td><?php echo $survey['title']; ?></td>
+                        <td><?php echo $survey['person_id']; ?></td>
+                        <td><?php echo $survey['id']; ?></td>
+                        <td><form name="showSurvey" id="showSurvey" action="detailed_survey" method="post">
+                                <input type="hidden" name="id"
+                                       value="<?php echo $survey['id']; ?>" />
+                                <input type="submit" value="Select" />
+                            </form></td>
+                            </tr>
+                    <?php } ?>
+
+
                 <?php endforeach; ?>
             </table>
         <?php endif; ?>
