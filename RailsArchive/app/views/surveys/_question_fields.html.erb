@@ -1,9 +1,0 @@
-<div class="field">
-<%= f.label :question, "Question" %><br \>
-<%= f.text_area :question, :rows => 3 %>
-<%= f.check_box :_destroy %>
-<%= f.label :_destroy, "Remove Question"%>
-</div>
-<%= f.fields_for :answers do |builder| %>
-<%= render 'answer_fields', :f => builder %>
-<% end %>
