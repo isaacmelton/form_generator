@@ -1,5 +1,6 @@
+<link rel="stylesheet" type="text/css" href="./statistics/stats.css"></style>
 <script type="text/javascript" src="https://www.google.com/jsapi"></script>
-<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 <script type="text/javascript">
     
     // Load the Visualization API and the piechart package.
@@ -13,7 +14,7 @@
         <?php foreach ($questions as $question): ?>
 
             var jsonData<?php echo $question['question_id']; ?> = $.ajax({
-                url: "get_survey_data.php",
+                url: "statistics/get_survey_data.php",
                 dataType:"json",
                 data: {sid: "<?php echo $question['survey_id']; ?>", qid: "<?php echo $question['question_id']; ?>"},
                 type: "POST",
@@ -25,7 +26,7 @@
   
             // Instantiate and draw our chart, passing in some options.
             var chart<?php echo $question['question_id']; ?> = new google.visualization.PieChart(document.getElementById("chart<?php echo $question['question_id']; ?>"));
-            chart<?php echo $question['question_id']; ?>.draw(data<?php echo $question['question_id']; ?>, {width: 400, height: 240});
+            chart<?php echo $question['question_id']; ?>.draw(data<?php echo $question['question_id']; ?>, {width: 300, height: 200});
 
         <?php endforeach; ?>
 
@@ -36,49 +37,61 @@
     echo "<meta http-equiv='Location' content='./index.php' >";
     //header('Location: ./index.php');
 else: ?>
-<p>
-    Okay, so uh... this is going to get adjusted depending on the format we plan on using, ultimately, but I'll try to make it somewhat clear what's going on...
-</p>
-
-<h1><?php echo $survey[0]['title']; ?></h1>
+<h1>Survey: <?php echo $survey[0]['title']; ?></h1>
 
 <h2>Author: <?php echo $survey[0]['email']; ?></h2>
 
-<h3><i>Number of submissions: <?php echo $survey[0]['total']; ?></i></h3>
+<h4>Number of submissions: <?php echo $survey[0]['total']; ?></h4>
 
-<ol>
+<br />
+
+<table class="stat_table">
     <?php $uniq = null;
     foreach ($survey as $qrow):
         if ($qrow['question'] != $uniq):
-            echo '<li>' . $qrow['question'] . '</li>'; ?>
-            <ul>
+            echo '<tr><th colspan="8">' . $qrow['question'] . '</th></tr>';
+            echo '<tr><td>Answer</td><td /><td>Votes</td><td /><td>Percent</td><td>Visualization</td></tr>';
+            $apr = 0;
+                foreach ($survey as $arow):
+                    if ($qrow['question'] == $arow['question']):
+                       $apr = $apr + 1;
+                    endif;
+                endforeach;
+                $first_go = true; ?>
                 <?php foreach ($survey as $arow):
                     if ($qrow['question'] == $arow['question']): ?>
-                        <li>
-                            <?php echo $arow['answer']; ?>
-                            <ul><i>
-                                <li>total votes: <?php echo $arow['choice_count']; ?></li>
+                        <tr>
+                            <td><?php echo $arow['answer']; ?></td>
+                            <td />
+                            <td><?php echo $arow['choice_count']; ?></td>
+                            <td />
+                            <td>
                                 <?php if ($arow['total'] > 0) {
                                     $percent = round(100 * $arow['choice_count'] / $arow['total'], 1);
                                 } else { $percent = 0; }
-                                ?>
-                                <li>percent of votes: <?php echo $percent; ?>%</li>
-                            </i></ul>
-                        </li>
-                        <script> </script>
+                                $apr = $apr + 1;
+                                echo $percent . '%'; ?>
+                            </td>
+                            <?php if ($first_go == true): ?>
+                                <td colspan="3" rowspan="<?php echo $apr; ?>">
+                                    <div id="chart<?php echo $qrow['question_id']; ?>">GRAPH</div>
+                                </td>                                
+                            <?php endif;
+                            $first_go = false; ?>
+                        </tr>
                     <?php endif;
                 endforeach; ?>
-            </ul>
-            <?php $uniq = $qrow['question']; ?>
-            <br />
-            <div id="chart<?php echo $qrow['question_id']; ?>"></div>
-        <?php endif;
-    endforeach; ?>
-</ol>
+            <?php $uniq = $qrow['question']; ?>            
+        <?php endif; ?>
 
-<br />
+    <tr><td colspan="8"></td></tr>
 
-<br />
-
-<div id="chart_x"></div>
+    <?php endforeach; ?>
+</table>
 <?php endif; ?>
+
+<br />
+
+<p>
+    Return <a href="index.php">home</a>.
+</p>

@@ -60,13 +60,13 @@ switch ($nav) {
         }
         break;
     case 'view_statistics':
-        include 'statistics/pseudoindex.php';
+        include 'statistics/index.php';
         break;
-	case 'create_user':
+    case 'create_user':
         include 'util/validate_user.php';
         include 'view/create_user.php';
         break;
-	case 'detailed_survey':
+    case 'detailed_survey':
         $id = $_POST['id'];
         $survey = get_survey($id);
         $questions = get_questions($id);
@@ -74,9 +74,11 @@ switch ($nav) {
         $answers = get_answers();
         //include 'view/survey_detailed.php';
         include 'view/survey_take.php';
-		break;
+	break;
     default;
         include "view/main.php";
         break;
 }
 include 'view/footer.php';
+
+?>
