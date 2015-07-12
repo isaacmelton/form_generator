@@ -72,7 +72,7 @@ if(isset($_POST['submit'])) {
     }
 
     function getQuestion(count) {
-        return  "<div class='container create_form_question' id='question_" + count + "'>" +
+        return  "<div class='col-lg-10 container create_form_question' id='question_" + count + "'>" +
                     "<tr class='question_row' >" +
                         "<td>" +
                             "<h4>Question: </h4>" +
@@ -110,10 +110,12 @@ if(isset($_POST['submit'])) {
 
     });
 </script>
+  <div class="container-fluid">
+<div class="col-md-6 col-md-offset-2">
+<form  class="form-horizontal" role="form" name="createForm" id="createForm" action="create_form" method="post">
 
-<form name="createForm" id="createForm" action="create_form" method="post">
-
-    <h3>Survey Name: </h3><input type="text" class="form-control" name="survey_title" required><br>
+    <h3>Survey Name: </h3>
+	<input type="text" class="form-control" name="survey_title" required><br>
 
     <table id="question_table">
     </table>
@@ -123,3 +125,5 @@ if(isset($_POST['submit'])) {
         <input class="btn btn-default" type="reset" name="reset" id="reset" value="Clear"  class="btn">
     </div>
 </form>
+</div>
+</div>
