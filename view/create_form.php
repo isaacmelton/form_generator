@@ -119,6 +119,7 @@ if(isset($_POST['submit'])) {
 
     <table id="question_table">
     </table>
+	<br><br>
     <input type="button" class="btn btn-default" id="add_question" value="Add a Question"><br>
     <div class="eventButtons">
         <input class="btn btn-default" type="submit" name="submit" id="submit" value="Save">
