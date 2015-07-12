@@ -68,7 +68,7 @@ $path .= '';
       </ul>
 	  
 	   <!-- Working on dropdown here -->
-				<ul class="nav pull-right">
+				<ul class="nav pull-left">
 					<li class="dropdown">
 						<a class="dropdown-toggle" href="#" data-toggle="dropdown">Sign In <strong class="caret"></strong></a>
 						<div class="dropdown-menu" style="padding: 15px; padding-bottom: 5px;">
@@ -86,14 +86,12 @@ $path .= '';
 	  <!-- END DROPDOWN WORK-->
 	  
     </div><!-- /.navbar-collapse -->
-  </div><!-- /.container-fluid -->
-</div>	
+  </div><!-- /.container-fluid -->	
   </nav>
 
 </header>
-        <p>Interactive Forms Generation</p>
-        <p>Enter links/buttons to create survey/take survey, etc here.</p>
+
     </div>
-</div>
+
 
    

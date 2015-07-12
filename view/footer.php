@@ -1,8 +1,13 @@
-            <div id="footer">
-                <p class="copyright">
+             <div class="container-fluid">
+			 
+<div class="col-md-3"></div>
+			 			<div class="col-md-5 text-center" id="footer">
+
+<p class="copyright">
                     &copy; <?php echo date("Y"); ?> Brian McMichael, Isaac Melton, Forrest Wilbur.
                 </p>
-            </div>
+
+
 			</div>
         </div><!-- end page -->
 	   <!-- Latest compiled and minified JavaScript -->
