@@ -78,5 +78,3 @@ function encrypt($email, $password) {
     return $hash;
 }
 
-?>
-
