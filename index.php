@@ -7,6 +7,7 @@ require('db/survey_db.php');
 require('db/people_db.php');
 require('db/question_db.php');
 require('db/answer_db.php');
+require('db/login_db.php');
 
 
 // Get the action to perform
@@ -43,6 +44,41 @@ switch ($nav) {
     case 'nav':
         include 'view/main.php';
         break;
+    case 'login':
+        if (!isset($_POST['email'])) {
+            $email = "";
+        } else {
+            $email = $_POST['email'];
+        }
+        if (!isset($_POST['password'])) {
+            $password = "";
+        } else {
+            $password = $_POST['password'];
+        }
+        $is_valid_password = confirm_password($email, $password);
+        if (!$is_valid_password) {
+            echo 'login is: '.$email.'... ';
+            echo 'password is: '.$password.'... ';
+            echo 'is total failure; not logged in.';
+            echo '... encrypting password.';
+            echo encrypt($email, $password);
+//            include('index.php');
+//        } elseif ((empty($admin) || empty($is_valid_password)) && !isset($_POST['has_tried_before'])) {
+//            $message = 'Please enter your login information.';
+//            include('admin_login.php');
+//        } elseif ((empty($admin) || empty($is_valid_password)) && isset($_POST['has_tried_before'])) {
+//            $message = 'The login information you entered was incorrect.  Please try again.';
+//            include('admin_login.php');
+        } else {
+            $_SESSION['logged_in'] = $email;
+//            include('index.php');
+            echo 'logged in as '.$_SESSION['logged_in'];
+        } 
+        break;
+    case 'logout':
+        unset($_SESSION['logged_in']);
+        $message = 'Successfully logged out.';
+        include('index.php');
     case 'create_form':
         include 'view/create_form.php';
         break;

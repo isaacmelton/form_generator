@@ -75,9 +75,10 @@ $path .= '';
 					<li class="dropdown">
 						<a class="dropdown-toggle" href="#" data-toggle="dropdown">Sign In <strong class="caret"></strong></a>
 						<div class="dropdown-menu" style="padding: 15px; padding-bottom: 5px;">
-							<form method="post" action="login" accept-charset="UTF-8">
-								<input style="margin-bottom: 15px;" type="text" placeholder="Username" id="username" name="username">
-								<input style="margin-bottom: 15px;" type="password" placeholder="Password" id="password" name="password">
+							<form method="post" action="" accept-charset="UTF-8">
+								<input type="hidden" name="nav" value="login" />
+								<input style="margin-bottom: 15px;" type="text" placeholder="Email" id="username" name="email" />
+								<input style="margin-bottom: 15px;" type="password" placeholder="Password" id="password" name="password" />
 								<input style="float: left; margin-right: 10px;" type="checkbox" name="remember-me" id="remember-me" value="1">
 								<label class="string optional" for="user_remember_me"> Remember me</label>
 								<input class="btn btn-primary btn-block" type="submit" id="sign-in" value="Sign In">
@@ -96,6 +97,11 @@ $path .= '';
 </header>
         <p>Interactive Forms Generation</p>
         <p>Enter links/buttons to create survey/take survey, etc here.</p>
+
+	<?php if (isset($_SESSION['logged_in']) == true): ?>
+	        <p><b>OBTW, UR LOGGED IN NAO KTHX!</b></p>
+	<?php endif; ?>
+
     </div>
 </div>
 
