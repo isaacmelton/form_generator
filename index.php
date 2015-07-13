@@ -73,7 +73,7 @@ switch ($nav) {
     case 'logout':
         unset($_SESSION['logged_in']);
         $message = 'Successfully logged out.';
-        include('index.php');
+        header('Location: index.php');
     case 'create_form':
         include 'view/create_form.php';
         break;
