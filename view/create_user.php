@@ -1,85 +1,79 @@
 <?php include './util/notification.php'; ?>
-
-<div>
-    <h1>Create an Account</h1>
+  <div class="container-fluid">
+<div class="col-md-4"></div>
+<div class="col-md-5 text-center">
+    <h1 align="left">Create an Account</h1>
+<br>
     <form class="form-horizontal" role="form" name="createUser" id="createUser" action="./create_user" method="post">
 
       <div class="form-group">
-	  <div class="col-sm-offset-2 col-sm-10">
-		<label>
-            First Name:
-        </label>
-        <input type="text" name="first_name" required>
-        <br>
-		</div>
+		<label class="col-sm-2 control-label">First Name:</label>
+			<div class="col-sm-4">
+				<input type="text" class="form-control" name="first_name" required>
+			</div>
 		</div>
 		
 		<div class="form-group"> 
-		<div class="col-sm-offset-2 col-sm-10">
-        <label>
-            Last Name:
-        </label>
-        <input type="text" name="last_name" required>
-        <br>
+		<label class="col-sm-2 control-label">Last Name:</label>
+		<div class="col-sm-4">
+        <input type="text" class="form-control" name="last_name" required>
 		</div>
 		</div>
 		
       <div class="form-group">
-	  <div class="col-sm-offset-2 col-sm-10">	  
-        <label>
+        <label class="col-sm-2 control-label">
             Email:
         </label>
-        <input type="text" name="email" required>
-        <br>
+		<div class="col-sm-4">
+        <input type="text" class="form-control" name="email" required>
 		</div>
 		</div>
+		
       <div class="form-group">
-	  <div class="col-sm-offset-2 col-sm-10">
-        <label>
+        <label class="col-sm-2 control-label">
             City:
         </label>
-        <input type="text" name="city" required>
-        <br>
+				<div class="col-sm-4">
+        <input type="text" class="form-control" name="city" required>
 		</div>
 		</div>
       <div class="form-group">
-	  <div class="col-sm-offset-2 col-sm-10">
-        <label>
+        <label class="col-sm-2 control-label">
             State:
         </label>
-        <input type="text" name="state" required>
-        <br>
+		<div class="col-sm-4">
+        <input type="text" class="form-control" name="state" required>
 		</div>
 		</div>
       <div class="form-group"> 
-	  <div class="col-sm-offset-2 col-sm-10">
-        <label>
+        <label class="col-sm-2 control-label">
             Country:
         </label>
-        <input type="text" name="country" required>
-        <br>
+		<div class="col-sm-4">
+        <input type="text" class="form-control" name="country" required>
 		</div>
 		</div>
       <div class="form-group">
-	  <div class="col-sm-offset-2 col-sm-10">
-        <label>
+        <label class="col-sm-2 control-label">
             Sex:
         </label>
+		<div class="col-sm-4">
 		<input type = 'radio' Name ='sex' value= 'female'>Female
+		&nbsp;
 		<input type = 'radio' Name ='sex' value= 'male'>Male
-        <br>
 		</div>
 		</div>
       <div class="form-group">
-	  <div class="col-sm-offset-2 col-sm-10">
-        <label>
+        <label class="col-sm-2 control-label">
             &nbsp;
         </label>
+		<div class="col-sm-4">
         <input type="submit" name="submit" value="Create User">
-        <br>
 		</div>
 		</div>
     </form>
-
+</div>
+<div class="col-md-4"></div>
 </div>
 <br>
+

@@ -75,7 +75,16 @@ switch ($nav) {
         $message = 'Successfully logged out.';
         header('Location: index.php');
     case 'create_form':
-        include 'view/create_form.php';
+        include 'db/create_form_db.php';
+        if (isset($survey_id)) {
+            $survey = get_survey($survey_id);
+            $questions = get_questions($survey_id);
+            $question_ids = get_question_ids_per_survey($survey_id);
+            $answers = get_answers();
+            include ('./view/survey_take.php');
+        } else {
+            include('./view/create_form.php');
+        }
         break;
     case 'view_survey':
         // Get survey data

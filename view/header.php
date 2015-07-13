@@ -70,7 +70,7 @@ $path .= '';
       </ul>
 	  
 	   <!-- Working on dropdown here -->
-				<ul class="nav pull-right">
+				<ul class="nav pull-left">
 					<li class="dropdown">
 						<?php if (!isset($_SESSION['logged_in'])): ?>
 						<a class="dropdown-toggle" href="#" data-toggle="dropdown">Sign In <strong class="caret"></strong></a>
@@ -99,8 +99,7 @@ $path .= '';
 	  <!-- END DROPDOWN WORK-->
 	  
     </div><!-- /.navbar-collapse -->
-  </div><!-- /.container-fluid -->
-</div>	
+  </div><!-- /.container-fluid -->	
   </nav>
 
 </header>
@@ -112,6 +111,6 @@ $path .= '';
 	<?php endif; ?>
 
     </div>
-</div>
+
 
    
