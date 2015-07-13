@@ -1,8 +1,5 @@
-<?php include './util/notification.php'; 
-  if (!isset($_SESSION["logged_in"]))
-   {
-      header("location: need_log_in");
-   }
+<?php
+    include './util/notification.php';
 ?>
     <div class="container">
 	<div class="col-md-3"></div>
