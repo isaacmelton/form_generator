@@ -77,4 +77,3 @@ function encrypt($email, $password) {
     update_password($email, $hash);
     return $hash;
 }
-

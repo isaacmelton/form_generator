@@ -1,6 +1,7 @@
 <?php
 //Change this to false to remove debug.
 $debug = false;
+$force_login = false;
 
 //Set a per session cookie.
 if (!isset($_SESSION)) {
@@ -81,20 +82,25 @@ switch ($nav) {
         header('Location: index.php');
 		break;
     case 'create_form':
-        include 'db/create_form_db.php';
-        if (isset($survey_id)) {
-            $survey = get_survey($survey_id);
-            $questions = get_questions($survey_id);
-            $question_ids = get_question_ids_per_survey($survey_id);
-            $answers = get_answers();
-            include ('./view/survey_take.php');
+        if (!isset($_SESSION["logged_in"]) && $force_login)
+        {
+            include 'view/log_in.php';
         } else {
-            include('./view/create_form.php');
+            include 'db/create_form_db.php';
+            if (isset($survey_id)) {
+                $survey = get_survey($survey_id);
+                $questions = get_questions($survey_id);
+                $question_ids = get_question_ids_per_survey($survey_id);
+                $answers = get_answers();
+                include ('./view/survey_take.php');
+            } else {
+                include('./view/create_form.php');
+            }
         }
         break;
     case 'view_survey':
         // Get survey data
-	$surveys = get_surveys();
+	    $surveys = get_surveys();
         // Display the survey list
         include 'view/survey_list.php';
         break;
