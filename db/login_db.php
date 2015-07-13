@@ -52,9 +52,9 @@ function update_password($email, $password) {
         $statement->bindValue(':email', $user_id);
         $statement->bindValue(':password', $password);
         $statement->execute();
-        $result = $statement->fetchAll();
+        $row_count = $statement->fetchColumn();
         $statement->closeCursor();
-        return $result;
+        return $row_count;
     } catch (PDOException $e) {
         display_db_error($e->getMessage());
     }
@@ -76,6 +76,46 @@ function encrypt($email, $password) {
     $hash = password_hash($password, PASSWORD_DEFAULT);
     update_password($email, $hash);
     return $hash;
+}
+
+function set_remember_me($email, $cookie_val) {
+    global $db;
+    $query =
+    "UPDATE users
+    SET users.remember_me = :cookie_val
+    WHERE users.id = :user_id";
+    try {
+        $statement = $db->prepare($query);
+        $user_id = get_user_id($email);
+        $statement->bindValue(':email', $user_id);
+        $statement->bindValue(':cookie_val', $cookie_val);
+        $statement->execute();
+        $row_count = $statement->fetchColumn();
+        $statement->closeCursor();
+        return $row_count;
+    } catch (PDOException $e) {
+        display_db_error($e->getMessage());
+    }
+}
+
+function is_remembered($cookie_val) {
+    global $db;
+    $query =
+    "SELECT people.email AS email
+    FROM people
+    INNER JOIN users
+    ON people.id = users.person_id
+    WHERE remember_me = :cookie_val";
+    try {
+        $statement = $db->prepare($query);
+        $statement->bindValue(':cookie_val', $cookie_val);
+        $statement->execute();
+        $result = $statement->fetch();
+        $statement->closeCursor();
+        return $result['email'];
+    } catch (PDOException $e) {
+        display_db_error($e->getMessage());
+    }
 }
 
 ?>
