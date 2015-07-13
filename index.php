@@ -1,6 +1,7 @@
 <?php
 //Change this to false to remove debug.
 $debug = false;
+//Change this to true to enable login.
 $force_login = false;
 
 //Set a per session cookie.
@@ -82,6 +83,8 @@ switch ($nav) {
         header('Location: index.php');
 		break;
     case 'create_form':
+        //Here we're checking if the user is logged in and if the
+        // login toggle isn't turned off.
         if (!isset($_SESSION["logged_in"]) && $force_login)
         {
             include 'view/log_in.php';
