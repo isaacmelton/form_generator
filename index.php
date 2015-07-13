@@ -2,6 +2,14 @@
 ob_start();
 //Change this to false to remove debug.
 $debug = false;
+//Change this to true to enable login.
+$force_login = false;
+
+//Set a per session cookie.
+if (!isset($_SESSION)) {
+    session_set_cookie_params(0, '/');
+    session_start();
+}
 
 include 'model/database.php';
 require_once('db/survey_db.php');
@@ -31,11 +39,7 @@ if (isset($_POST['nav'])) {
     $nav = 'nav';
 }
 
-//Set a per session cookie.
-if (!isset($_SESSION)) {
-    session_set_cookie_params(0, '/');
-    session_start();
-}
+
 
 //Log in user automatically if remembered
 if (!isset($_SESSION['logged_in']) && isset($_COOKIE['remembered'])) {
@@ -87,6 +91,9 @@ switch ($nav) {
             header('Location: index.php');
         } 
         break;
+	case 'need_log_in':
+		include 'view/log_in.php';
+		break;
     case 'logout':
         if (isset($_COOKIE['remembered']) {
             unset($_COOKIE['remembered']);
@@ -95,21 +102,29 @@ switch ($nav) {
         unset($_SESSION['logged_in']);
         $login_message = 'Successfully logged out.';
         header('Location: index.php');
+		break;
     case 'create_form':
-        include 'db/create_form_db.php';
-        if (isset($survey_id)) {
-            $survey = get_survey($survey_id);
-            $questions = get_questions($survey_id);
-            $question_ids = get_question_ids_per_survey($survey_id);
-            $answers = get_answers();
-            include ('./view/survey_take.php');
+        //Here we're checking if the user is logged in and if the
+        // login toggle isn't turned off.
+        if (!isset($_SESSION["logged_in"]) && $force_login)
+        {
+            include 'view/log_in.php';
         } else {
-            include('./view/create_form.php');
+            include 'db/create_form_db.php';
+            if (isset($survey_id)) {
+                $survey = get_survey($survey_id);
+                $questions = get_questions($survey_id);
+                $question_ids = get_question_ids_per_survey($survey_id);
+                $answers = get_answers();
+                include ('./view/survey_take.php');
+            } else {
+                include('./view/create_form.php');
+            }
         }
         break;
     case 'view_survey':
         // Get survey data
-	$surveys = get_surveys();
+	    $surveys = get_surveys();
         // Display the survey list
         include 'view/survey_list.php';
         break;

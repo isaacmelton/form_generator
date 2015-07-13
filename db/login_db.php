@@ -138,4 +138,3 @@ function unset_remember_me($email) {
 }
 
 ?>
-
