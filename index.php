@@ -70,10 +70,15 @@ switch ($nav) {
 //            echo 'logged in as '.$_SESSION['logged_in'];
         } 
         break;
+	case 'need_log_in':
+		include 'view/log_in.php';
+		break;
+	
     case 'logout':
         unset($_SESSION['logged_in']);
         $message = 'Successfully logged out.';
         header('Location: index.php');
+		break;
     case 'create_form':
         include 'db/create_form_db.php';
         if (isset($survey_id)) {

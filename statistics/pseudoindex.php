@@ -1,10 +1,5 @@
 <?php 
 
-  if (!isset($_SESSION["logged_in"]))
-   {
-      header("location: need_log_in");
-   }
-
 if (strstr(getcwd(), "statistics") == true) {
     header('Location: ../index.php');
 }
@@ -30,7 +25,6 @@ if ($action == 'select_focus') {
 } else if ($action == 'surveys') {
     $survey_id = $_POST['survey_id'];
     $survey = get_survey_stats_by_id($survey_id);
-    $questions = get_questions_for_survey($survey_id);
     include("./statistics/survey_stats.php");
 } else if ($action == 'takers') {
     $taker_id = $_POST['taker_id'];

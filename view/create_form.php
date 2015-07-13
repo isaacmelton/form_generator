@@ -1,4 +1,11 @@
-<?php ?>
+<?php 
+
+  if (!isset($_SESSION["logged_in"]))
+   {
+      header("location: need_log_in");
+   }
+?>
+
 <script>
 
     var counter = 0;
