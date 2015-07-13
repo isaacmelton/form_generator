@@ -2,6 +2,12 @@
 //Change this to false to remove debug.
 $debug = false;
 
+//Set a per session cookie.
+if (!isset($_SESSION)) {
+    session_set_cookie_params(0, '/');
+    session_start();
+}
+
 include 'model/database.php';
 require_once('db/survey_db.php');
 require_once('db/people_db.php');
@@ -30,11 +36,7 @@ if (isset($_POST['nav'])) {
     $nav = 'nav';
 }
 
-//Set a per session cookie.
-if (!isset($_SESSION)) {
-    session_set_cookie_params(0, '/');
-    session_start();
-}
+
 
 // Show the views.
 include 'view/header.php';
@@ -73,7 +75,6 @@ switch ($nav) {
 	case 'need_log_in':
 		include 'view/log_in.php';
 		break;
-	
     case 'logout':
         unset($_SESSION['logged_in']);
         $message = 'Successfully logged out.';
