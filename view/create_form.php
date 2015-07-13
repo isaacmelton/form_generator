@@ -64,7 +64,7 @@ if(isset($_POST['submit'])) {
     }
 
     function removeAnswerFromQuestion(answerID) {
-        $("tr").remove(answerID);
+        $("table").remove(answerID);
     }
 
     function removeQuestionFromSurvey(questionID) {
@@ -90,15 +90,19 @@ if(isset($_POST['submit'])) {
 
     function getAnswer(count) {
         answer_counter++;
-        return  "<tr class='a' id='answer_"+answer_counter+"'>" +
-                    "<td>" +
-                    "</td>" +
-                    "<td>" +
-                        "<h5>Answer: </h5>" +
-                        "<input class='form-control' type='text' name='answer[" + count + "][]' required>" +
-                        "<input type='button' class='btn btn-default' value='Remove' onclick='removeAnswerFromQuestion(\"#answer_"+answer_counter+"\")' required />" +
-                    "</td>" +
-                "</tr>";
+        return  "<table class='a' id='answer_"+answer_counter+"'>" +
+                    "<tr>" +
+                        "<td>" +
+                                "<h5>Answer: </h5>" +
+                        "</td>" +
+                        "<td>" +
+                                "<input class='form-control' type='text' name='answer[" + count + "][]' required>" +
+                        "</td>" +
+                        "<td>" +
+                                "<input type='button' class='btn btn-default' value='Remove' onclick='removeAnswerFromQuestion(\"#answer_"+answer_counter+"\")' required />" +
+                        "</td>" +
+                    "</tr>" +
+                "</table>";
     }
 
     $(document).ready(function() {
@@ -117,7 +121,7 @@ if(isset($_POST['submit'])) {
     <h3>Survey Name: </h3>
 	<input type="text" class="form-control" name="survey_title" required><br>
 
-    <table id="question_table">
+    <table class="table" id="question_table">
     </table>
 	<br><br>
     <input type="button" class="btn btn-default" id="add_question" value="Add a Question"><br>
