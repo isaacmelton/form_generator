@@ -1,4 +1,5 @@
 <?php
+ob_start();
 //Change this to false to remove debug.
 $debug = false;
 
@@ -37,10 +38,10 @@ if (!isset($_SESSION)) {
 }
 
 //Log in user automatically if remembered
-if (!isset($_SESSION['logged_in']) && isset($_COOKIE['remembered']) {
+if (!isset($_SESSION['logged_in']) && isset($_COOKIE['remembered'])) {
     $email = is_remembered($_COOKIE['remembered']);
     if (!empty($email)) {
-        $_SESSION['logged_in']) = $email;
+        $_SESSION['logged_in'] = $email;
         $login_message = 'Welcome, '.$_SESSION['logged_in'].'.';
         header('Location: index.php');
     } else {
@@ -51,6 +52,8 @@ if (!isset($_SESSION['logged_in']) && isset($_COOKIE['remembered']) {
 // Show the views.
 include 'view/header.php';
 if ($debug) { include 'view/debug.php'; }
+
+
 
 switch ($nav) {
     case 'nav':
@@ -67,18 +70,13 @@ switch ($nav) {
         } else {
             $password = $_POST['password'];
         }
-        if (!isset($_POST['remember_me'])) {
-            $remember_me = 0;
-        } else {
-            $remember_me = $_POST['remember_me'];
-        }
         $is_valid_password = confirm_password($email, $password);
         if (!$is_valid_password) {
             $login_message = 'The login information you entered is invalid.';
             header('Location: index.php');
         } else {
             $_SESSION['logged_in'] = $email;
-            if ($remember_me == 1) {
+            if (isset($_POST['remember_me'])) {
                 $cookie_val = openssl_random_pseudo_bytes(60);
                 setcookie('remembered', $cookie_val, time() + (86400 * 365), "/"); // gives cookie one year shelf-life
                 set_remember_me($email, $cookie_val);
@@ -90,8 +88,12 @@ switch ($nav) {
         } 
         break;
     case 'logout':
+        if (isset($_COOKIE['remembered']) {
+            unset($_COOKIE['remembered']);
+            unset_remember_me($_SESSION['logged_in']); 
+        }            
         unset($_SESSION['logged_in']);
-        $message = 'Successfully logged out.';
+        $login_message = 'Successfully logged out.';
         header('Location: index.php');
     case 'create_form':
         include 'db/create_form_db.php';

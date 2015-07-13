@@ -42,6 +42,10 @@ $path .= '';
 
 <!-- the body section -->
 <body>
+
+	<?php // if (isset($login_message)):
+		echo '<p><i>' . var_dump($login_message) . '.</i></p>';
+	// endif; ?>
 <div id="page">
     <header class="navbar-inverse" role="banner">
 	<nav class="navbar navbar-inverse">
@@ -81,7 +85,7 @@ $path .= '';
 								<input type="hidden" name="nav" value="login" />
 								<input style="margin-bottom: 15px;" type="text" placeholder="Email" id="username" name="email" />
 								<input style="margin-bottom: 15px;" type="password" placeholder="Password" id="password" name="password" />
-								<input style="float: left; margin-right: 10px;" type="checkbox" name="remember_me" id="remember-me" value="1">
+								<input style="float: left; margin-right: 10px;" type="checkbox" name="remember_me" id="remember-me" value="yes" />
 								<label class="string optional" for="user_remember_me"> Remember me</label>
 								<input class="btn btn-primary btn-block" type="submit" id="sign-in" value="Sign In">
 								<li class="active"><a href="/create_user" >Sign me up for an account<span class="sr-only">(current)</span></a></li>
@@ -104,13 +108,13 @@ $path .= '';
   </div><!-- /.container-fluid -->	
   </nav>
 
+
+
 </header>
         <p>Interactive Forms Generation</p>
         <p>Enter links/buttons to create survey/take survey, etc here.</p>
 
-	<?php if (isset($login_message)):
-		echo '<p><i>'.$login_message.'.</i></p>';
-	endif; ?>
+
 
     </div>
 

@@ -78,26 +78,6 @@ function encrypt($email, $password) {
     return $hash;
 }
 
-function set_remember_me($email, $cookie_val) {
-    global $db;
-    $query =
-    "UPDATE users
-    SET users.remember_me = :cookie_val
-    WHERE users.id = :user_id";
-    try {
-        $statement = $db->prepare($query);
-        $user_id = get_user_id($email);
-        $statement->bindValue(':email', $user_id);
-        $statement->bindValue(':cookie_val', $cookie_val);
-        $statement->execute();
-        $row_count = $statement->fetchColumn();
-        $statement->closeCursor();
-        return $row_count;
-    } catch (PDOException $e) {
-        display_db_error($e->getMessage());
-    }
-}
-
 function is_remembered($cookie_val) {
     global $db;
     $query =
@@ -113,6 +93,45 @@ function is_remembered($cookie_val) {
         $result = $statement->fetch();
         $statement->closeCursor();
         return $result['email'];
+    } catch (PDOException $e) {
+        display_db_error($e->getMessage());
+    }
+}
+
+function set_remember_me($email, $cookie_val) {
+    global $db;
+    $query =
+    "UPDATE users
+    SET users.remember_me = :cookie_val
+    WHERE users.id = :user_id";
+    try {
+        $statement = $db->prepare($query);
+        $user_id = get_user_id($email);
+        $statement->bindValue(':user_id', $user_id);
+        $statement->bindValue(':cookie_val', $cookie_val);
+        $statement->execute();
+        $row_count = $statement->fetchColumn();
+        $statement->closeCursor();
+        return $row_count;
+    } catch (PDOException $e) {
+        display_db_error($e->getMessage());
+    }
+}
+
+function unset_remember_me($email) {
+    global $db;
+    $query =
+    "UPDATE users
+    SET users.remember_me = NULL
+    WHERE users.id = :user_id";
+    try {
+        $statement = $db->prepare($query);
+        $user_id = get_user_id($email);
+        $statement->bindValue(':user_id', $user_id);
+        $statement->execute();
+        $row_count = $statement->fetchColumn();
+        $statement->closeCursor();
+        return $row_count;
     } catch (PDOException $e) {
         display_db_error($e->getMessage());
     }
