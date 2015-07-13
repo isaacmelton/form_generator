@@ -3,11 +3,11 @@
 $debug = false;
 
 include 'model/database.php';
-require('db/survey_db.php');
-require('db/people_db.php');
-require('db/question_db.php');
-require('db/answer_db.php');
-require('db/login_db.php');
+require_once('db/survey_db.php');
+require_once('db/people_db.php');
+require_once('db/question_db.php');
+require_once('db/answer_db.php');
+require_once('db/login_db.php');
 
 
 // Get the action to perform
@@ -57,12 +57,7 @@ switch ($nav) {
         }
         $is_valid_password = confirm_password($email, $password);
         if (!$is_valid_password) {
-            echo 'login is: '.$email.'... ';
-            echo 'password is: '.$password.'... ';
-            echo 'is total failure; not logged in.';
-            echo '... encrypting password.';
-            echo encrypt($email, $password);
-//            include('index.php');
+            header('Location: index.php');
 //        } elseif ((empty($admin) || empty($is_valid_password)) && !isset($_POST['has_tried_before'])) {
 //            $message = 'Please enter your login information.';
 //            include('admin_login.php');
@@ -71,8 +66,8 @@ switch ($nav) {
 //            include('admin_login.php');
         } else {
             $_SESSION['logged_in'] = $email;
-//            include('index.php');
-            echo 'logged in as '.$_SESSION['logged_in'];
+            header('Location: index.php');
+//            echo 'logged in as '.$_SESSION['logged_in'];
         } 
         break;
     case 'logout':
@@ -84,7 +79,7 @@ switch ($nav) {
         break;
     case 'view_survey':
         // Get survey data
-		$surveys = get_surveys();
+	$surveys = get_surveys();
         // Display the survey list
         include 'view/survey_list.php';
         break;

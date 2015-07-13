@@ -73,8 +73,9 @@ $path .= '';
 	   <!-- Working on dropdown here -->
 				<ul class="nav pull-right">
 					<li class="dropdown">
+						<?php if (!isset($_SESSION['logged_in'])): ?>
 						<a class="dropdown-toggle" href="#" data-toggle="dropdown">Sign In <strong class="caret"></strong></a>
-						<div class="dropdown-menu" style="padding: 15px; padding-bottom: 5px;">
+						<div class="dropdown-menu" style="padding: 15px; padding-bottom: 5px;">	
 							<form method="post" action="" accept-charset="UTF-8">
 								<input type="hidden" name="nav" value="login" />
 								<input style="margin-bottom: 15px;" type="text" placeholder="Email" id="username" name="email" />
@@ -84,6 +85,15 @@ $path .= '';
 								<input class="btn btn-primary btn-block" type="submit" id="sign-in" value="Sign In">
 								<li class="active"><a href="/create_user" >Sign me up for an account<span class="sr-only">(current)</span></a></li>
 							</form>
+						<?php else: ?>
+						<a class="dropdown-toggle" href="#" data-toggle="dropdown">Logged in as <?php echo $_SESSION['logged_in']; ?><strong class="caret"></strong></a>
+						<div class="dropdown-menu" style="padding: 15px; padding-bottom: 5px;">	
+							<form method="post" action="">
+								<input type="hidden" name="nav" value="logout" />
+								<input class="btn btn-primary btn-block" type="submit" id="sign-in" value="Log out" />
+							</form>
+						<?php endif; ?>
+
 						</div>
 					</li>
 				</ul>
