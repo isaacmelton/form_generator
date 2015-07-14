@@ -43,9 +43,6 @@ $path .= '';
 <!-- the body section -->
 <body>
 
-	<?php // if (isset($login_message)):
-		echo '<p><i>' . var_dump($login_message) . '.</i></p>';
-	// endif; ?>
 <div id="page">
     <header class="navbar-inverse" role="banner">
 	<nav class="navbar navbar-inverse">
@@ -111,11 +108,14 @@ $path .= '';
 
 
 </header>
+
+	<?php if (isset($_SESSION['login_message'])):
+		echo '<p><i>'.$_SESSION['login_message'].'</i></p>';
+		unset($_SESSION['login_message']);
+	endif; ?>
+
         <p>Interactive Forms Generation</p>
         <p>Enter links/buttons to create survey/take survey, etc here.</p>
-
-
-
     </div>
 
 

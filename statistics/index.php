@@ -1,10 +1,4 @@
 <?php 
-
-  if (!isset($_SESSION["logged_in"]))
-   {
-      header("location: need_log_in");
-   }
-
 if (strstr(getcwd(), "statistics") == true) {
     header('Location: ../index.php');
 }

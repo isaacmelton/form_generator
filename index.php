@@ -1,9 +1,9 @@
 <?php
 ob_start();
 //Change this to false to remove debug.
-$debug = true;
-//Change this to true to enable login.
-$force_login = false;
+$debug = false;
+//Change this to true to force login.
+$force_login = true;
 
 //Set a per session cookie.
 if (!isset($_SESSION)) {
@@ -40,17 +40,26 @@ if (isset($_POST['nav'])) {
     $nav = 'nav';
 }
 
-
-
 //Log in user automatically if remembered
 if (!isset($_SESSION['logged_in']) && isset($_COOKIE['remembered'])) {
     $email = is_remembered($_COOKIE['remembered']);
     if (!empty($email)) {
         $_SESSION['logged_in'] = $email;
-        $login_message = 'Welcome, '.$_SESSION['logged_in'].'.';
+        $_SESSION['login_message'] = 'Welcome, '.$_SESSION['logged_in'].'.';
         header('Location: index.php');
     } else {
         unset($_COOKIE['remembered']);
+    }
+}
+
+//If user not logged in && trying to access page that requires login, user is sent to login page
+if ($force_login) {
+    if (!isset($_SESSION['logged_in']) && (($nav != 'nav') 
+                                        && ($nav != 'create_user') 
+                                        && ($nav != 'need_login') 
+                                        && ($nav != 'login') 
+                                        && ($nav != 'logout'))) { //add to or remove from this list as needed
+        $nav = 'need_login';
     }
 }
 
@@ -63,6 +72,18 @@ if ($debug) { include 'view/debug.php'; }
 switch ($nav) {
     case 'nav':
         include 'view/main.php';
+        break;
+    case 'create_user':
+        include 'util/validate_user.php';
+        include 'view/create_user.php';
+        break;
+    case 'need_login':
+        if (isset($_SESSION['logged_in'])) {
+            $_SESSION['login_message'] = 'You are already logged in, '.$_SESSION['logged_in'].'.';
+            header('Location: index.php');
+        } else {
+            include 'view/log_in.php';
+        }
         break;
     case 'login':
         if (!isset($_POST['email'])) {
@@ -77,7 +98,7 @@ switch ($nav) {
         }
         $is_valid_password = confirm_password($email, $password);
         if (!$is_valid_password) {
-            $login_message = 'The login information you entered is invalid.';
+            $_SESSION['login_message'] = 'The login information you entered is invalid.';
             header('Location: index.php');
         } else {
             $_SESSION['logged_in'] = $email;
@@ -85,52 +106,37 @@ switch ($nav) {
                 $cookie_val = openssl_random_pseudo_bytes(60);
                 setcookie('remembered', $cookie_val, time() + (86400 * 365), "/"); // gives cookie one year shelf-life
                 set_remember_me($email, $cookie_val);
-                $login_message = "We'll remember you, '.$email.'. Promise.";
+                $_SESSION['login_message'] = "We'll remember you, $email. Promise.";
             } else {
-                $login_message = 'Welcome, '.$_SESSION['logged_in'].'.';
+                $_SESSION['login_message'] = 'Welcome, '.$_SESSION['logged_in'].'.';
             }
             header('Location: index.php');
         } 
         break;
-	case 'need_log_in':
-		include 'view/log_in.php';
-		break;
     case 'logout':
-        if (isset($_COOKIE['remembered']) {
+        if (isset($_COOKIE['remembered'])) {
             unset($_COOKIE['remembered']);
             unset_remember_me($_SESSION['logged_in']); 
         }            
         unset($_SESSION['logged_in']);
-        $login_message = 'Successfully logged out.';
+        $_SESSION['login_message'] = 'Successfully logged out.';
         header('Location: index.php');
-		break;
+        break;
     case 'create_form':
-        //Here we're checking if the user is logged in and if the
-        // login toggle isn't turned off.
-        if (!isset($_SESSION["logged_in"]) && $force_login)
-        {   include 'view/log_in.php';
+        include 'db/create_form_db.php';
+        if (isset($survey_id)) {
+            $survey = get_survey($survey_id);
+            $questions = get_questions($survey_id);
+            $question_ids = get_question_ids_per_survey($survey_id);
+            $answers = get_answers();
+            include ('./view/survey_take.php');
         } else {
-            include 'db/create_form_db.php';
-            if (isset($survey_id)) {
-                $survey = get_survey($survey_id);
-                $questions = get_questions($survey_id);
-                $question_ids = get_question_ids_per_survey($survey_id);
-                $answers = get_answers();
-                include ('./view/survey_take.php');
-            } else {
-                include('./view/create_form.php');
-            }
+            include('./view/create_form.php');
         }
         break;
     case 'view_survey':
-        if (!isset($_SESSION["logged_in"]) && $force_login)
-        {   include 'view/log_in.php';
-        } else {
-            // Get survey data
-            $surveys = get_surveys();
-            // Display the survey list
-            include 'view/survey_list.php';
-        }
+        $surveys = get_surveys();
+        include 'view/survey_list.php';
         break;
     case 'take_survey':
         if (isset($_POST['submit'])){
@@ -142,10 +148,6 @@ switch ($nav) {
         break;
     case 'view_statistics':
         include 'statistics/index.php';
-        break;
-    case 'create_user':
-        include 'util/validate_user.php';
-        include 'view/create_user.php';
         break;
     case 'detailed_survey':
         $id = $_POST['id'];
@@ -160,6 +162,7 @@ switch ($nav) {
         include "view/main.php";
         break;
 }
+
 include 'view/footer.php';
 
 ?>
