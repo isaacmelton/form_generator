@@ -1,7 +1,7 @@
 <?php
 ob_start();
 //Change this to false to remove debug.
-$debug = false;
+$debug = true;
 //Change this to true to enable login.
 $force_login = false;
 
@@ -16,6 +16,7 @@ require_once('db/survey_db.php');
 require_once('db/people_db.php');
 require_once('db/question_db.php');
 require_once('db/answer_db.php');
+require_once('db/recorded_answer_db.php');
 require_once('db/login_db.php');
 
 
@@ -107,8 +108,7 @@ switch ($nav) {
         //Here we're checking if the user is logged in and if the
         // login toggle isn't turned off.
         if (!isset($_SESSION["logged_in"]) && $force_login)
-        {
-            include 'view/log_in.php';
+        {   include 'view/log_in.php';
         } else {
             include 'db/create_form_db.php';
             if (isset($survey_id)) {
@@ -123,13 +123,18 @@ switch ($nav) {
         }
         break;
     case 'view_survey':
-        // Get survey data
-	    $surveys = get_surveys();
-        // Display the survey list
-        include 'view/survey_list.php';
+        if (!isset($_SESSION["logged_in"]) && $force_login)
+        {   include 'view/log_in.php';
+        } else {
+            // Get survey data
+            $surveys = get_surveys();
+            // Display the survey list
+            include 'view/survey_list.php';
+        }
         break;
     case 'take_survey':
         if (isset($_POST['submit'])){
+            include 'db/take_survey_db.php';
             include 'view/survey_results.php';
         } else {
             include 'view/main.php';
