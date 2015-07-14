@@ -2,13 +2,22 @@
 
 if(isset($_POST['submit'])) {
 
+    /*
+    Recorded answers:
+        id INT,
+        user_id INT,
+        answer_id INT,
+        survey_id INT,
+        created_at TIMESTAMP,
+        updated_at TIMESTAMP
+    */
+
     $survey_id = $_POST['survey'];
     $questions = get_questions($survey_id);
     $answers = get_answers();
     $now = date("Y-m-d H:i:s");
 
-
-    /*
+    $sql = "INSERT INTO recorded_answers "
     //TODO Create survey
     $sql = "INSERT INTO surveys (person_id, title, active)
             VALUES ('1','".$_POST['survey_title']."','1')";  //TODO add user

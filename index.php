@@ -15,6 +15,7 @@ require_once('db/survey_db.php');
 require_once('db/people_db.php');
 require_once('db/question_db.php');
 require_once('db/answer_db.php');
+require_once('db/recorded_answer_db.php');
 require_once('db/login_db.php');
 
 
