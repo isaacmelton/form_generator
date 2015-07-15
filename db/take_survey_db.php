@@ -13,6 +13,7 @@ if(isset($_POST['submit'])) {
     */
 
     $survey_id = $_POST['survey'];
+	$user_id = $_POST['user_id'];
     $answers = get_answers_by_id($survey_id);
     $questions = get_question_ids_per_survey($survey_id);
     $now = date("Y-m-d H:i:s");
@@ -26,7 +27,7 @@ if(isset($_POST['submit'])) {
         if (isset($_POST[$question_tag])) {
             //TODO add user id
             $sql = "INSERT INTO recorded_answers ( user_id, answer_id, survey_id, created_at )
-            VALUES ('1','".str_replace('question_', '', $_POST[$question_tag])."','".$survey_id."', '".$now."')";
+            VALUES ('".$user_id."','".str_replace('question_', '', $_POST[$question_tag])."','".$survey_id."', '".$now."')";
 
             if ($db->query($sql)) {
                 $survey_result_id = $db->lastInsertId();

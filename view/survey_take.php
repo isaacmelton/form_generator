@@ -1,3 +1,5 @@
+<?php $person = get_person_by_email($_SESSION['logged_in']);?>
+
 <div id="main">
 
     <div class="container">
@@ -7,6 +9,8 @@
         <form class="survey" name="take_survey" action="./take_survey" method="post">
 	        <table class="table table-hover">
 				<input type="hidden" name="survey" value="<?php echo $survey['id'] ?>" />
+				<input type="hidden" name="user_id" value="<?php echo $person['id']; ?>" required><br>
+
 				    <tr>
 						<th>Question</th>
 						<th>Response</th>
