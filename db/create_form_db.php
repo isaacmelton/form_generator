@@ -6,12 +6,13 @@ if(isset($_POST['submit'])) {
     $questions = $_POST['question'];
     $answers = $_POST['answer'];
     $now = date("Y-m-d H:i:s");
+	$person_id = $_POST['person_id'];
 
 
 
     //TODO Create survey
     $sql = "INSERT INTO surveys (person_id, title, active)
-            VALUES ('1','".$_POST['survey_title']."','1')";  //TODO add user
+            VALUES ('".$_POST['person_id']."','".$_POST['survey_title']."','1')";  //TODO add user
     if ($db->query($sql)) {
         $survey_id = $db->lastInsertId();
 

@@ -1,3 +1,4 @@
+<?php $person = get_person_by_email($_SESSION['logged_in']);?>
 <script>
 
     var counter = 0;
@@ -23,30 +24,30 @@
             "<tr>" +
             "<td class='col-sm-2 control-label' colspan='2'>" +
 			"Question:" +
-            "<input class='form-control' type='text' name='question[]'>" +
+            "<input class='form-control' type='text' name='question[]' required>" +
             "</td>" +
-            "<td>" +
+            "<td><br>" +
             "<input type='button' class='btn btn-default' value='Remove' onclick='removeQuestionFromSurvey(\"#question_"+count+"\")' />" +
-            "<input type='button' class='btn btn-default add_answer' value='Add an Answer' id='question_"+count+"' onclick='addAnswerToQuestion(this.id);'/>" +
+            "&nbsp;<input type='button' class='btn btn-default add_answer' value='Add an Answer' id='question_"+count+"' onclick='addAnswerToQuestion(this.id);'/>" +
             "</td>" +
             "</tr>" +
             "</div></div><br>";
     }
     function getAnswer(count) {
         answer_counter++;
-        return  "<table class='a' id='answer_"+answer_counter+"'>" +
-            "<tr>" +
+        return "<div class='container-fluid'>" +
+			"<div class='text-center'><br>" +
+			"<table class='col-md-12' id='answer_"+answer_counter+"'>" +
+            "<tr class='col-md-12'>" +
             "<td>" +
-            "<h5>Answer: </h5>" +
-            "</td>" +
-            "<td class='col-sm-4'>" +
-            "<input class='form-control' type='text' name='answer[" + count + "][]' required>" +
+            "<input class='form-control' type='text' placeholder='Enter Answer Here' name='answer[" + count + "][]' required>" +
             "</td>" +
             "<td>" +
             "<input type='button' class='btn btn-default' value='Remove' onclick='removeAnswerFromQuestion(\"#answer_"+answer_counter+"\")' required />" +
             "</td>" +
             "</tr>" +
-            "</table>";
+            "</table>" + 
+			"</div></div>";
     }
 
     $(document).ready(function() {
@@ -62,6 +63,7 @@
 <div class="col-md-3"></div>
 <div class="col-md-8 text-center">
         <form  class="form-horizontal" role="form" name="createForm" id="createForm" action="create_form" method="post">
+		<input type="hidden" class="form-control" name="person_id" value="<?php echo $person['id']; ?>" required><br>
 		<div class="form-group">
 			<br>
 			<label class="col-sm-2 control-label">Survey Name: </label>

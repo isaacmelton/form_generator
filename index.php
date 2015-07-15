@@ -102,6 +102,7 @@ switch ($nav) {
             header('Location: index.php');
         } else {
             $_SESSION['logged_in'] = $email;
+			$person = get_person_by_email($_SESSION['logged_in']['id']);
             if (isset($_POST['remember_me'])) {
                 $cookie_val = openssl_random_pseudo_bytes(60);
                 setcookie('remembered', $cookie_val, time() + (86400 * 365), "/"); // gives cookie one year shelf-life
