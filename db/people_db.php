@@ -17,7 +17,7 @@ function add_person($first_name, $last_name, $email, $city, $state, $country, $s
     $statement->bindValue(':country', $country);
     $statement->bindValue(':sex', $sex);
     $statement->execute();
-    $person = $statement->$fetch();
+    $person = $statement->fetch();
     $statement->closeCursor();
     return $person;
 }

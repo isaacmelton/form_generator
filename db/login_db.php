@@ -137,4 +137,43 @@ function unset_remember_me($email) {
     }
 }
 
+function create_user($email, $password) {
+    global $db;
+    $query =
+    "INSERT INTO users (person_id, password)
+    VALUES (:person_id, :password)";
+    try {
+        $user_id = get_user_id($email);
+        $options['cost'] = 20;
+        $hash = password_hash($password, PASSWORD_DEFAULT);
+        $statement = $db->prepare($query);
+        $statement->bindValue(':person_id', get_person_id_by_email($email));
+        $statement->bindValue(':password', $hash);
+        $statement->execute();
+        $row_count = $statement->fetchColumn();
+        $statement->closeCursor();
+        return $row_count;
+    } catch (PDOException $e) {
+        display_db_error($e->getMessage());
+    }
+}
+
+function get_person_id_by_email($email) {
+    global $db;
+    $query =
+    "SELECT id AS id
+    FROM people
+    WHERE email = :email";
+    try {
+        $statement = $db->prepare($query);
+        $statement->bindValue(':email', $email);
+        $statement->execute();
+        $result = $statement->fetch();
+        $statement->closeCursor();
+        return $result['id'];
+    } catch (PDOException $e) {
+        display_db_error($e->getMessage());
+    }
+}
+
 ?>

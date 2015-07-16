@@ -4,22 +4,22 @@
 <div class="col-md-5 text-center">
     <h1 align="left">Create an Account</h1>
 <br>
-    <form class="form-horizontal" role="form" name="createUser" id="createUser" action="./create_user" method="post">
-
+    <form class="form-horizontal" role="form" name="createUser" id="createUser" action="" method="post">
+      <input type="hidden" name="nav" value="create_user" />
       <div class="form-group">
 		<label class="col-sm-2 control-label">First Name:</label>
 			<div class="col-sm-4">
 				<input type="text" class="form-control" name="first_name" required>
 			</div>
 		</div>
-		
-		<div class="form-group"> 
+
+		<div class="form-group">
 		<label class="col-sm-2 control-label">Last Name:</label>
 		<div class="col-sm-4">
         <input type="text" class="form-control" name="last_name" required>
 		</div>
 		</div>
-		
+
       <div class="form-group">
         <label class="col-sm-2 control-label">
             Email:
@@ -28,7 +28,26 @@
         <input type="text" class="form-control" name="email" required>
 		</div>
 		</div>
-		
+
+      <div class="form-group">
+        <label class="col-sm-2 control-label">
+            Password:
+        </label>
+    <div class="col-sm-4">
+        <input type="password" class="form-control" name="password" required>
+    </div>
+    </div>
+
+      <div class="form-group">
+        <label class="col-sm-2 control-label">
+            Confirm password:
+        </label>
+    <div class="col-sm-4">
+        <br /> <!-- quick fix in lieu of css changes -->
+        <input type="password" class="form-control" name="verify_password" required>
+    </div>
+    </div>
+
       <div class="form-group">
         <label class="col-sm-2 control-label">
             City:
@@ -45,7 +64,7 @@
         <input type="text" class="form-control" name="state" required>
 		</div>
 		</div>
-      <div class="form-group"> 
+      <div class="form-group">
         <label class="col-sm-2 control-label">
             Country:
         </label>

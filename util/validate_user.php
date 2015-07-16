@@ -39,8 +39,30 @@ if(isset($_POST['submit'])) {
         if (!preg_match($email_pattern, $_POST['email'])) {
             $error =  "Email is invalid. Must be between 1-25 characters and be in format name@domain.com.";
             array_push($errors, $error);
-        } else
+        } elseif (empty(get_person_by_email($_POST['email']))) {
+            $error = "This email address has already been used.";
+            array_push($errors, $error);
+        } else {
             $email = $_POST['email'];
+        }
+    }
+
+    if (empty($_POST['password'])) {
+        $error = 'No password was entered.';
+        array_push($errors, $error);
+    } elseif (empty($_POST['verify_password'])) {
+        $error = 'The password entered was not repeated for confirmation.';
+        array_push($errors, $error);
+    }
+
+    if (!empty($_POST['password']) && !empty($_POST['verify_password'])) {
+// any additional password checking can be done here.
+        if ($_POST['password'] != $_POST['verify_password']) {
+            $error =  "The passwords entered do not match.";
+            array_push($errors, $error);
+        } else
+            $password = $_POST['password'];
+        }
     }
 
     if (empty($_POST['city'])) {
@@ -75,7 +97,7 @@ if(isset($_POST['submit'])) {
         if (!preg_match($countrypattern, $country)) {
             $error = "Country is invalid. Must be between 1-50 letters.";
             array_push($errors, $error);
-        }else
+        } else {
             $country = $_POST['country'];
     }
 
@@ -88,6 +110,7 @@ if(isset($_POST['submit'])) {
 
     if (!array_filter($errors)) {
         add_person($first_name, $last_name, $email, $city, $state, $country, $sex);
+        create_user($email, $password);
         $notice = $first_name." has been entered into the system";
     }
 }
