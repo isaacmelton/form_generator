@@ -25,7 +25,7 @@
             Email:
         </label>
 		<div class="col-sm-4">
-        <input type="text" class="form-control" name="email" required>
+        <input type="text" class="form-control" placeholder="Enter Email Here" name="email" required>
 		</div>
 		</div>
 

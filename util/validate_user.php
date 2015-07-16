@@ -39,7 +39,7 @@ if(isset($_POST['submit'])) {
         if (!preg_match($email_pattern, $_POST['email'])) {
             $error =  "Email is invalid. Must be between 1-25 characters and be in format name@domain.com.";
             array_push($errors, $error);
-        } elseif (empty(get_person_by_email($_POST['email']))) {
+        } elseif (!empty(get_person_by_email($_POST['email']))) {
             $error = "This email address has already been used.";
             array_push($errors, $error);
         } else {
@@ -112,7 +112,7 @@ if(isset($_POST['submit'])) {
         add_person($first_name, $last_name, $email, $city, $state, $country, $sex);
         create_user($email, $password);
         $notice = $first_name." has been entered into the system";
-    }
+		}
 }
 
 
