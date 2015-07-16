@@ -18,8 +18,6 @@ if(isset($_POST['submit'])) {
     $questions = get_question_ids_per_survey($survey_id);
     $now = date("Y-m-d H:i:s");
 
-    echo print_r(get_question_ids_per_survey($survey_id));
-
     foreach ($questions as $question) {
         $question_tag = "question_".$question['id'];
         //echo $question_tag;
