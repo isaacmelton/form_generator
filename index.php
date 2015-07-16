@@ -54,11 +54,13 @@ if (!isset($_SESSION['logged_in']) && isset($_COOKIE['remembered'])) {
 
 //If user not logged in && trying to access page that requires login, user is sent to login page
 if ($force_login) {
-    if (!isset($_SESSION['logged_in']) && (($nav != 'nav') 
-                                        && ($nav != 'create_user') 
-                                        && ($nav != 'need_login') 
-                                        && ($nav != 'login') 
-                                        && ($nav != 'logout'))) { //add to or remove from this list as needed
+    if (!isset($_SESSION['logged_in'])  &&
+            (       ($nav != 'nav') 
+            &&      ($nav != 'create_user') 
+            &&      ($nav != 'need_login') 
+            &&      ($nav != 'login') 
+            &&      ($nav != 'logout'))
+            ) { //add to or remove from this list as needed
         $nav = 'need_login';
     }
 }
@@ -66,8 +68,6 @@ if ($force_login) {
 // Show the views.
 include 'view/header.php';
 if ($debug) { include 'view/debug.php'; }
-
-
 
 switch ($nav) {
     case 'nav':
@@ -156,7 +156,6 @@ switch ($nav) {
         $questions = get_questions($id);
         $question_ids = get_question_ids_per_survey($id);
         $answers = get_answers();
-        //include 'view/survey_detailed.php';
         include 'view/survey_take.php';
 	break;
     default;
