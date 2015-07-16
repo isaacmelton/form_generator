@@ -85,7 +85,7 @@ $path .= '';
 								<input style="float: left; margin-right: 10px;" type="checkbox" name="remember_me" id="remember-me" value="yes" />
 								<label class="string optional" for="user_remember_me"> Remember me</label>
 								<input class="btn btn-primary btn-block" type="submit" id="sign-in" value="Sign In">
-								<li class="active"><a href="/create_user" >Sign me up for an account<span class="sr-only">(current)</span></a></li>
+								<li class="active"><a href="index?nav=create_user" >Sign me up for an account<span class="sr-only">(current)</span></a></li>
 							</form>
 						<?php else: ?>
 						<a class="dropdown-toggle" href="#" data-toggle="dropdown">Logged in as <?php echo $_SESSION['logged_in']; ?><strong class="caret"></strong></a>
