@@ -37,6 +37,10 @@
     echo "<meta http-equiv='Location' content='./index.php' >";
     //header('Location: ./index.php');
 else: ?>
+
+ <div class="container-fluid">
+<div class="col-md-3"></div>
+<div class="col-md-5 text-center">
 <h1>Survey: <?php echo $survey[0]['title']; ?></h1>
 
 <h2>Author: <?php echo $survey[0]['email']; ?></h2>
@@ -45,7 +49,7 @@ else: ?>
 
 <br />
 
-<table class="stat_table">
+<table class="stat_table col-sm-12 col-sm-offset-2">
     <?php $uniq = null;
     foreach ($survey as $qrow):
         if ($qrow['question'] != $uniq):
@@ -95,3 +99,4 @@ else: ?>
 <p>
     Return <a href="index.php">home</a>.
 </p>
+</div></div>

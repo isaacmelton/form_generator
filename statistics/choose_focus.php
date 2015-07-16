@@ -23,7 +23,9 @@ $(document).ready(function() {
 <?php if (empty($surveys)):
     header('Location: index.php');
 else: ?>
-
+ <div class="container-fluid">
+<div class="col-md-3"></div>
+<div class="col-md-5 text-center">
 <h3>What kind of statistics are you looking for?</h3>
 
 <span class="focus_chooser"><input type="radio" name="focus" value="survey" checked>Surveys</span>
@@ -74,7 +76,7 @@ else: ?>
     <br />
 </div>
 
-
+</div></div>
 <?php endif; ?>
 
 <br />
