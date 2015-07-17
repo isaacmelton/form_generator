@@ -18,7 +18,7 @@ if(isset($_POST['submit'])) {
             $first_name = $_POST['first_name'];
     }
 
-    if (empty($_POST['last_name'])) {
+     if (empty($_POST['last_name'])) {
         $error = 'No last name was entered.';
         array_push($errors, $error);
     } elseif (!empty($_POST['last_name'])) {
@@ -30,7 +30,7 @@ if(isset($_POST['submit'])) {
             $last_name = $_POST['last_name'];
     }
 
-    if (empty($_POST['email'])) {
+     if (empty($_POST['email'])) {
         $error = 'No email address was entered.';
         array_push($errors, $error);
 
@@ -55,7 +55,7 @@ if(isset($_POST['submit'])) {
         array_push($errors, $error);
     }
 
-    if (!empty($_POST['password']) && !empty($_POST['verify_password'])) {
+     if (!empty($_POST['password']) && !empty($_POST['verify_password'])) {
 // any additional password checking can be done here.
         if ($_POST['password'] != $_POST['verify_password']) {
             $error =  "The passwords entered do not match.";
@@ -63,9 +63,9 @@ if(isset($_POST['submit'])) {
         } else
             $password = $_POST['password'];
         }
-    }
 
-    if (empty($_POST['city'])) {
+
+     if (empty($_POST['city'])) {
         $error = 'No city was entered.';
         array_push($errors, $error);
     } elseif (!empty($_POST['city'])) {
@@ -77,7 +77,7 @@ if(isset($_POST['submit'])) {
             $city = $_POST['city'];
     }
 
-    if (empty($_POST['state'])) {
+     if (empty($_POST['state'])) {
         $error = 'No state was entered.';
         array_push($errors, $error);
     } elseif (!empty($_POST['state'])) {
@@ -114,9 +114,4 @@ if(isset($_POST['submit'])) {
         $notice = $first_name." has been entered into the system";
 		}
 }
-
-
-
-	
-	
-
+}
