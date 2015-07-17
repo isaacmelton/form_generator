@@ -140,11 +140,11 @@ switch ($nav) {
         include 'view/survey_list.php';
         break;
     case 'take_survey':
-        if (isset($_POST['submit'])){
-            include 'db/take_survey_db.php';
+        include 'db/take_survey_db.php';
+        if (isset($survey_result_id)) {
             include 'view/survey_results.php';
         } else {
-            include 'view/main.php';
+            include 'view/survey_take.php';
         }
         break;
     case 'view_statistics':

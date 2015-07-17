@@ -18,14 +18,11 @@ if(isset($_POST['submit'])) {
     $questions = get_question_ids_per_survey($survey_id);
     $now = date("Y-m-d H:i:s");
 
-    echo print_r(get_question_ids_per_survey($survey_id));
-
     foreach ($questions as $question) {
         $question_tag = "question_".$question['id'];
         //echo $question_tag;
         //echo $_POST[$question_tag];
         if (isset($_POST[$question_tag])) {
-            //TODO add user id
             $sql = "INSERT INTO recorded_answers ( user_id, answer_id, survey_id, created_at )
             VALUES ('".$user_id."','".str_replace('question_', '', $_POST[$question_tag])."','".$survey_id."', '".$now."')";
 
