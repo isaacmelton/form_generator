@@ -23,10 +23,15 @@ if(isset($_POST['submit'])) {
         //echo $question_tag;
         //echo $_POST[$question_tag];
         if (isset($_POST[$question_tag])) {
-            $sql = "INSERT INTO recorded_answers ( user_id, answer_id, survey_id, created_at )
-            VALUES ('".$user_id."','".str_replace('question_', '', $_POST[$question_tag])."','".$survey_id."', '".$now."')";
+            $query = "INSERT INTO recorded_answers ( user_id, answer_id, survey_id, created_at )
+                      VALUES  (:user_id, :answer_id, :survey_id, :now )";
+            $statement = $db->prepare($query);
+            $statement->bindValue(':user_id', $user_id);
+            $statement->bindValue(':answer_id', str_replace('question_', $_POST[$question_tag]));
+            $statement->bindValue(':survey_id', $survey_id);
+            $statement->bindValue(':now', $now);
 
-            if ($db->query($sql)) {
+            if ($statement->execute()) {
                 $survey_result_id = $db->lastInsertId();
             } else {
                 echo "<script type= 'text/javascript'>alert('Data not successfully Inserted.');</script>";
