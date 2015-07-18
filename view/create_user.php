@@ -1,4 +1,6 @@
 <?php include './util/notification.php'; ?>
+<?php $states = states_list(); ?>
+<?php $countries = country_list(); ?>
   <div class="container-fluid">
 <div class="col-md-4"></div>
 <div class="col-md-5 text-center">
@@ -61,7 +63,14 @@
             State:
         </label>
 		<div class="col-sm-4">
-        <input type="text" class="form-control" name="state" required>
+    <select name="state" class="form-control">
+        <option selected="selected">Select your state...</option>
+        <?php foreach($states as $key=>$value) { ?>
+            <option value="<?php echo $key; ?>"><?php echo $value; ?></option>
+        <?php } ?>
+    </select>
+
+
 		</div>
 		</div>
       <div class="form-group">
@@ -69,7 +78,12 @@
             Country:
         </label>
 		<div class="col-sm-4">
-        <input type="text" class="form-control" name="country" required>
+    <select name="country" class="form-control">
+        <option selected="selected">Select your country...</option>
+        <?php foreach($countries as $key=>$value) { ?>
+            <option value="<?php echo $key; ?>"><?php echo $value; ?></option>
+        <?php } ?>
+    </select>
 		</div>
 		</div>
       <div class="form-group">
