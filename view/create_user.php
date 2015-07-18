@@ -1,6 +1,17 @@
 <?php include './util/notification.php'; ?>
 <?php $states = states_list(); ?>
 <?php $countries = country_list(); ?>
+
+<script>
+  function disable(val)
+  {
+      if(val=="US")
+           document.getElementById("state").disabled=false;
+      else
+          document.getElementById("state").disabled=true;
+  }
+</script>
+
   <div class="container-fluid">
 <div class="col-md-4"></div>
 <div class="col-md-5 text-center">
@@ -58,12 +69,27 @@
         <input type="text" class="form-control" name="city" required>
 		</div>
 		</div>
+		
+      <div class="form-group">
+        <label class="col-sm-2 control-label">
+            Country:
+        </label>
+		<div class="col-sm-4">
+    <select name="country" class="form-control" onchange="disable(this.value)">
+        <option selected="selected">Select your country...</option>
+        <?php foreach($countries as $key=>$value) { ?>
+            <option value="<?php echo $key; ?>"><?php echo $value; ?></option>
+        <?php } ?>
+    </select>
+		</div>
+		</div>
+		
       <div class="form-group">
         <label class="col-sm-2 control-label">
             State:
         </label>
 		<div class="col-sm-4">
-    <select name="state" class="form-control">
+    <select name="state" class="form-control" id="state">
         <option selected="selected">Select your state...</option>
         <?php foreach($states as $key=>$value) { ?>
             <option value="<?php echo $key; ?>"><?php echo $value; ?></option>
@@ -73,19 +99,7 @@
 
 		</div>
 		</div>
-      <div class="form-group">
-        <label class="col-sm-2 control-label">
-            Country:
-        </label>
-		<div class="col-sm-4">
-    <select name="country" class="form-control">
-        <option selected="selected">Select your country...</option>
-        <?php foreach($countries as $key=>$value) { ?>
-            <option value="<?php echo $key; ?>"><?php echo $value; ?></option>
-        <?php } ?>
-    </select>
-		</div>
-		</div>
+
       <div class="form-group">
         <label class="col-sm-2 control-label">
             Sex:
