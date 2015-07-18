@@ -14,7 +14,7 @@
         var jsonData = $.ajax({
             url: "statistics/get_data.php",
             dataType:"json",
-            data: {aid: <?php echo $author_id; ?>, purpose: 'author'},
+            data: {purpose: 'general'},
             type: "POST",
             async: false
             }).responseText;
@@ -28,39 +28,50 @@
     }
 </script>
 
-<h1>About AUTHOR'S surveys</h1>
+<h1>Statistics About Everything</h1>
 
 <p>
-    If the author has created less than three surveys, indicate statistics 
-    may be a little wonky...
+    
 </p>
 
-<h3>Number of Survey Takers for Top Five Surveys</h3>
-
-<p>
-    Bar Graph
-</p>
-
-<h3>Number of Registered Takers and Anonymous Takers</h3>
+<h3>Number of Surveys and Number of Users</h3>
 
 <p>
     Bar Graph
 </p>
 
-<h3>Number of Survey Takers for Each Survey</h3>
+<h3>Number of Surveys Taken by Registered versus Anonymous Users</h3>
 
 <p>
-    3d Pie Graph
+    Bar graph
 </p>
 
-<h3>Average Number of Questions Per Survey</h3>
+<h3>Average Number of Questions per Test</h3>
 
 <p>
-    Donut Graph
+    Pie Graph
 </p>
 
-<h3>Average Number of Answers Per Question</h3>
-    3d Pie Graph
+<h3>Number of Surveys Taken</h3>
+
+<p>
+    
+</p>
+
+<h3>Top Five Surveys</h3>
+
+<p>
+    Bar Graph
+</p>
+
+<h3>Number of Male versus Female Test Takers</h3>
+
+<p>
+    
+</p>
+
+<h3>Average Tests Taken per Male and Female</h3>
+
 <p>
     
 </p>

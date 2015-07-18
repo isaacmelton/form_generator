@@ -14,9 +14,9 @@
         <?php foreach ($questions as $question): ?>
 
             var jsonData<?php echo $question['question_id']; ?> = $.ajax({
-                url: "statistics/get_survey_data.php",
+                url: "./statistics/get_data.php",
                 dataType:"json",
-                data: {sid: "<?php echo $question['survey_id']; ?>", qid: "<?php echo $question['question_id']; ?>"},
+                data: {sid: "<?php echo $question['survey_id']; ?>", qid: "<?php echo $question['question_id']; ?>", purpose: "survey"},
                 type: "POST",
                 async: false
                 }).responseText;
@@ -29,13 +29,11 @@
             chart<?php echo $question['question_id']; ?>.draw(data<?php echo $question['question_id']; ?>, {width: 300, height: 200});
 
         <?php endforeach; ?>
-
     }
 </script>
 
 <?php if (empty($survey)):
     echo "<meta http-equiv='Location' content='./index.php' >";
-    //header('Location: ./index.php');
 else: ?>
 
  <div class="container-fluid">

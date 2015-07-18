@@ -24,6 +24,7 @@ function get_authors() {
     FROM people
     INNER JOIN surveys
     ON people.id = surveys.person_id
+    GROUP BY email
     ORDER BY email";
     try {
         $statement = $db->prepare($query);
