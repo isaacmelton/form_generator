@@ -1,6 +1,5 @@
 <?php
 
-//TODO Move this to the db folder and update references.
 
 if(isset($_POST['survey'])) {
 
@@ -17,11 +16,15 @@ if(isset($_POST['survey'])) {
             $key = "question_".$q['id'];
             $question_ids[$count] = $q['id'];
             $answer_ids[$count] = $_POST[$key];
-            //TODO Prepared statement
-            $sql = "INSERT INTO recorded_answers (user_id, answer_id, survey_id, created_at)
-                    VALUES ('".$_POST['user_id']."', '" . $_POST[$key] . "', '" . $_POST['survey'] . "', '".$now."')";
+            $query = "INSERT INTO recorded_answers ( user_id, answer_id, survey_id, created_at )
+                      VALUES  (:user_id, :answer_id, :survey_id, :now )";
+            $statement = $db->prepare($query);
+            $statement->bindValue(':user_id', $_POST['user_id']);
+            $statement->bindValue(':answer_id', $_POST['key']);
+            $statement->bindValue(':survey_id', $_POST['survey']);
+            $statement->bindValue(':now', $now);
 
-            if ($db->query($sql)) {
+            if ($statement->execute()) {
 
             } else {
                 echo "<script type= 'text/javascript'>alert('Data not successfully Inserted.');</script>";
