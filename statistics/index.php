@@ -24,8 +24,11 @@ if ($action == 'select_focus') {
     include("./statistics/survey_stats.php");
 } else if ($action == 'authors') {
     $author_id = $_POST['author_id'];
+    $surveys = get_surveys_by_author($author_id);
     include("./statistics/author_stats.php");
 } else if ($action == 'general') {
     include("./statistics/general_stats.php"); 
 }
 ?>
+
+

@@ -37,26 +37,6 @@ function get_authors() {
     }
 }
 
-function get_surveys_by_author($author_id) {
-  global $db;
-  $query =
-  "SELECT *
-  FROM surveys
-  WHERE person_id = :author_id
-  ORDER BY title";
-  try {
-      $statement = $db->prepare($query);
-      $statement->bindValue(':author_id', $author_id);
-      $statement->execute();
-      $result = $statement->fetchAll();
-      $statement->closeCursor();
-      return $result;
-  } catch (PDOException $e) {
-      display_db_error($e->getMessage());
-  }
-} 
-
-
 function get_survey_stats_by_id($survey_id) {
     global $db;
     $query =
@@ -157,6 +137,87 @@ function get_questions_for_survey($survey_id) {
         display_db_error($e->getMessage());
     }
 }
+
+// function get_author_email($author_id
+
+function get_surveys_taker_count_by_author($author_id) {
+  global $db;
+  $query =
+  "SELECT s.id AS sid, 
+  s.title AS title,
+  p.id AS author_id,
+  p.email AS email,
+  COUNT(ra.id) AS takers
+  FROM surveys AS s
+  INNER JOIN people AS p
+  ON s.person_id = p.id
+  INNER JOIN questions AS q
+  ON s.id = q.survey_id
+  INNER JOIN answers AS a
+  ON q.id = a.question_id
+  INNER JOIN recorded_answers AS ra
+  ON a.id = ra.answer_id
+  WHERE p.id = :author_id
+  GROUP BY sid
+  ORDER BY takers DESC;";
+  try {
+      $statement = $db->prepare($query);
+      $statement->bindValue(':author_id', $author_id);
+      $statement->execute();
+      $result = $statement->fetchAll();
+      $statement->closeCursor();
+      return $result;
+  } catch (PDOException $e) {
+      display_db_error($e->getMessage());
+  }
+}
+
+function get_anon_takers_by_author($author_id) {
+    global $db;
+    $query =
+    "SELECT COUNT(ra.user_id),
+    s.person_id AS author_id
+    FROM recorded_answers AS ra
+    INNER JOIN surveys AS s
+    ON ra.survey_id = s.id
+    WHERE ra.user_id IS NULL
+    AND s.person_id = :author_id
+    GROUP BY s.person_id";
+    try {
+        $statement = $db->prepare($query);
+        $statement->bindValue(':author_id', $author_id);
+        $statement->execute();
+        $result = $statement->fetch();
+        $statement->closeCursor();
+        return $result;
+    } catch (PDOException $e) {
+        display_db_error($e->getMessage());
+    }
+}
+
+function get_reg_takers_by_author($author_id) {
+    global $db;
+    $query =
+    "SELECT COUNT(ra.user_id),
+    s.person_id AS author_id
+    FROM recorded_answers AS ra
+    INNER JOIN surveys AS s
+    ON ra.survey_id = s.id
+    WHERE ra.user_id IS NOT NULL
+    AND s.person_id = :author_id
+    GROUP BY s.person_id";
+    try {
+        $statement = $db->prepare($query);
+        $statement->bindValue(':author_id', $author_id);
+        $statement->execute();
+        $result = $statement->fetch();
+        $statement->closeCursor();
+        return $result;
+    } catch (PDOException $e) {
+        display_db_error($e->getMessage());
+    }
+}
+
 
 
 ?>

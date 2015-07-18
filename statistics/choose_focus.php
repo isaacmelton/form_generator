@@ -7,15 +7,24 @@
 <script type="text/javascript">
 $(document).ready(function() {
     $("#author_focus").hide();
+    $("#general_focus").hide();
 
     $("input[value='survey']").change(function() {
         $("#author_focus").hide();
+        $("#general_focus").hide();
         $("#survey_focus").slideDown();
     });
 
     $("input[value='author']").change(function() {
         $("#survey_focus").hide();
+        $("#general_focus").hide();
         $("#author_focus").slideDown();
+    });
+
+    $("input[value='general']").change(function() {
+        $("#author_focus").hide();
+        $("#survey_focus").hide();
+        $("#general_focus").slideDown();
     });
 });
 </script>
@@ -30,6 +39,7 @@ else: ?>
 
 <span class="focus_chooser"><input type="radio" name="focus" value="survey" checked>Surveys</span>
 <span class="focus_chooser"><input type="radio" name="focus" value="author">Authors</span>
+<span class="focus_chooser"><input type="radio" name="focus" value="author">Everything</span>
 
 <br />
 <br />
@@ -71,7 +81,21 @@ else: ?>
         </select>
         <br />
         <br />
-        <input type="submit" value="Inspect" />
+        <input type="submit" value="Investigate" />
+    </form>
+    <br />
+</div>
+
+<div id="general_focus">
+    <p class="focus_description">
+        If you're interested in knowing some general information about trends 
+        for all the surveys people have created with us, this is where you want
+        to look.
+    </p>
+    <form action="" method="post" id="aligned">
+        <input type="hidden" name="action" value="general" />
+        <br />
+        <input type="submit" value="Show Me" />
     </form>
     <br />
 </div>
