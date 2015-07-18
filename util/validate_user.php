@@ -77,10 +77,13 @@ if(isset($_POST['submit'])) {
             $city = $_POST['city'];
     }
 
-     if (empty($_POST['state'])) {
+     if (empty($_POST['state']) && ($_POST['country'] == 'US')) {
         $error = 'No state was entered.';
         array_push($errors, $error);
-    } elseif (!empty($_POST['state'])) {
+    } elseif (empty($_POST['state']) && ($_POST['country'] != 'US')){
+		$state = null;
+	}
+		elseif (!empty($_POST['state'])) {
         $state = $_POST['state'];
         $state_pattern = '/^[A-Z]{2}$/';
         if (!preg_match($state_pattern, $state)) {
