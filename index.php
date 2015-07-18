@@ -59,8 +59,10 @@ if ($force_login) {
             &&      ($nav != 'create_user') 
             &&      ($nav != 'need_login') 
             &&      ($nav != 'login') 
-            &&      ($nav != 'logout'))
-            ) { //add to or remove from this list as needed
+            &&      ($nav != 'logout')
+			&& 		($nav != 'view_survey')
+			&&      ($nav != 'detailed_survey')))
+             { //add to or remove from this list as needed
         $nav = 'need_login';
     }
 }
