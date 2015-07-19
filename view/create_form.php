@@ -62,9 +62,9 @@
 <div class="main">
     <h2>Create a new Survey</h2>
 
-    <div class="container-fluid">
+    <div class="row">
         <div class="col-md-1"></div>
-        <div class="col-md-19 text-center">
+        <div class="col-md-10">
             <form class="form-horizontal" role="form" name="createForm" id="createForm" action="create_form"
                   method="post">
                 <input type="hidden" class="form-control" name="person_id" value="<?php echo $person['id']; ?>"
