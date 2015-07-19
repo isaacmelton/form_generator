@@ -76,11 +76,7 @@ $path .= '';
                                         class="sr-only">(current)</span></a></li>
                             <li class="active"><a href="./view_statistics">View Statistics<span class="sr-only">(current)</span></a>
                             </li>
-                        </ul>
-
-                        <!-- Working on dropdown here -->
-                        <ul class="nav pull-left">
-                            <li class="dropdown">
+                            <li class="active">
                                 <?php if (!isset($_SESSION['logged_in'])): ?>
                                 <a class="dropdown-toggle" href="#" data-toggle="dropdown">Sign In <strong
                                         class="caret"></strong></a>
@@ -115,7 +111,6 @@ $path .= '';
                                     </div>
                             </li>
                         </ul>
-                        <!-- END DROPDOWN WORK-->
 
                     </div>
                     <!-- /.navbar-collapse -->
