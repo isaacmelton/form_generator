@@ -12,19 +12,19 @@ $(document).ready(function() {
     $("input[value='survey']").change(function() {
         $("#author_focus").hide();
         $("#general_focus").hide();
-        $("#survey_focus").hide();
+        $("#survey_focus").show();
     });
 
     $("input[value='author']").change(function() {
         $("#survey_focus").hide();
         $("#general_focus").hide();
-        $("#author_focus").hide();
+        $("#author_focus").show();
     });
 
     $("input[value='general']").change(function() {
         $("#author_focus").hide();
         $("#survey_focus").hide();
-        $("#general_focus").hide();
+        $("#general_focus").show();
     });
 
 });
