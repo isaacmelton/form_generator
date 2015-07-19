@@ -3,7 +3,10 @@
 
     <div class="container">
 
-        <h2><?php echo $survey['title']; ?></h2>
+        <div class="row">
+            <div class="col-md-1"></div>
+            <div class="col-md-8"><?php echo $survey['title']; ?></div>
+        </div>
 
         <form class="survey" name="take_survey" action="./take_survey" method="post">
             <table class="table table-hover">

@@ -60,7 +60,11 @@
     });
 </script>
 <div class="main">
-    <h2>Create a new Survey</h2>
+    <div class="row">
+        <div class="col-md-1"></div>
+        <div class="col-md-8"><h2>Create a new Survey</h2></div>
+    </div>
+
 
     <div class="row">
         <div class="col-md-1"></div>

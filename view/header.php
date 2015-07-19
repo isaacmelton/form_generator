@@ -126,9 +126,9 @@ $path .= '';
         unset($_SESSION['login_message']);
     endif; ?>
 
-    <p>Interactive Forms Generation</p>
-
-    <p>Enter links/buttons to create survey/take survey, etc here.</p>
+    <div class="row">
+        <div class="col-md-1"></div>
+    </div>
 </div>
 
 
