@@ -9,7 +9,7 @@ if (isset($_SESSION['logged_in'])) {
 
         <div class="row">
             <div class="col-md-1"></div>
-            <div class="col-md-8"><?php echo $survey['title']; ?></div>
+            <div class="col-md-8"><h2><?php echo $survey['title']; ?></h2></div>
         </div>
 
         <form class="survey" name="take_survey" action="./take_survey" method="post">
@@ -20,22 +20,21 @@ if (isset($_SESSION['logged_in'])) {
                     echo "<input type='hidden' name='user_id' value='" . $person['id'] . "' required><br>";
                 }
                 ?>
-                <!-- <input type="hidden" name="user_id" value="<?php //echo $person['id']; ?>" required><br> -->
                 <input type="hidden" name="title" value="<?php echo $survey['title']; ?>" required><br>
 
                 <tr>
-                    <th>Question</th>
-                    <th>Response</th>
+                    <th><h3>Question</h3></th>
+                    <th><h3>Response</h3></th>
                 </tr>
                 <?php foreach ($questions as $question) : ?>
                     <tr>
-                        <td><?php echo $question['question']; ?></td>
+                        <td>&nbsp;&nbsp;&nbsp;<h4><?php echo $question['question']; ?></h4></td>
                         <td></td>
                     </tr>
                     <?php foreach ($answers as $answer) : ?>
                         <?php if ($answer['question_id'] == $question['id']) : ?>
                             <tr>
-                                <td>&nbsp;&nbsp;&nbsp;<?php echo $answer['answer']; ?></td>
+                                <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php echo $answer['answer']; ?></td>
                                 <td><input type="radio" name="question_<?php echo $question['id'] ?>"
                                            value="<?php echo $answer['id'] ?>"></td>
                             </tr>
