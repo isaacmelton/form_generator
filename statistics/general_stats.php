@@ -131,6 +131,10 @@
     }
 </script>
 
+ <div class="container-fluid">
+<div class="col-md-3"></div>
+<div class="col-md-5 text-center">
+
 <h1>Statistics About Everything</h1>
 
 
@@ -175,6 +179,6 @@
 <div id="mvf2">
     SIDE-BY-SIDE COLUMN CHART
 </div>
-
+</div></div>
 <br />
 

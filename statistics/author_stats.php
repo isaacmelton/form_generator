@@ -97,7 +97,9 @@
 
     }
 </script>
-
+ <div class="container-fluid">
+<div class="col-md-3"></div>
+<div class="col-md-5 text-center">
 <h1>AUTHOR'S surveys</h1>
 <?php $nsurveys = (count($surveys));
 if ($nsurveys < 5): ?>
@@ -131,6 +133,6 @@ if ($nsurveys < 5): ?>
 <h3>Average Number of Answers Per Question</h3>
 
 <div id="avgapq">DONUT GRAPH</div>
-
+</div></div>
 <br />
 
