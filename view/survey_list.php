@@ -11,11 +11,11 @@
         <table class="table table-hover">
                 <?php foreach ($surveys as $survey) : ?>
                         <tr col-md-2>
-                        <td><?php echo $survey['title']; ?></td>
+                        <td class="lead"><?php echo $survey['title']; ?></td>
                         <td><form name="showSurvey" id="showSurvey" action="detailed_survey" method="post">
                                 <input type="hidden" name="id"
                                        value="<?php echo $survey['id']; ?>" />
-                                <input type="submit" value="Select" />
+                                <input class="btn btn-default" type="submit" value="Select" />
                             </form></td>
                             </tr>
                 <?php endforeach; ?>
