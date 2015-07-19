@@ -94,7 +94,7 @@ require("../model/statistics_db.php");
         // these are used for the general_stats.php
         case 'general_popularity':
             $encode = array();
-            $surveys = // STUB
+            $surveys = get_popularity_of_surveys()
             foreach($surveys as $row) {
                 $encode['cols'][] = array('label'=>'Survey','type'=>'string');
                 $encode['cols'][] = array('label'=>'Takers','type'=>'number');
@@ -105,8 +105,8 @@ require("../model/statistics_db.php");
             break;
         case 'general_svu':
             $encode = array();
-            $surveys = // STUB
-            $regd = // STUB
+            $surveys = get_number_surveys();
+            $regd = get_number_users();
             $encode['cols'][] = array('label'=>'The Counted','type'=>'string');
             $encode['cols'][] = array('label'=>'Takers','type'=>'number');
             $encode['rows'][] = array('c'=> array( array('v'=>'Surveys'), array('v'=>(int)$surveys)));
@@ -116,18 +116,18 @@ require("../model/statistics_db.php");
             break;
         case 'general_regvanon':
             $encode = array();
-            $regd = // STUB
-            $anon = // STUB
+            $regd = get_number_regd_takers();
+            $anon = get_number_anon_takers();
             $encode['cols'][] = array('label'=>'Taker Type','type'=>'string');
             $encode['cols'][] = array('label'=>'Takers','type'=>'number');
-            $encode['rows'][] = array('c'=> array( array('v'=>'Registered Users'), array('v'=>(int)$regd['takers'])));
-            $encode['rows'][] = array('c'=> array( array('v'=>'Anonymous Users'), array('v'=>(int)$anon['takers'])));
+            $encode['rows'][] = array('c'=> array( array('v'=>'Registered Users'), array('v'=>(int)$regd)));
+            $encode['rows'][] = array('c'=> array( array('v'=>'Anonymous Users'), array('v'=>(int)$anon)));
             $encoded = json_encode($encode);
             echo $encoded;
             break;
         case 'general_qps':
             $encode = array();
-            $qps = // STUB
+            $qps = get_avg_questions_per_survey()
             foreach($qps as $row) {
                 $encode['cols'][] = array('label'=>'Number of Questions','type'=>'string');
                 $encode['cols'][] = array('label'=>'Count','type'=>'number');
@@ -138,7 +138,7 @@ require("../model/statistics_db.php");
             break;
         case 'general_apq':
             $encode = array();
-            $apq = // STUB
+            $apq = get_avg_answers_per_question()
             foreach($apq as $row) {
                 $encode['cols'][] = array('label'=>'Number of Answers','type'=>'string');
                 $encode['cols'][] = array('label'=>'Count','type'=>'number');
@@ -149,28 +149,43 @@ require("../model/statistics_db.php");
             break;
         case 'general_mvf1':
             $encode = array();
-            $male = // STUB
-            $female = // STUB
-            $encode['cols'][] = array('label'=>'Gender','type'=>'string');
-            $encode['cols'][] = array('label'=>'Takers','type'=>'number');
-            $encode['rows'][] = array('c'=> array( array('v'=>'Male'), array('v'=>(int)$male['takers'])));
-            $encode['cols'][] = array('label'=>'Gender','type'=>'string');
-            $encode['cols'][] = array('label'=>'Takers','type'=>'number');
-            $encode['rows'][] = array('c'=> array( array('v'=>'Female'), array('v'=>(int)$female['takers'])));
+            $both = get_number_male_and_female_users()
+            foreach($both as $row) {
+                if ($row['sex'] == 'M') {
+                    $sex = 'Male';
+                } else {
+                    $sex = 'Female';
+                }
+                $encode['cols'][] = array('label'=>'Gender','type'=>'string');
+                $encode['cols'][] = array('label'=>'Takers','type'=>'number');
+                $encode['rows'][] = array('c'=> array( array('v'=>$sex), array('v'=>(int)$row['number'])));
+            }
             $encoded = json_encode($encode);
             echo $encoded;
             break;
         case 'general_mvf2':
             $encode = array();
-            $mcs = // STUB
-            $fcs = // STUB
-            $musers = // STUB
-            $fusers = // STUB
+            $cs = get_number_male_and_female_created_surveys();
+            foreach($cs as $row) {
+                if ($row['sex'] == 'M') {
+                    $csfemale = $row['created'];
+                } else {
+                    $csmale = $row['created'];
+                }
+            }
+            foreach($takers as $row) {
+                if ($row['sex'] == 'M') {
+                    $stfemale = $row['taken'];
+                } else {
+                    $stmale = $row['taken'];
+                }
+            }
+            $takers = get_number_male_and_female_surveys_taken();
             $encode['cols'][] = array('label'=>'Gender','type'=>'string');
             $encode['cols'][] = array('label'=>'Surveys Created','type'=>'number');
-            $encode['cols'][] = array('label'=>'Site Users','type'=>'number');
-            $encode['rows'][] = array('c'=> array( array('v'=>'Surveys Created'), array('v'=>(int)$mcs), array('v'=>(int)$fcs)));
-            $encode['rows'][] = array('c'=> array( array('v'=>'Site Users'), array('v'=>(int)$musers), array('v'=>(int)$fusers)));
+            $encode['cols'][] = array('label'=>'Surveys Taken','type'=>'number');
+            $encode['rows'][] = array('c'=> array( array('v'=>'Surveys Created'), array('v'=>(int)$csfemale), array('v'=>(int)$csmale)));
+            $encode['rows'][] = array('c'=> array( array('v'=>'Site Users'), array('v'=>(int)$stfemale), array('v'=>(int)$stmale)));
             $encoded = json_encode($encode);
             echo $encoded;
             break;

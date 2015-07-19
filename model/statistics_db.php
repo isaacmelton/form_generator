@@ -290,8 +290,106 @@ function get_avg_answers_per_question_for_author($author_id) {
 
 
 // for general_stats.php
-function get_popularity() {
-    
+function get_popularity_of_surveys() {
+    global $db;
+    $query =
+    "SELECT s.id AS sid, 
+    s.title AS title,
+    COUNT(ra.id) AS takers
+    FROM surveys AS s
+    INNER JOIN people AS p
+    ON s.person_id = p.id
+    INNER JOIN questions AS q
+    ON s.id = q.survey_id
+    INNER JOIN answers AS a
+    ON q.id = a.question_id
+    INNER JOIN recorded_answers AS ra
+    ON a.id = ra.answer_id
+    GROUP BY sid
+    ORDER BY title ASC";
+    try {
+        $statement = $db->prepare($query);
+        $statement->execute();
+        $result = $statement->fetchAll();
+        $statement->closeCursor();
+        return $result;
+    } catch (PDOException $e) {
+        display_db_error($e->getMessage());
+    }
+}
+
+function get_number_surveys() {
+    global $db;
+    $query =
+    "SELECT COUNT(*) AS number
+    FROM surveys";
+    try {
+        $statement = $db->prepare($query);
+        $statement->execute();
+        $result = $statement->fetch();
+        $statement->closeCursor();
+        return $result['number'];
+    } catch (PDOException $e) {
+        display_db_error($e->getMessage());
+    }
+}
+
+function get_number_users() {
+    global $db;
+    $query =
+    "SELECT COUNT(*) AS number
+    FROM users";
+    try {
+        $statement = $db->prepare($query);
+        $statement->execute();
+        $result = $statement->fetch();
+        $statement->closeCursor();
+        return $result['number'];
+    } catch (PDOException $e) {
+        display_db_error($e->getMessage());
+    }
+}
+
+function get_number_anon_takers() {
+    global $db;
+    $query =
+    "SELECT COUNT(ra.user_id) AS takers,
+    s.person_id AS author_id
+    FROM recorded_answers AS ra
+    INNER JOIN surveys AS s
+    ON ra.survey_id = s.id
+    WHERE ra.user_id IS NULL
+    GROUP BY s.person_id";
+    try {
+        $statement = $db->prepare($query);
+        $statement->execute();
+        $result = $statement->fetch();
+        $statement->closeCursor();
+        return $result['takers'];
+    } catch (PDOException $e) {
+        display_db_error($e->getMessage());
+    }
+}
+
+function get_number_regd_takers() {
+    global $db;
+    $query =
+    "SELECT COUNT(ra.user_id) AS takers,
+    s.person_id AS author_id
+    FROM recorded_answers AS ra
+    INNER JOIN surveys AS s
+    ON ra.survey_id = s.id
+    WHERE ra.user_id IS NOT NULL
+    GROUP BY s.person_id";
+    try {
+        $statement = $db->prepare($query);
+        $statement->execute();
+        $result = $statement->fetch();
+        $statement->closeCursor();
+        return $result['takers'];
+    } catch (PDOException $e) {
+        display_db_error($e->getMessage());
+    }
 }
 
 function get_avg_questions_per_survey() {
@@ -329,6 +427,89 @@ function get_avg_answers_per_question() {
           ON questions.id = answers.question_id
           GROUP BY questions.id) AS counted
     GROUP BY apq";
+    try {
+        $statement = $db->prepare($query);
+        $statement->execute();
+        $result = $statement->fetchAll();
+        $statement->closeCursor();
+        return $result;
+    } catch (PDOException $e) {
+        display_db_error($e->getMessage());
+    }
+}
+
+function get_number_male_and_female_users() {
+    global $db;
+    $query =
+    "SELECT sex,
+    COUNT(*) AS number 
+    FROM people
+    GROUP BY sex
+    ORDER BY sex";
+    try {
+        $statement = $db->prepare($query);
+        $statement->execute();
+        $result = $statement->fetchAll();
+        $statement->closeCursor();
+        return $result;
+    } catch (PDOException $e) {
+        display_db_error($e->getMessage());
+    }
+}
+
+function get_number_male_and_female_created_surveys() {
+    global $db;
+    $query =
+    "SELECT p.sex AS sex, COUNT(*) AS created
+    FROM surveys AS s
+    INNER JOIN people AS p
+    ON s.person_id = p.id
+    GROUP BY p.sex
+    ORDER BY p.sex";
+    try {
+        $statement = $db->prepare($query);
+        $statement->execute();
+        $result = $statement->fetchAll();
+        $statement->closeCursor();
+        return $result;
+    } catch (PDOException $e) {
+        display_db_error($e->getMessage());
+    }
+}
+
+function get_number_male_and_female_surveys_taken() {
+    global $db;
+    $query =
+    "SELECT t2.sex AS sex, 
+            SUM(timestaken) AS taken
+    FROM (SELECT user_id, 
+                  FLOOR(SUM(adivbyq)) AS timestaken, 
+                  sex
+           FROM (SELECT user_id, 
+                        survey_id, 
+                        COUNT(answer_id) AS acount, 
+                        qcount, 
+                        COUNT(answer_id) / qcount AS adivbyq
+                 FROM recorded_answers
+                 LEFT JOIN (SELECT surveys.id, 
+                                   COUNT(questions.id) AS qcount
+                            FROM surveys 
+                            INNER JOIN questions 
+                            ON surveys.id = questions.survey_id
+                            GROUP BY surveys.id) AS t1
+                 ON t1.id = survey_id
+                 WHERE user_id IS NOT NULL
+                 GROUP BY user_id, survey_id, qcount) AS meh
+           INNER JOIN users
+           ON user_id = users.id
+           INNER JOIN people
+           ON users.person_id = people.id
+           GROUP BY user_id) AS t2
+    INNER JOIN users
+    ON user_id = users.id
+    INNER JOIN people
+    ON users.person_id = people.id
+    GROUP BY sex";
     try {
         $statement = $db->prepare($query);
         $statement->execute();
