@@ -1,12 +1,12 @@
 <?php
 
-if(isset($_POST['submit'])) {
+if (isset($_POST['submit'])) {
 
     $surveyTitle = $_POST['survey_title'];
     $questions = $_POST['question'];
     $answers = $_POST['answer'];
     $now = date("Y-m-d H:i:s");
-	$person_id = $_POST['person_id'];
+    $person_id = $_POST['person_id'];
 
     $query = "INSERT INTO surveys (person_id, title, active, created_at)
               VALUES (:person_id, :survey_title, '1', :now)";
@@ -14,7 +14,7 @@ if(isset($_POST['submit'])) {
     $statement->bindValue(':person_id', $_POST['person_id']);
     $statement->bindValue(':survey_title', $_POST['survey_title']);
     $statement->bindValue(':now', $now);
-    if($statement->execute()) {
+    if ($statement->execute()) {
         $survey_id = $db->lastInsertId();
         $statement->closeCursor();
 
@@ -33,9 +33,9 @@ if(isset($_POST['submit'])) {
                     $question_id = $db->lastInsertId();
                     $statement->closeCursor();
 
-                    if (isset($answers[($sequence-1)])) {
+                    if (isset($answers[($sequence - 1)])) {
                         $answer_sequence = 1;
-                        foreach ($answers[($sequence-1)] as $answer) {
+                        foreach ($answers[($sequence - 1)] as $answer) {
 
                             $query = "INSERT INTO answers(sequence, answer, created_at, question_id)
                                       VALUES (:answer_sequence, :answer, :now, :question_id)";

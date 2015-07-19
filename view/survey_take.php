@@ -1,7 +1,6 @@
 <div id="main">
 
     <div class="container">
-        <!-- display a table of surveys -->
 		
         <h2><?php echo $survey['title']; ?></h2>
         <form class="survey" name="take_survey" action="./take_survey" method="post">
