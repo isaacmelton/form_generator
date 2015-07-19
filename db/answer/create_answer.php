@@ -1,10 +1,21 @@
 <?php
 if (isset($_POST['submitted'])) {
-    $sql = $db->prepare("INSERT INTO `answers` ( `answer` ,  `created_at` ,  `updated_at` ,  `question_id`  )
-  VALUES(  '{$_POST['answer']}' ,  '{$_POST['created_at']}' ,  '{$_POST['updated_at']}' ,  '{$_POST['question_id']}'  ) ");
-    $sql->execute() or die(print_r($sql->errorInfo()));
-echo "Added row.<br />"; 
-echo "<a href='read_answer.php'>Back To Listing</a>"; 
+    //$sql = $db->prepare("INSERT INTO `answers` ( `answer` ,  `created_at` ,  `updated_at` ,  `question_id`  )
+    //    VALUES(  '{$_POST['answer']}' ,  '{$_POST['created_at']}' ,  '{$_POST['updated_at']}' ,  '{$_POST['question_id']}'  ) ");
+    $query = "INSERT INTO answers (answer, created_at, updated_at, question_id)
+              VALUES ( :answer, :created_at, :updated_at, :question_id )";
+    $statement = $db->prepare($query);
+    $statement->bindValue(':answer', $_POST['answer']);
+    $statement->bindValue(':created_at', $_POST['created_at']);
+    $statement->bindValue(':updated_at', $_POST['updated_at']);
+    $statement->bindValue(':question_id', $_POST['question_id']);
+    if ($statement->execute()) {
+        echo "Added row.<br />";
+        echo "<a href='read_answer.php'>Back To Listing</a>";
+    } else {
+        print_r($sql->errorInfo());
+        die();
+    }
 } 
 ?>
 

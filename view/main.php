@@ -7,11 +7,11 @@ echo '</div>';
 echo '</div>';
 
 ?>
- <div class="container-fluid">
-<div class="col-md-3"></div>
-<div class="col-md-5 text-center">
-<p>
-Create surveys, use them to display data and TAKE OVER THE WORLD!
-</p>
-</div>
+<div class="container-fluid">
+    <div class="col-md-3"></div>
+    <div class="col-md-5 text-center">
+        <p>
+            Create surveys, use them to display data and TAKE OVER THE WORLD!
+        </p>
+    </div>
 </div>

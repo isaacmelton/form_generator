@@ -1,16 +1,18 @@
 <?php
 
-function get_all_recorded_answers() {
-	global $db;
-	$query = 'SELECT * FROM recorded_answers';
-	$statement = $db->prepare($query);
-	$statement->execute();
-	$recorded_answers = $statement->fetchAll();
-	$statement->closeCursor();
-	return $recorded_answers;
+function get_all_recorded_answers()
+{
+    global $db;
+    $query = 'SELECT * FROM recorded_answers';
+    $statement = $db->prepare($query);
+    $statement->execute();
+    $recorded_answers = $statement->fetchAll();
+    $statement->closeCursor();
+    return $recorded_answers;
 }
 
-function get_recorded_answers_by_answer_id($answer_id) {
+function get_recorded_answers_by_answer_id($answer_id)
+{
     global $db;
     $query = "SELECT * FROM recorded_answers
               WHERE answer_id = :answer_id";
@@ -20,10 +22,11 @@ function get_recorded_answers_by_answer_id($answer_id) {
     $recorded_answers = $statement->fetchAll();
     $statement->closeCursor();
     return $recorded_answers;
-	}
-	
-	
-function get_recorded_answers_by_user_id($user_id) {
+}
+
+
+function get_recorded_answers_by_user_id($user_id)
+{
     global $db;
     $query = "SELECT * FROM recorded_answers
               WHERE user_id = :user_id";
@@ -33,9 +36,10 @@ function get_recorded_answers_by_user_id($user_id) {
     $recorded_answers = $statement->fetchAll();
     $statement->closeCursor();
     return $recorded_answers;
-	}
-	
-function get_recorded_answers_by_survey_id($survey_id) {
+}
+
+function get_recorded_answers_by_survey_id($survey_id)
+{
     global $db;
     $query = "SELECT * FROM recorded_answers
               WHERE survey_id = :survey_id";
@@ -45,10 +49,11 @@ function get_recorded_answers_by_survey_id($survey_id) {
     $recorded_answers = $statement->fetchAll();
     $statement->closeCursor();
     return $recorded_answers;
-	}
-	
-	
-function get_recorded_answer($id) {
+}
+
+
+function get_recorded_answer($id)
+{
     global $db;
     $query = "SELECT * FROM recorded_answers
               WHERE id = :id";
@@ -58,8 +63,7 @@ function get_recorded_answer($id) {
     $recorded_answer = $statement->fetch();
     $statement->closeCursor();
     return $recorded_answer;
-	}
-	
-	
-	
+}
+
+
 ?>
