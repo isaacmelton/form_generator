@@ -60,8 +60,8 @@
     });
 </script>
 <div class="container-fluid">
-<div class="col-md-3"></div>
-<div class="col-md-8 text-center">
+<div class="col-md-1"></div>
+<div class="col-md-12 text-center">
         <form  class="form-horizontal" role="form" name="createForm" id="createForm" action="create_form" method="post">
 		<input type="hidden" class="form-control" name="person_id" value="<?php echo $person['id']; ?>" required><br>
 		<div class="form-group">
@@ -77,8 +77,8 @@
 			</div>
 			</div>
 			
-            <table class="table" id="question_table">
-            </table>
+            <div class="table" id="question_table">
+            </div>
             <br>
 			
 			<div class="form-group">
