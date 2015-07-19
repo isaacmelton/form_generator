@@ -66,20 +66,20 @@ $path .= '';
                     <!-- Collect the nav links, forms, and other content for toggling -->
                     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                         <ul class="nav navbar-nav">
-                            <li class="active"><a href="http://<?php echo $_SERVER['HTTP_HOST']; ?>">Home <span
+                            <li class="active"><a href="http://<?php echo $_SERVER['HTTP_HOST']; ?>"><?php echo $fa->icon('home'); ?>&nbsp;Home <span
                                         class="sr-only">(current)</span></a></li>
 
                             <!--BIG NOTE!! THE HREF LINKS BELOW WERE PREVIOUS /create_form, /view_survey, ETC. TO GET THEM WORKING ON MY LOCAL MACHINE, I NEEDED TO CHANGE THEM TO index.php?nav=action_in_question. IF I FORGET TO CHANGE THEM BACK AND THE LINK NAVIGATION ISN'T WORKING... LET ME KNOW-->
 
-                            <li class="active"><a href="./create_form">Create Form<span class="sr-only">(current)</span></a>
+                            <li class="active"><a href="./create_form"><?php echo $fa->icon('plus-circle'); ?>&nbsp;Create Form<span class="sr-only">(current)</span></a>
                             </li>
-                            <li class="active"><a href="./view_survey">View Surveys<span
+                            <li class="active"><a href="./view_survey"><?php echo $fa->icon('eye'); ?>&nbsp;View Surveys<span
                                         class="sr-only">(current)</span></a></li>
-                            <li class="active"><a href="./view_statistics">View Statistics<span class="sr-only">(current)</span></a>
+                            <li class="active"><a href="./view_statistics"><?php echo $fa->icon('bar-chart-o'); ?>&nbsp;View Statistics<span class="sr-only">(current)</span></a>
                             </li>
                             <li class="active">
                                 <?php if (!isset($_SESSION['logged_in'])): ?>
-                                <a class="dropdown-toggle" href="#" data-toggle="dropdown">Sign In <strong
+                                <a class="dropdown-toggle" href="#" data-toggle="dropdown"><?php echo $fa->icon('user'); ?>&nbsp;Sign In <strong
                                         class="caret"></strong></a>
 
                                 <div class="dropdown-menu" style="padding: 15px; padding-bottom: 5px;">

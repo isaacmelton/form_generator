@@ -18,7 +18,10 @@ require_once('db/question_db.php');
 require_once('db/answer_db.php');
 require_once('db/recorded_answer_db.php');
 require_once('db/login_db.php');
+
+# Make FontAwesome available on all pages.
 require_once('src/Khill/Fontawesome/FontAwesome.php');
+$fa = new \Khill\Fontawesome\FontAwesome();
 
 
 // Get the action to perform
