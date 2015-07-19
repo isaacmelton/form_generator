@@ -29,43 +29,67 @@ require("../model/statistics_db.php");
             $surveys = get_surveys_taker_count_by_author($aid);
             $limit = 5;
             $i = 0;
-            foreach($q_and_a as $row) {
+            foreach($surveys as $row) {
                 if ($i < $limit) {
                     $encode['cols'][] = array('label'=>'Survey','type'=>'string');
                     $encode['cols'][] = array('label'=>'Takers','type'=>'number');
                     $encode['rows'][] = array('c'=> array( array('v'=>$row['title']), array('v'=>(int)$row['takers'])));
                     $i++;
                 } else {
-                break;
+                break 1;
             }
             $encoded = json_encode($encode);
             echo $encoded;
+            break;
         case 'regvanon':
             $aid = $_POST['aid'];
             $encode = array();
             $surveys = get_surveys_taker_count_by_author($aid);
-            $limit = 5;
-            $i = 0;
-            foreach($q_and_a as $row) {
+            foreach($surveys as $row) {
                 $encode['cols'][] = array('label'=>'Survey','type'=>'string');
                 $encode['cols'][] = array('label'=>'Takers','type'=>'number');
                 $encode['rows'][] = array('c'=> array( array('v'=>$row['title']), array('v'=>(int)$row['takers'])));
             $encoded = json_encode($encode);
             echo $encoded;
+            break;
         case 'allsurveys':
             $aid = $_POST['aid'];
             $encode = array();
             $regd = get_reg_takers_by_author($author_id);
             $anon = get_anon_takers_by_author($author_id);
-            $encode['cols'][] = array('label'=>'Survey','type'=>'string');
+            $encode['cols'][] = array('label'=>'Taker Type','type'=>'string');
             $encode['cols'][] = array('label'=>'Takers','type'=>'number');
-            $encode['rows'][] = array('c'=> array( array('v'=>$row['title']), array('v'=>(int)$row['takers'])));
+            $encode['regd'][] = array('c'=> array( array('v'=>'Registered Users'), array('v'=>(int)$regd['takers'])));
+            $encode['cols'][] = array('label'=>'Taker Type','type'=>'string');
+            $encode['cols'][] = array('label'=>'Takers','type'=>'number');
+            $encode['anon'][] = array('c'=> array( array('v'=>'Anonymous Users'), array('v'=>(int)$anon['takers'])));
             $encoded = json_encode($encode);
             echo $encoded;
+            break;
         case 'avgqps':
-            // do the thing
+            $aid = $_POST['aid'];
+            $encode = array();
+            $qps = get_avg_questions_per_survey_for_author($author_id);
+            foreach($qps as $row) {
+                $encode['cols'][] = array('label'=>'Number of Questions','type'=>'string');
+                $encode['cols'][] = array('label'=>'Count','type'=>'number');
+                $encode['rows'][] = array('c'=> array( array('v'=>$row['qps']. ' Questions'), array('v'=>(int)$row['qps'])));
+            $encoded = json_encode($encode);
+            echo $encoded;
+            break;
         case 'avgapq':
-            // do the thing
+            $aid = $_POST['aid'];
+            $encode = array();
+            $apq = get_avg_answers_per_question_for_author($author_id);
+            foreach($apq as $row) {
+                $encode['cols'][] = array('label'=>'Number of Answers','type'=>'string');
+                $encode['cols'][] = array('label'=>'Count','type'=>'number');
+                $encode['rows'][] = array('c'=> array( array('v'=>$row['apq']. ' Questions'), array('v'=>(int)$row['apq'])));
+            $encoded = json_encode($encode);
+            echo $encoded;
+            break;
+
+        // these are used for the general_stats.php
         endswitch;
 
 ?>

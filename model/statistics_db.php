@@ -141,41 +141,41 @@ function get_questions_for_survey($survey_id) {
 // function get_author_email($author_id
 
 function get_surveys_taker_count_by_author($author_id) {
-  global $db;
-  $query =
-  "SELECT s.id AS sid, 
-  s.title AS title,
-  p.id AS author_id,
-  p.email AS email,
-  COUNT(ra.id) AS takers
-  FROM surveys AS s
-  INNER JOIN people AS p
-  ON s.person_id = p.id
-  INNER JOIN questions AS q
-  ON s.id = q.survey_id
-  INNER JOIN answers AS a
-  ON q.id = a.question_id
-  INNER JOIN recorded_answers AS ra
-  ON a.id = ra.answer_id
-  WHERE p.id = :author_id
-  GROUP BY sid
-  ORDER BY takers DESC;";
-  try {
-      $statement = $db->prepare($query);
-      $statement->bindValue(':author_id', $author_id);
-      $statement->execute();
-      $result = $statement->fetchAll();
-      $statement->closeCursor();
-      return $result;
-  } catch (PDOException $e) {
-      display_db_error($e->getMessage());
-  }
+    global $db;
+    $query =
+    "SELECT s.id AS sid, 
+    s.title AS title,
+    p.id AS author_id,
+    p.email AS email,
+    COUNT(ra.id) AS takers
+    FROM surveys AS s
+    INNER JOIN people AS p
+    ON s.person_id = p.id
+    INNER JOIN questions AS q
+    ON s.id = q.survey_id
+    INNER JOIN answers AS a
+    ON q.id = a.question_id
+    INNER JOIN recorded_answers AS ra
+    ON a.id = ra.answer_id
+    WHERE p.id = :author_id
+    GROUP BY sid
+    ORDER BY takers DESC";
+    try {
+        $statement = $db->prepare($query);
+        $statement->bindValue(':author_id', $author_id);
+        $statement->execute();
+        $result = $statement->fetchAll();
+        $statement->closeCursor();
+        return $result;
+    } catch (PDOException $e) {
+        display_db_error($e->getMessage());
+    }
 }
 
 function get_anon_takers_by_author($author_id) {
     global $db;
     $query =
-    "SELECT COUNT(ra.user_id),
+    "SELECT COUNT(ra.user_id) AS takers,
     s.person_id AS author_id
     FROM recorded_answers AS ra
     INNER JOIN surveys AS s
@@ -198,7 +198,7 @@ function get_anon_takers_by_author($author_id) {
 function get_reg_takers_by_author($author_id) {
     global $db;
     $query =
-    "SELECT COUNT(ra.user_id),
+    "SELECT COUNT(ra.user_id) AS takers,
     s.person_id AS author_id
     FROM recorded_answers AS ra
     INNER JOIN surveys AS s
@@ -211,6 +211,56 @@ function get_reg_takers_by_author($author_id) {
         $statement->bindValue(':author_id', $author_id);
         $statement->execute();
         $result = $statement->fetch();
+        $statement->closeCursor();
+        return $result;
+    } catch (PDOException $e) {
+        display_db_error($e->getMessage());
+    }
+}
+
+function get_avg_questions_per_survey_for_author($author_id) {
+    global $db;
+    $query =
+    "SELECT question_count AS qps
+    FROM (SELECT surveys.id AS survey,
+          COUNT(questions.id) AS question_count
+          FROM surveys
+          INNER JOIN questions
+          ON surveys.id = questions.survey_id
+          WHERE surveys.person_id = :author_id
+          GROUP BY survey) AS counted
+    GROUP BY qps";
+    try {
+        $statement = $db->prepare($query);
+        $statement->bindValue(':author_id', $author_id);
+        $statement->execute();
+        $result = $statement->fetchAll();
+        $statement->closeCursor();
+        return $result;
+    } catch (PDOException $e) {
+        display_db_error($e->getMessage());
+    }    
+}
+
+function get_avg_answers_per_question_for_author($author_id) {
+    global $db;
+    $query =
+    "SELECT answer_count AS apq
+    FROM (SELECT questions.question AS question,
+          COUNT(answers.id) AS answer_count
+          FROM questions
+          INNER JOIN surveys
+          ON questions.survey_id = surveys.id
+          INNER JOIN answers
+          ON questions.id = answers.question_id
+          WHERE surveys.person_id = :author_id
+          GROUP BY questions.id) AS counted
+    GROUP BY apq";
+    try {
+        $statement = $db->prepare($query);
+        $statement->bindValue(':author_id', $author_id);
+        $statement->execute();
+        $result = $statement->fetchAll();
         $statement->closeCursor();
         return $result;
     } catch (PDOException $e) {
