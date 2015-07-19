@@ -99,7 +99,7 @@ $path .= '';
 														<span class="sr-only">(current)</span></a></li>
                                     </form>
                                     <?php else: ?>
-                                    <a class="dropdown-toggle" href="#" data-toggle="dropdown">Logged in
+                                    <a class="dropdown-toggle" href="#" data-toggle="dropdown"><?php echo $fa->icon('user'); ?>&nbsp;Logged in
                                         as <?php echo $_SESSION['logged_in']; ?><strong class="caret"></strong></a>
 
                                     <div class="dropdown-menu" style="padding: 15px; padding-bottom: 5px;">
