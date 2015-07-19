@@ -144,10 +144,15 @@ switch ($nav) {
         break;
     case 'take_survey':
         include 'db/take_survey_db.php';
+        $id = $_POST['survey'];
+        $questions = get_questions($id);
+        $survey = get_survey($id);
+        $answers = get_answers_by_id($id);
         if (isset($survey_result_id)) {
             include 'view/survey_results.php';
         } else {
-            include 'view/survey_take.php';
+            include 'view/survey_results.php';
+            //include 'view/survey_take.php';
         }
         break;
     case 'view_statistics':

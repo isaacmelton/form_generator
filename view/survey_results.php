@@ -11,16 +11,18 @@ if(isset($_POST['survey'])) {
     $result_data['survey_id'] = $_POST['survey'];
 
     if (array_filter($questions)) {
+
+        //TODO If user is logged in, use a different query.
         $count = 0;
         foreach ($questions as $q) {
             $key = "question_".$q['id'];
             $question_ids[$count] = $q['id'];
             $answer_ids[$count] = $_POST[$key];
-            $query = "INSERT INTO recorded_answers ( user_id, answer_id, survey_id, created_at )
-                      VALUES  (:user_id, :answer_id, :survey_id, :now )";
+            $query = "INSERT INTO recorded_answers (  answer_id, survey_id, created_at )
+                      VALUES  ( :answer_id, :survey_id, :now )";
             $statement = $db->prepare($query);
-            $statement->bindValue(':user_id', $_POST['user_id']);
-            $statement->bindValue(':answer_id', $_POST['key']);
+            //$statement->bindValue(':user_id', $_POST['user_id']);
+            $statement->bindValue(':answer_id', $_POST[$key]);
             $statement->bindValue(':survey_id', $_POST['survey']);
             $statement->bindValue(':now', $now);
 

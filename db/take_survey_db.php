@@ -12,8 +12,9 @@ if(isset($_POST['submit'])) {
         updated_at TIMESTAMP
     */
 
+    /*
     $survey_id = $_POST['survey'];
-	$user_id = $_POST['user_id'];
+	//$user_id = $_POST['user_id'];
     $answers = get_answers_by_id($survey_id);
     $questions = get_question_ids_per_survey($survey_id);
     $now = date("Y-m-d H:i:s");
@@ -23,10 +24,10 @@ if(isset($_POST['submit'])) {
         //echo $question_tag;
         //echo $_POST[$question_tag];
         if (isset($_POST[$question_tag])) {
-            $query = "INSERT INTO recorded_answers ( user_id, answer_id, survey_id, created_at )
-                      VALUES  (:user_id, :answer_id, :survey_id, :now )";
+            $query = "INSERT INTO recorded_answers ( answer_id, survey_id, created_at )
+                      VALUES  ( :answer_id, :survey_id, :now )";
             $statement = $db->prepare($query);
-            $statement->bindValue(':user_id', $user_id);
+            //$statement->bindValue(':user_id', $user_id);
             $statement->bindValue(':answer_id', str_replace('question_', "", $_POST[$question_tag]));
             $statement->bindValue(':survey_id', $survey_id);
             $statement->bindValue(':now', $now);
@@ -44,6 +45,7 @@ if(isset($_POST['submit'])) {
     } catch (PDOException $e) {
         echo $e->getMessage();
     }
+    */
 
 }
 ?>
