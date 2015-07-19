@@ -1,4 +1,8 @@
-<?php $person = get_person_by_email($_SESSION['logged_in']); ?>
+<?php
+if (isset($_SESSION['logged_in'])) {
+    $person = get_person_by_email($_SESSION['logged_in']);
+}
+ ?>
 <div id="main">
 
     <div class="container">
