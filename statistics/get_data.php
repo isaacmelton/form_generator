@@ -33,7 +33,7 @@ require("../model/statistics_db.php");
             $encode['cols'][] = array('label'=>'Takers','type'=>'number');
             foreach($surveys as $row) {
                 if ($i < $limit) {
-                    $encode['rows'][] = array('c'=> array( array('v'=>$row['title']), array('v'=>(int)$row['takers'])));
+                    $encode['rows'][] = array('c'=> array( array('v'=>$row['title']), array('v'=>(int)$row['timestaken'])));
                     $i++;
                 } else {
                     break 1;
@@ -49,7 +49,7 @@ require("../model/statistics_db.php");
             foreach($surveys as $row) {
                 $encode['cols'][] = array('label'=>'Survey','type'=>'string');
                 $encode['cols'][] = array('label'=>'Takers','type'=>'number');
-                $encode['rows'][] = array('c'=> array( array('v'=>$row['title']), array('v'=>(int)$row['takers'])));
+                $encode['rows'][] = array('c'=> array( array('v'=>$row['title']), array('v'=>(int)$row['timestaken'])));
             }
             $encoded = json_encode($encode);
             echo $encoded;
@@ -61,8 +61,8 @@ require("../model/statistics_db.php");
             $anon = get_anon_takers_by_author($aid);
             $encode['cols'][] = array('label'=>'Taker Type','type'=>'string');
             $encode['cols'][] = array('label'=>'Takers','type'=>'number');
-            $encode['rows'][] = array('c'=> array( array('v'=>'Registered Users'), array('v'=>(int)$regd['takers'])));
-            $encode['rows'][] = array('c'=> array( array('v'=>'Anonymous Users'), array('v'=>(int)$anon['takers'])));
+            $encode['rows'][] = array('c'=> array( array('v'=>'Registered Users'), array('v'=>(int)$regd['timestaken'])));
+            $encode['rows'][] = array('c'=> array( array('v'=>'Anonymous Users'), array('v'=>(int)$anon['timestaken'])));
             $encoded = json_encode($encode);
             echo $encoded;
             break;

@@ -163,13 +163,16 @@ function get_surveys_by_author($author_id) {
 function get_surveys_taker_count_by_author($author_id) {
     global $db;
     $query =
-    "SELECT FLOOR(SUM(adivbyq)) AS timestaken
-    FROM (SELECT survey_id, 
+    "SELECT meh.title AS title,
+            FLOOR(SUM(adivbyq)) AS timestaken
+    FROM (SELECT survey_id,
+                 t1.title,
                  COUNT(answer_id) AS acount, 
                  qcount, 
                  COUNT(answer_id) / qcount AS adivbyq
           FROM recorded_answers
-          LEFT JOIN (SELECT surveys.id, 
+          LEFT JOIN (SELECT surveys.id,
+                            surveys.title, 
                             COUNT(questions.id) AS qcount
                      FROM surveys 
                      INNER JOIN questions 
