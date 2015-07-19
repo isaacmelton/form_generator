@@ -18,6 +18,7 @@ require_once('db/question_db.php');
 require_once('db/answer_db.php');
 require_once('db/recorded_answer_db.php');
 require_once('db/login_db.php');
+require_once('src/Khill/Fontawesome/FontAwesome.php');
 
 
 // Get the action to perform
