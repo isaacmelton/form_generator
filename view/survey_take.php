@@ -7,6 +7,11 @@
         <form class="survey" name="take_survey" action="./take_survey" method="post">
 	        <table class="table table-hover">
 				<input type="hidden" name="survey" value="<?php echo $survey['id'] ?>" />
+				<?php
+					if (isset($_SESSION['logged_in'])) {
+						echo "<input type='hidden' name='user_id' value='".$person['id']."' required><br>";
+					}
+				?>
 				<!-- <input type="hidden" name="user_id" value="<?php //echo $person['id']; ?>" required><br> -->
 				<input type="hidden" name="title" value="<?php echo $survey['title']; ?>" required><br>
 
