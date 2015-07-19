@@ -10,7 +10,7 @@ Recorded answers:
     updated_at TIMESTAMP
 */
 
-if(isset($_POST['submit'])) {
+if (isset($_POST['submit'])) {
     $questions = get_question_ids_per_survey($_POST['survey']);
     $now = date("Y-m-d H:i:s");
     $result_data = array();
@@ -22,7 +22,7 @@ if(isset($_POST['submit'])) {
 
         $count = 0;
         foreach ($questions as $q) {
-            $key = "question_".$q['id'];
+            $key = "question_" . $q['id'];
             $question_ids[$count] = $q['id'];
             $answer_ids[$count] = $_POST[$key];
             $query = "INSERT INTO recorded_answers ( user_id, answer_id, survey_id, created_at )

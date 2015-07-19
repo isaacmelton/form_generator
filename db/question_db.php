@@ -1,6 +1,7 @@
 <?php
 
-function get_questions($survey_id) {
+function get_questions($survey_id)
+{
     global $db;
     $query = "SELECT * FROM questions
               WHERE survey_id = :survey_id";
@@ -10,9 +11,10 @@ function get_questions($survey_id) {
     $questions = $statement->fetchAll();
     $statement->closeCursor();
     return $questions;
-	}
+}
 
-function get_question_by_id($id) {
+function get_question_by_id($id)
+{
     global $db;
     $query = "SELECT * FROM questions
               WHERE id = :id";
@@ -23,8 +25,9 @@ function get_question_by_id($id) {
     $statement->closeCursor();
     return $question;
 }
-	
-function get_question_ids_per_survey($survey_id) {
+
+function get_question_ids_per_survey($survey_id)
+{
     global $db;
     $query = "SELECT id FROM questions
               WHERE survey_id = :survey_id";
@@ -34,6 +37,6 @@ function get_question_ids_per_survey($survey_id) {
     $question_ids = $statement->fetchAll();
     $statement->closeCursor();
     return $question_ids;
-	}
-	
+}
+
 ?>

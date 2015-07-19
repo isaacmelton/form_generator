@@ -1,9 +1,10 @@
 <?php
 
-function get_hash($email) {
+function get_hash($email)
+{
     global $db;
     $query =
-    "SELECT users.`password` AS pswd
+        "SELECT users.`password` AS pswd
     FROM users
     INNER JOIN people
     ON users.person_id = people.id
@@ -20,10 +21,11 @@ function get_hash($email) {
     }
 }
 
-function get_user_id($email) {
+function get_user_id($email)
+{
     global $db;
     $query =
-    "SELECT users.id AS user_id
+        "SELECT users.id AS user_id
     FROM users
     INNER JOIN people
     ON users.person_id = people.id
@@ -40,10 +42,11 @@ function get_user_id($email) {
     }
 }
 
-function update_password($email, $password) {
+function update_password($email, $password)
+{
     global $db;
     $query =
-    "UPDATE users
+        "UPDATE users
     SET users.`password` = :password
     WHERE users.id = :user_id";
     try {
@@ -60,28 +63,31 @@ function update_password($email, $password) {
     }
 }
 
-function confirm_password($email, $password) {
+function confirm_password($email, $password)
+{
     $hash = get_hash($email);
     if (empty($hash)) {
         $hash = ' ';
-    } 
+    }
     if (empty($password)) {
         $password = ' ';
     }
     return password_verify($password, $hash);
 }
 
-function encrypt($email, $password) {
+function encrypt($email, $password)
+{
     $options['cost'] = 20;
     $hash = password_hash($password, PASSWORD_DEFAULT);
     update_password($email, $hash);
     return $hash;
 }
 
-function is_remembered($cookie_val) {
+function is_remembered($cookie_val)
+{
     global $db;
     $query =
-    "SELECT people.email AS email
+        "SELECT people.email AS email
     FROM people
     INNER JOIN users
     ON people.id = users.person_id
@@ -98,10 +104,11 @@ function is_remembered($cookie_val) {
     }
 }
 
-function set_remember_me($email, $cookie_val) {
+function set_remember_me($email, $cookie_val)
+{
     global $db;
     $query =
-    "UPDATE users
+        "UPDATE users
     SET users.remember_me = :cookie_val
     WHERE users.id = :user_id";
     try {
@@ -118,10 +125,11 @@ function set_remember_me($email, $cookie_val) {
     }
 }
 
-function unset_remember_me($email) {
+function unset_remember_me($email)
+{
     global $db;
     $query =
-    "UPDATE users
+        "UPDATE users
     SET users.remember_me = NULL
     WHERE users.id = :user_id";
     try {
@@ -137,10 +145,11 @@ function unset_remember_me($email) {
     }
 }
 
-function create_user($email, $password) {
+function create_user($email, $password)
+{
     global $db;
     $query =
-    "INSERT INTO users (person_id, password)
+        "INSERT INTO users (person_id, password)
     VALUES (:person_id, :password)";
     try {
         $user_id = get_user_id($email);
@@ -158,10 +167,11 @@ function create_user($email, $password) {
     }
 }
 
-function get_person_id_by_email($email) {
+function get_person_id_by_email($email)
+{
     global $db;
     $query =
-    "SELECT id AS id
+        "SELECT id AS id
     FROM people
     WHERE email = :email";
     try {
