@@ -27,7 +27,7 @@ if(isset($_POST['submit'])) {
                       VALUES  (:user_id, :answer_id, :survey_id, :now )";
             $statement = $db->prepare($query);
             $statement->bindValue(':user_id', $user_id);
-            $statement->bindValue(':answer_id', str_replace('question_', $_POST[$question_tag]));
+            $statement->bindValue(':answer_id', str_replace('question_', "", $_POST[$question_tag]));
             $statement->bindValue(':survey_id', $survey_id);
             $statement->bindValue(':now', $now);
 

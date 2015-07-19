@@ -61,7 +61,8 @@ if ($force_login) {
             &&      ($nav != 'login') 
             &&      ($nav != 'logout')
 			&& 		($nav != 'view_survey')
-			&&      ($nav != 'detailed_survey')))
+			&&      ($nav != 'detailed_survey')
+            &&      ($nav != 'take_survey')))
              { //add to or remove from this list as needed
         $nav = 'need_login';
     }
@@ -157,6 +158,9 @@ switch ($nav) {
         $survey = get_survey($id);
         $questions = get_questions($id);
         $question_ids = get_question_ids_per_survey($id);
+        if (isset($_SESSION['logged_in']))
+            { $person = get_person_by_email($_SESSION['logged_in']); }
+        else {$person = null; }
         $answers = get_answers();
         include 'view/survey_take.php';
 	break;
