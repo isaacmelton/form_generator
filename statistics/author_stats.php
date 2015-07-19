@@ -12,7 +12,7 @@
     function drawChart() {
 
         // TOP 5 GRAPH
-        var jsonData = $.ajax({
+        var jsonDataTop5 = $.ajax({
             url: "statistics/get_data.php",
             dataType:"json",
             data: {aid: <?php echo $author_id; ?>, purpose: 'top5'},
@@ -21,32 +21,15 @@
             }).responseText;
 
         // Create our data table out of JSON data loaded from server.
-        var data = new google.visualization.DataTable(jsonData);
+        var dataTop5 = new google.visualization.DataTable(jsonDataTop5);
   
         // Instantiate and draw our chart, passing in some options.
-        var chart = new google.visualization.ColumnChart(document.getElementById("top5"));
-        chart.draw(data, {width: 300, height: 200});
-
-
-        // REGISTERED USER TAKERS VS ANON USER TAKERS
-        var jsonData = $.ajax({
-            url: "statistics/get_data.php",
-            dataType:"json",
-            data: {aid: <?php echo $author_id; ?>, purpose: 'regvanon'},
-            type: "POST",
-            async: false
-            }).responseText;
-            
-        // Create our data table out of JSON data loaded from server.
-        var data = new google.visualization.DataTable(jsonData);
-  
-        // Instantiate and draw our chart, passing in some options.
-        var chart = new google.visualization.ColumnChart(document.getElementById("regvanon"));
-        chart.draw(data, {width: 300, height: 200});
+        var chartTop5 = new google.visualization.ColumnChart(document.getElementById("top5"));
+        chartTop5.draw(dataTop5, {width: 600, height: 400});
 
 
         // MOST TAKEN SURVEYS
-        var jsonData = $.ajax({
+        var jsonDataAllSurveys = $.ajax({
             url: "statistics/get_data.php",
             dataType:"json",
             data: {aid: <?php echo $author_id; ?>, purpose: 'allsurveys'},
@@ -55,15 +38,32 @@
             }).responseText;
             
         // Create our data table out of JSON data loaded from server.
-        var data = new google.visualization.DataTable(jsonData);
+        var dataAllSurveys = new google.visualization.DataTable(jsonDataAllSurveys);
   
         // Instantiate and draw our chart, passing in some options.
-        var chart = new google.visualization.PieChart(document.getElementById("allsurveys"));
-        chart.draw(data, {width: 300, height: 200});
+        var chartAllSurveys = new google.visualization.PieChart(document.getElementById("allsurveys"));
+        chartAllSurveys.draw(dataAllSurveys, {width: 600, height: 400, is3D: true});
+
+
+        // REGISTERED USER TAKERS VS ANON USER TAKERS
+        var jsonDataRegvanon = $.ajax({
+            url: "statistics/get_data.php",
+            dataType:"json",
+            data: {aid: <?php echo $author_id; ?>, purpose: 'regvanon'},
+            type: "POST",
+            async: false
+            }).responseText;
+            
+        // Create our data table out of JSON data loaded from server.
+        var dataRegvanon = new google.visualization.DataTable(jsonDataRegvanon);
+  
+        // Instantiate and draw our chart, passing in some options.
+        var chartRegvanon = new google.visualization.ColumnChart(document.getElementById("regvanon"));
+        chartRegvanon.draw(dataRegvanon, {width: 600, height: 400});
 
 
         // AVERAGE QUESTIONS PER SURVEY
-        var jsonData = $.ajax({
+        var jsonDataAvgqps = $.ajax({
             url: "statistics/get_data.php",
             dataType:"json",
             data: {aid: <?php echo $author_id; ?>, purpose: 'avgqps'},
@@ -72,14 +72,15 @@
             }).responseText;
             
         // Create our data table out of JSON data loaded from server.
-        var data = new google.visualization.DataTable(jsonData);
+        var dataAvgqps = new google.visualization.DataTable(jsonDataAvgqps);
   
         // Instantiate and draw our chart, passing in some options.
-        var chart = new google.visualization.PieChart(document.getElementById("avgqps"));
-        chart.draw(data, {width: 600, height: 400, pieHole: 0.4});
+        var chartAvgqps = new google.visualization.PieChart(document.getElementById("avgqps"));
+        chartAvgqps.draw(dataAvgqps, {width: 600, height: 400, pieHole: 0.4});
+
 
         // AVERAGE ANSWERS PER QUESTION
-        var jsonData = $.ajax({
+        var jsonDataAvgapq = $.ajax({
             url: "statistics/get_data.php",
             dataType:"json",
             data: {aid: <?php echo $author_id; ?>, purpose: 'avgapq'},
@@ -88,11 +89,13 @@
             }).responseText;
             
         // Create our data table out of JSON data loaded from server.
-        var data = new google.visualization.DataTable(jsonData);
+        var dataAvgapq = new google.visualization.DataTable(jsonDataAvgapq);
   
         // Instantiate and draw our chart, passing in some options.
-        var chart = new google.visualization.PieChart(document.getElementById("avgapq"));
-        chart.draw(data, {width: 600, height: 400, pieHole: 0.4});
+        var chartAvgapq = new google.visualization.PieChart(document.getElementById("avgapq"));
+        chartAvgapq.draw(dataAvgapq, {width: 600, height: 400, pieHole: 0.4});
+
+
     }
 </script>
 
@@ -100,7 +103,7 @@
 <?php $nsurveys = (count($surveys));
 if ($nsurveys < 5): ?>
     <p><i>
-        Note: This user has created only <?php echo $nsurveys; ?>, so the following statistics
+        Note: This user has created only <?php echo $nsurveys; ?> survey, so the following statistics
         may be a poor indication of the author's survey-creation trends.
     </i></p>
 

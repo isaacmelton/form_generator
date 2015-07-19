@@ -30,51 +30,51 @@
 
 <h1>Statistics About Everything</h1>
 
-<p>
+<div id="">
     
-</p>
+</div>
 
 <h3>Number of Surveys and Number of Users</h3>
 
-<p>
-    Bar Graph
-</p>
+<div id="">
+    COLUMN CHART
+</div>
 
 <h3>Number of Surveys Taken by Registered versus Anonymous Users</h3>
 
-<p>
-    Bar graph
-</p>
+<div id="">
+    PIE GRAPH 3D
+</div>
 
 <h3>Average Number of Questions per Test</h3>
 
-<p>
-    Pie Graph
-</p>
+<div id="">
+    DONUT CHART
+</div>
 
 <h3>Number of Surveys Taken</h3>
 
-<p>
+<div id="">
     
-</p>
+</div>
 
 <h3>Top Five Surveys</h3>
 
-<p>
-    Bar Graph
-</p>
+<div id="">
+    COLUMN CHART
+</div>
 
 <h3>Number of Male versus Female Test Takers</h3>
 
-<p>
+<div id="">
     
-</p>
+</div>
 
 <h3>Average Tests Taken per Male and Female</h3>
 
-<p>
+<div id="">
     
-</p>
+</div>
 
 
 

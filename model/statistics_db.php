@@ -1,5 +1,6 @@
 <?php
 
+// The following functions are used by choose_focus.php
 function get_surveys_by_title() {
     global $db;
     $query =
@@ -37,6 +38,8 @@ function get_authors() {
     }
 }
 
+
+// This function is used by survey_stats.php
 function get_survey_stats_by_id($survey_id) {
     global $db;
     $query =
@@ -83,7 +86,6 @@ function get_survey_stats_by_id($survey_id) {
 }
 
 
-// THE FOLLOWING GET USED FOR AJAX AND JSON
 function get_answers_for_question($survey_id, $question_id) {
     global $db;
     $query =
@@ -138,7 +140,25 @@ function get_questions_for_survey($survey_id) {
     }
 }
 
-// function get_author_email($author_id
+// for author.php
+function get_surveys_by_author($author_id) {
+  global $db;
+  $query =
+  "SELECT *
+  FROM surveys
+  WHERE person_id = :author_id
+  ORDER BY title";
+  try {
+      $statement = $db->prepare($query);
+      $statement->bindValue(':author_id', $author_id);
+      $statement->execute();
+      $result = $statement->fetchAll();
+      $statement->closeCursor();
+      return $result;
+  } catch (PDOException $e) {
+      display_db_error($e->getMessage());
+  }
+}
 
 function get_surveys_taker_count_by_author($author_id) {
     global $db;
