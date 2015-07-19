@@ -15,7 +15,7 @@
         var jsonDataTop5 = $.ajax({
             url: "statistics/get_data.php",
             dataType:"json",
-            data: {aid: <?php echo $author_id; ?>, purpose: 'top5'},
+            data: {aid: <?php echo $author_id; ?>, purpose: 'author_top5'},
             type: "POST",
             async: false
             }).responseText;
@@ -25,14 +25,14 @@
   
         // Instantiate and draw our chart, passing in some options.
         var chartTop5 = new google.visualization.ColumnChart(document.getElementById("top5"));
-        chartTop5.draw(dataTop5, {width: 600, height: 400});
+        chartTop5.draw(dataTop5, {width: 600, height: 400, vAxis: {minValue: 0}});
 
 
         // MOST TAKEN SURVEYS
         var jsonDataAllSurveys = $.ajax({
             url: "statistics/get_data.php",
             dataType:"json",
-            data: {aid: <?php echo $author_id; ?>, purpose: 'allsurveys'},
+            data: {aid: <?php echo $author_id; ?>, purpose: 'author_allsurveys'},
             type: "POST",
             async: false
             }).responseText;
@@ -49,7 +49,7 @@
         var jsonDataRegvanon = $.ajax({
             url: "statistics/get_data.php",
             dataType:"json",
-            data: {aid: <?php echo $author_id; ?>, purpose: 'regvanon'},
+            data: {aid: <?php echo $author_id; ?>, purpose: 'author_regvanon'},
             type: "POST",
             async: false
             }).responseText;
@@ -59,14 +59,14 @@
   
         // Instantiate and draw our chart, passing in some options.
         var chartRegvanon = new google.visualization.ColumnChart(document.getElementById("regvanon"));
-        chartRegvanon.draw(dataRegvanon, {width: 600, height: 400});
+        chartRegvanon.draw(dataRegvanon, {width: 600, height: 400, vAxis: {minValue: 0}});
 
 
         // AVERAGE QUESTIONS PER SURVEY
         var jsonDataAvgqps = $.ajax({
             url: "statistics/get_data.php",
             dataType:"json",
-            data: {aid: <?php echo $author_id; ?>, purpose: 'avgqps'},
+            data: {aid: <?php echo $author_id; ?>, purpose: 'author_avgqps'},
             type: "POST",
             async: false
             }).responseText;
@@ -83,7 +83,7 @@
         var jsonDataAvgapq = $.ajax({
             url: "statistics/get_data.php",
             dataType:"json",
-            data: {aid: <?php echo $author_id; ?>, purpose: 'avgapq'},
+            data: {aid: <?php echo $author_id; ?>, purpose: 'author_avgapq'},
             type: "POST",
             async: false
             }).responseText;
@@ -94,7 +94,6 @@
         // Instantiate and draw our chart, passing in some options.
         var chartAvgapq = new google.visualization.PieChart(document.getElementById("avgapq"));
         chartAvgapq.draw(dataAvgapq, {width: 600, height: 400, pieHole: 0.4});
-
 
     }
 </script>
@@ -133,5 +132,5 @@ if ($nsurveys < 5): ?>
 
 <div id="avgapq">DONUT GRAPH</div>
 
-
+<br />
 

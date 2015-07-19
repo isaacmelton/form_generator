@@ -39,7 +39,7 @@ else: ?>
 
 <span class="focus_chooser"><input type="radio" name="focus" value="survey" checked>Surveys</span>
 <span class="focus_chooser"><input type="radio" name="focus" value="author">Authors</span>
-<span class="focus_chooser"><input type="radio" name="focus" value="author">Everything</span>
+<span class="focus_chooser"><input type="radio" name="focus" value="general">Everything</span>
 
 <br />
 <br />
@@ -94,7 +94,6 @@ else: ?>
     </p>
     <form action="" method="post" id="aligned">
         <input type="hidden" name="action" value="general" />
-        <br />
         <input type="submit" value="Show Me" />
     </form>
     <br />

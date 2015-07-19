@@ -289,6 +289,56 @@ function get_avg_answers_per_question_for_author($author_id) {
 }
 
 
+// for general_stats.php
+function get_popularity() {
+    
+}
+
+function get_avg_questions_per_survey() {
+    global $db;
+    $query =
+    "SELECT question_count AS qps
+    FROM (SELECT surveys.id AS survey,
+          COUNT(questions.id) AS question_count
+          FROM surveys
+          INNER JOIN questions
+          ON surveys.id = questions.survey_id
+          GROUP BY survey) AS counted
+    GROUP BY qps";
+    try {
+        $statement = $db->prepare($query);
+        $statement->execute();
+        $result = $statement->fetchAll();
+        $statement->closeCursor();
+        return $result;
+    } catch (PDOException $e) {
+        display_db_error($e->getMessage());
+    }    
+}
+
+function get_avg_answers_per_question() {
+    global $db;
+    $query =
+    "SELECT answer_count AS apq
+    FROM (SELECT questions.question AS question,
+          COUNT(answers.id) AS answer_count
+          FROM questions
+          INNER JOIN surveys
+          ON questions.survey_id = surveys.id
+          INNER JOIN answers
+          ON questions.id = answers.question_id
+          GROUP BY questions.id) AS counted
+    GROUP BY apq";
+    try {
+        $statement = $db->prepare($query);
+        $statement->execute();
+        $result = $statement->fetchAll();
+        $statement->closeCursor();
+        return $result;
+    } catch (PDOException $e) {
+        display_db_error($e->getMessage());
+    }
+}
 
 ?>
 
