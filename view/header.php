@@ -24,7 +24,7 @@ $path .= '';
 
     <!-- Optional theme -->
     <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css"> -->
-    <link rel="stylesheet" href="https://bootswatch.com/superhero/bootstrap.min.css">
+    <link rel="stylesheet" href="https://bootswatch.com/yeti/bootstrap.min.css">
 
     <link rel="stylesheet" type="text/css"
           href="<?php echo 'http://' . $_SERVER['HTTP_HOST'] . '/css/main.css'; ?>"/>
