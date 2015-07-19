@@ -93,8 +93,9 @@ $path .= '';
                                         <label class="string optional" for="user_remember_me"> Remember me</label>
                                         <input class="btn btn-primary btn-block" type="submit" id="sign-in"
                                                value="Sign In">
-                                        <li class="active"><a href="index?nav=create_user">Sign me up for an
-                                                account<span class="sr-only">(current)</span></a></li>
+										<br>
+                                        <li class="active"><a style="color:white; text-decoration:none;" href="index?nav=create_user">&nbsp;&nbsp;&nbsp;Create a new account!
+														<span class="sr-only">(current)</span></a></li>
                                     </form>
                                     <?php else: ?>
                                     <a class="dropdown-toggle" href="#" data-toggle="dropdown">Logged in
