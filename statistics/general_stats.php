@@ -24,8 +24,8 @@
         var Popularity = new google.visualization.DataTable(jsonPopularity);
   
         // Instantiate and draw our chart, passing in some options.
-        var chartPopularity = new google.visualization.ColumnChart(document.getElementById("popularity"));
-        chartPopularity.draw(Popularity, {width: 600, height: 400, vAxis: {minValue: 0}});
+        var chartPopularity = new google.visualization.PieChart(document.getElementById("popularity"));
+        chartPopularity.draw(Popularity, {width: 600, height: 400, is3D: true});
 
 
         // NUMBER OF SURVEYS VS NUMBER OF USERS
@@ -112,7 +112,6 @@
         var chartMvf1 = new google.visualization.PieChart(document.getElementById("mvf1"));
         chartMvf1.draw(dataMvf1, {width: 600, height: 400, is3D: true});
 
-
         // MALE VS FEMALE SITE USAGE
         var jsonDataMvf2 = $.ajax({
             url: "statistics/get_data.php",
@@ -126,8 +125,9 @@
         var dataMvf2 = new google.visualization.DataTable(jsonDataMvf2);
   
         // Instantiate and draw our chart, passing in some options.
-        var chartMvf2 = new google.visualization.PieChart(document.getElementById("mvf2"));
-        chartMvf2.draw(dataMvf2, {width: 600, height: 400, is3D: true});
+        var chartMvf2 = new google.visualization.ColumnChart(document.getElementById("mvf2"));
+        chartMvf2.draw(dataMvf2, {width: 600, height: 400});
+
     }
 </script>
 
@@ -164,13 +164,15 @@
     DONUT CHART
 </div>
 
-<h3>Male versus Female Site Usage</h3>
+<h3>Number of Male and Female Registered Users</h3>
 
 <div id="mvf1">
-    SIDE-BY-SIDE COLUMN CHART
+    PIE CHART
 </div>
 
-<div id="mvf1">
+<h3>Male and Female Registered User Site Activity</h3>
+
+<div id="mvf2">
     SIDE-BY-SIDE COLUMN CHART
 </div>
 

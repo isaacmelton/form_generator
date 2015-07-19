@@ -163,23 +163,21 @@ function get_surveys_by_author($author_id) {
 function get_surveys_taker_count_by_author($author_id) {
     global $db;
     $query =
-    "SELECT s.id AS sid, 
-    s.title AS title,
-    p.id AS author_id,
-    p.email AS email,
-    COUNT(ra.id) AS takers
-    FROM surveys AS s
-    INNER JOIN people AS p
-    ON s.person_id = p.id
-    INNER JOIN questions AS q
-    ON s.id = q.survey_id
-    INNER JOIN answers AS a
-    ON q.id = a.question_id
-    INNER JOIN recorded_answers AS ra
-    ON a.id = ra.answer_id
-    WHERE p.id = :author_id
-    GROUP BY sid
-    ORDER BY takers DESC";
+    "SELECT FLOOR(SUM(adivbyq)) AS timestaken
+    FROM (SELECT survey_id, 
+                 COUNT(answer_id) AS acount, 
+                 qcount, 
+                 COUNT(answer_id) / qcount AS adivbyq
+          FROM recorded_answers
+          LEFT JOIN (SELECT surveys.id, 
+                            COUNT(questions.id) AS qcount
+                     FROM surveys 
+                     INNER JOIN questions 
+                     ON surveys.id = questions.survey_id
+                     WHERE surveys.person_id = :author_id
+                     GROUP BY surveys.id) AS t1
+          ON t1.id = survey_id
+          GROUP BY survey_id, qcount) AS meh";
     try {
         $statement = $db->prepare($query);
         $statement->bindValue(':author_id', $author_id);
@@ -195,14 +193,22 @@ function get_surveys_taker_count_by_author($author_id) {
 function get_anon_takers_by_author($author_id) {
     global $db;
     $query =
-    "SELECT COUNT(ra.user_id) AS takers,
-    s.person_id AS author_id
-    FROM recorded_answers AS ra
-    INNER JOIN surveys AS s
-    ON ra.survey_id = s.id
-    WHERE ra.user_id IS NULL
-    AND s.person_id = :author_id
-    GROUP BY s.person_id";
+    "SELECT FLOOR(SUM(adivbyq)) AS timestaken
+    FROM (SELECT survey_id, 
+                 COUNT(answer_id) AS acount, 
+                 qcount, 
+                 COUNT(answer_id) / qcount AS adivbyq
+          FROM recorded_answers
+          LEFT JOIN (SELECT surveys.id, 
+                            COUNT(questions.id) AS qcount
+                     FROM surveys 
+                     INNER JOIN questions 
+                     ON surveys.id = questions.survey_id
+                     WHERE surveys.person_id = :author_id
+                     GROUP BY surveys.id) AS t1
+          ON t1.id = survey_id
+          WHERE user_id IS NULL
+          GROUP BY survey_id, qcount) AS meh";
     try {
         $statement = $db->prepare($query);
         $statement->bindValue(':author_id', $author_id);
@@ -218,14 +224,22 @@ function get_anon_takers_by_author($author_id) {
 function get_reg_takers_by_author($author_id) {
     global $db;
     $query =
-    "SELECT COUNT(ra.user_id) AS takers,
-    s.person_id AS author_id
-    FROM recorded_answers AS ra
-    INNER JOIN surveys AS s
-    ON ra.survey_id = s.id
-    WHERE ra.user_id IS NOT NULL
-    AND s.person_id = :author_id
-    GROUP BY s.person_id";
+    "SELECT FLOOR(SUM(adivbyq)) AS timestaken
+    FROM (SELECT survey_id, 
+                 COUNT(answer_id) AS acount, 
+                 qcount, 
+                 COUNT(answer_id) / qcount AS adivbyq
+          FROM recorded_answers
+          LEFT JOIN (SELECT surveys.id, 
+                            COUNT(questions.id) AS qcount
+                     FROM surveys 
+                     INNER JOIN questions 
+                     ON surveys.id = questions.survey_id
+                     WHERE surveys.person_id = :author_id
+                     GROUP BY surveys.id) AS t1
+          ON t1.id = survey_id
+          WHERE user_id IS NOT NULL
+          GROUP BY survey_id, qcount) AS meh";
     try {
         $statement = $db->prepare($query);
         $statement->bindValue(':author_id', $author_id);
@@ -241,7 +255,8 @@ function get_reg_takers_by_author($author_id) {
 function get_avg_questions_per_survey_for_author($author_id) {
     global $db;
     $query =
-    "SELECT question_count AS qps
+    "SELECT question_count,
+            COUNT(question_count) AS occurrence
     FROM (SELECT surveys.id AS survey,
           COUNT(questions.id) AS question_count
           FROM surveys
@@ -249,7 +264,7 @@ function get_avg_questions_per_survey_for_author($author_id) {
           ON surveys.id = questions.survey_id
           WHERE surveys.person_id = :author_id
           GROUP BY survey) AS counted
-    GROUP BY qps";
+    GROUP BY question_count";
     try {
         $statement = $db->prepare($query);
         $statement->bindValue(':author_id', $author_id);
@@ -265,7 +280,8 @@ function get_avg_questions_per_survey_for_author($author_id) {
 function get_avg_answers_per_question_for_author($author_id) {
     global $db;
     $query =
-    "SELECT answer_count AS apq
+    "SELECT answer_count,
+            COUNT(answer_count) AS occurrence
     FROM (SELECT questions.question AS question,
           COUNT(answers.id) AS answer_count
           FROM questions
@@ -275,7 +291,7 @@ function get_avg_answers_per_question_for_author($author_id) {
           ON questions.id = answers.question_id
           WHERE surveys.person_id = :author_id
           GROUP BY questions.id) AS counted
-    GROUP BY apq";
+    GROUP BY answer_count";
     try {
         $statement = $db->prepare($query);
         $statement->bindValue(':author_id', $author_id);
@@ -293,20 +309,25 @@ function get_avg_answers_per_question_for_author($author_id) {
 function get_popularity_of_surveys() {
     global $db;
     $query =
-    "SELECT s.id AS sid, 
-    s.title AS title,
-    COUNT(ra.id) AS takers
-    FROM surveys AS s
-    INNER JOIN people AS p
-    ON s.person_id = p.id
-    INNER JOIN questions AS q
-    ON s.id = q.survey_id
-    INNER JOIN answers AS a
-    ON q.id = a.question_id
-    INNER JOIN recorded_answers AS ra
-    ON a.id = ra.answer_id
-    GROUP BY sid
-    ORDER BY title ASC";
+    "SELECT surveys.title AS title, 
+            FLOOR(SUM(adivbyq)) AS timestaken
+     FROM (SELECT user_id,
+                  survey_id, 
+                  COUNT(answer_id) AS acount, 
+                  qcount, 
+                  COUNT(answer_id) / qcount AS adivbyq
+           FROM recorded_answers
+           LEFT JOIN (SELECT surveys.id, 
+                             COUNT(questions.id) AS qcount
+                      FROM surveys 
+                      INNER JOIN questions 
+                      ON surveys.id = questions.survey_id
+                      GROUP BY surveys.id) AS t1
+           ON t1.id = survey_id
+           GROUP BY user_id, survey_id, qcount) AS t2
+    INNER JOIN surveys
+    ON t2.survey_id = surveys.id
+    GROUP BY survey_id";
     try {
         $statement = $db->prepare($query);
         $statement->execute();
@@ -350,43 +371,59 @@ function get_number_users() {
     }
 }
 
-function get_number_anon_takers() {
+function get_number_anon_takens() {
     global $db;
     $query =
-    "SELECT COUNT(ra.user_id) AS takers,
-    s.person_id AS author_id
-    FROM recorded_answers AS ra
-    INNER JOIN surveys AS s
-    ON ra.survey_id = s.id
-    WHERE ra.user_id IS NULL
-    GROUP BY s.person_id";
+    "SELECT FLOOR(SUM(adivbyq)) AS timestaken
+    FROM (SELECT survey_id, 
+                 COUNT(answer_id) AS acount, 
+                 qcount, 
+                 COUNT(answer_id) / qcount AS adivbyq
+          FROM recorded_answers
+          LEFT JOIN (SELECT surveys.id, 
+                            COUNT(questions.id) AS qcount
+                     FROM surveys 
+                     INNER JOIN questions 
+                     ON surveys.id = questions.survey_id
+                     GROUP BY surveys.id) AS t1
+          ON t1.id = survey_id
+          WHERE user_id IS NULL
+          GROUP BY survey_id, qcount) AS meh";
     try {
         $statement = $db->prepare($query);
         $statement->execute();
         $result = $statement->fetch();
         $statement->closeCursor();
-        return $result['takers'];
+        return $result['timestaken'];
     } catch (PDOException $e) {
         display_db_error($e->getMessage());
     }
 }
 
-function get_number_regd_takers() {
+function get_number_regd_takens() {
     global $db;
     $query =
-    "SELECT COUNT(ra.user_id) AS takers,
-    s.person_id AS author_id
-    FROM recorded_answers AS ra
-    INNER JOIN surveys AS s
-    ON ra.survey_id = s.id
-    WHERE ra.user_id IS NOT NULL
-    GROUP BY s.person_id";
+    "SELECT FLOOR(SUM(adivbyq)) AS timestaken
+    FROM (SELECT survey_id, 
+                 COUNT(answer_id) AS acount, 
+                 qcount, 
+                 COUNT(answer_id) / qcount AS adivbyq
+          FROM recorded_answers
+          LEFT JOIN (SELECT surveys.id, 
+                            COUNT(questions.id) AS qcount
+                     FROM surveys 
+                     INNER JOIN questions 
+                     ON surveys.id = questions.survey_id
+                     GROUP BY surveys.id) AS t1
+          ON t1.id = survey_id
+          WHERE user_id IS NOT NULL
+          GROUP BY survey_id, qcount) AS meh";
     try {
         $statement = $db->prepare($query);
         $statement->execute();
         $result = $statement->fetch();
         $statement->closeCursor();
-        return $result['takers'];
+        return $result['timestaken'];
     } catch (PDOException $e) {
         display_db_error($e->getMessage());
     }
@@ -395,14 +432,15 @@ function get_number_regd_takers() {
 function get_avg_questions_per_survey() {
     global $db;
     $query =
-    "SELECT question_count AS qps
+    "SELECT question_count,
+            COUNT(question_count) AS occurrence
     FROM (SELECT surveys.id AS survey,
           COUNT(questions.id) AS question_count
           FROM surveys
           INNER JOIN questions
           ON surveys.id = questions.survey_id
           GROUP BY survey) AS counted
-    GROUP BY qps";
+    GROUP BY question_count";
     try {
         $statement = $db->prepare($query);
         $statement->execute();
@@ -417,7 +455,8 @@ function get_avg_questions_per_survey() {
 function get_avg_answers_per_question() {
     global $db;
     $query =
-    "SELECT answer_count AS apq
+    "SELECT answer_count,
+            COUNT(answer_count) AS occurrence
     FROM (SELECT questions.question AS question,
           COUNT(answers.id) AS answer_count
           FROM questions
@@ -426,7 +465,7 @@ function get_avg_answers_per_question() {
           INNER JOIN answers
           ON questions.id = answers.question_id
           GROUP BY questions.id) AS counted
-    GROUP BY apq";
+    GROUP BY answer_count";
     try {
         $statement = $db->prepare($query);
         $statement->execute();
@@ -480,7 +519,7 @@ function get_number_male_and_female_created_surveys() {
 function get_number_male_and_female_surveys_taken() {
     global $db;
     $query =
-    "SELECT t2.sex AS sex, 
+    "SELECT t3.sex AS sex, 
             SUM(timestaken) AS taken
     FROM (SELECT user_id, 
                   FLOOR(SUM(adivbyq)) AS timestaken, 
@@ -499,17 +538,18 @@ function get_number_male_and_female_surveys_taken() {
                             GROUP BY surveys.id) AS t1
                  ON t1.id = survey_id
                  WHERE user_id IS NOT NULL
-                 GROUP BY user_id, survey_id, qcount) AS meh
+                 GROUP BY user_id, survey_id, qcount) AS t2
            INNER JOIN users
            ON user_id = users.id
            INNER JOIN people
            ON users.person_id = people.id
-           GROUP BY user_id) AS t2
+           GROUP BY user_id) AS t3
     INNER JOIN users
     ON user_id = users.id
     INNER JOIN people
     ON users.person_id = people.id
-    GROUP BY sex";
+    GROUP BY sex
+    ORDER BY sex";
     try {
         $statement = $db->prepare($query);
         $statement->execute();
