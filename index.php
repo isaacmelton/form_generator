@@ -93,7 +93,6 @@ switch ($nav) {
         } else {
 		$_SESSION['redirect_to'] = $_SERVER['REQUEST_URI'];
             include 'view/log_in.php';
-			exit();
         }
         break;
     case 'login':
