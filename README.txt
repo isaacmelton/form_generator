@@ -1,3 +1,13 @@
+Site available online at: http://45.55.93.140/
+
+use the following credentials for 'logged in" features
+login: jjones@example.com
+passw: password
+
+
+
+-------------------------------------------------------------------------------
+
 Once you have MySQL up and running, go ahead and run the following SQL code:
 
 
@@ -105,6 +115,3 @@ TABLE: recorded_answers
 | created_at | timestamp | NO   |     | 0000-00-00 00:00:00 |                             |
 | updated_at | timestamp | NO   |     | CURRENT_TIMESTAMP   | on update CURRENT_TIMESTAMP |
 +------------+-----------+------+-----+---------------------+-----------------------------+
-
-
-
