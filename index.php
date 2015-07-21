@@ -68,7 +68,7 @@ if ($force_login) {
             && ($nav != 'detailed_survey')
             && ($nav != 'take_survey'))
     ) { //add to or remove from this list as needed
-        $nav = 'need_login';
+		$nav = 'need_login';
     }
 }
 
@@ -91,7 +91,9 @@ switch ($nav) {
             $_SESSION['login_message'] = 'You are already logged in, ' . $_SESSION['logged_in'] . '.';
             header('Location: index.php');
         } else {
+		$_SESSION['redirect_to'] = $_SERVER['REQUEST_URI'];
             include 'view/log_in.php';
+			exit();
         }
         break;
     case 'login':
@@ -112,13 +114,21 @@ switch ($nav) {
         } else {
             $_SESSION['logged_in'] = $email;
             $person = get_person_by_email($_SESSION['logged_in']['id']);
+			$redirect = $_SESSION['redirect_to'];
+			// unset the session var
+			unset($_SESSION['redirect_to']);
+			header("Location:".$redirect);
             if (isset($_POST['remember_me'])) {
                 $cookie_val = openssl_random_pseudo_bytes(60);
                 setcookie('remembered', $cookie_val, time() + (86400 * 365), "/"); // gives cookie one year shelf-life
                 set_remember_me($email, $cookie_val);
                 $_SESSION['login_message'] = "We'll remember you, $email. Promise.";
+						exit();
+
             } else {
                 $_SESSION['login_message'] = 'Welcome, ' . $_SESSION['logged_in'] . '.';
+						exit();
+
             }
             header('Location: index.php');
         }

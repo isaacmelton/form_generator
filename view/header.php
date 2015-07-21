@@ -77,27 +77,12 @@ $path .= '';
                                         class="sr-only">(current)</span></a></li>
                             <li class="active"><a href="./view_statistics"><?php echo $fa->icon('bar-chart-o'); ?>&nbsp;View Statistics<span class="sr-only">(current)</span></a>
                             </li>
+
                             <li class="active">
                                 <?php if (!isset($_SESSION['logged_in'])): ?>
-                                <a class="dropdown-toggle" href="#" data-toggle="dropdown"><?php echo $fa->icon('user'); ?>&nbsp;Sign In <strong
-                                        class="caret"></strong></a>
-
                                 <div class="dropdown-menu" style="padding: 15px; padding-bottom: 5px;">
-                                    <form method="post" action="" accept-charset="UTF-8">
-                                        <input type="hidden" name="nav" value="login"/>
-                                        <input style="margin-bottom: 15px;" type="text" placeholder="Email"
-                                               id="username" name="email"/>
-                                        <input style="margin-bottom: 15px;" type="password" placeholder="Password"
-                                               id="password" name="password"/>
-                                        <input style="float: left; margin-right: 10px;" type="checkbox"
-                                               name="remember_me" id="remember-me" value="yes"/>
-                                        <label class="string optional" for="user_remember_me"> Remember me</label>
-                                        <input class="btn btn-primary btn-block" type="submit" id="sign-in"
-                                               value="Sign In">
-										<br>
-                                        <li class="active"><a style="color:white; text-decoration:none;" href="index?nav=create_user">&nbsp;&nbsp;&nbsp;Create a new account!
-														<span class="sr-only">(current)</span></a></li>
-                                    </form>
+ 							<li class="active"><a href="./log_in"><?php echo $fa->icon('user'); ?>&nbsp;Log In<span class="sr-only">(current)</span></a>
+                            </li>
                                     <?php else: ?>
                                     <a class="dropdown-toggle" href="#" data-toggle="dropdown"><?php echo $fa->icon('user'); ?>&nbsp;Logged in
                                         as <?php echo $_SESSION['logged_in']; ?><strong class="caret"></strong></a>

@@ -114,6 +114,9 @@ if (isset($_POST['submit'])) {
             add_person($first_name, $last_name, $email, $city, $state, $country, $sex);
             create_user($email, $password);
             $notice = $first_name . " has been entered into the system";
+			        header('Location: need_login');
         }
+
+
     }
 }
