@@ -94,7 +94,4 @@ else: ?>
 
 <br />
 
-<p>
-    Return <a href="index.php">home</a>.
-</p>
 </div></div>
