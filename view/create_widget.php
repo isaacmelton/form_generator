@@ -1,22 +1,9 @@
-<?php
-include 'model/database.php';
-require_once('db/survey_db.php');
-require_once('db/people_db.php');
-require_once('db/question_db.php');
-require_once('db/answer_db.php');
-require_once('db/recorded_answer_db.php');
-require_once('db/login_db.php');
-
-$surveys = get_surveys();
-?>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 <script type="text/javascript">
-
 $(document).ready(function() {
     $("select").each(function() {
         $(this).change(function() {
             var val = $(this).val();
-            $("#widget_code").text("<div id=\"the_widget_area\"></div><script type=\"text/javascript\" src=\"http://localhost/cs6290_webform_generator/js/widget.js\"><\/script><script type=\"text/javascript\">init_widget(" + val + ")<\/script>");
+            $("#widget_code").text("<div id=\"the_widget_area\"></div><script type=\"text/javascript\" src=\"http://45.55.93.140/js/widget.js\"><\/script><script type=\"text/javascript\">init_widget(" + val + ")<\/script>");
         });
     });
 });

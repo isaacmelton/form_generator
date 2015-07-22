@@ -58,8 +58,8 @@ if (!isset($_SESSION['logged_in']) && isset($_COOKIE['remembered'])) {
 
 //If user not logged in && trying to access page that requires login, user is sent to login page
 if ($force_login) {
-    if (!isset($_SESSION['logged_in']) &&
-        (($nav != 'nav')
+    if (!isset($_SESSION['logged_in']) && (
+               ($nav != 'nav')
             && ($nav != 'create_user')
             && ($nav != 'need_login')
             && ($nav != 'login')
@@ -185,6 +185,10 @@ switch ($nav) {
         }
         $answers = get_answers();
         include 'view/survey_take.php';
+        break;
+    case 'create_widget':
+        $surveys = get_surveys();
+        include 'view/create_widget.php';
         break;
     default;
         include "view/main.php";

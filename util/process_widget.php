@@ -1,13 +1,27 @@
 <?php
 
-include 'model/database.php';
-require_once('db/survey_db.php');
-require_once('db/people_db.php');
-require_once('db/question_db.php');
-require_once('db/answer_db.php');
+/*
+Recorded answers:
+    id INT,
+    user_id INT,
+    answer_id INT,
+    survey_id INT,
+    created_at TIMESTAMP,
+    updated_at TIMESTAMP
+*/
+
+
+include '../model/database.php';
+require_once('../db/survey_db.php');
+require_once('../db/people_db.php');
+require_once('../db/question_db.php');
+require_once('../db/answer_db.php');
+require_once('../db/recorded_answer_db.php');
+require_once('../db/login_db.php');
+
 
 if (isset($_POST['submit'])) {
-echo 'made it to line 10: '.$_POST['submit'].'<br />';
+echo 'made it this far: '.$_POST['submit'].'<br />'.'Oh and...'.$_POST['survey'];
     $questions = get_question_ids_per_survey($_POST['survey']);
     $now = date("Y-m-d H:i:s");
     $result_data = array();
@@ -19,7 +33,6 @@ echo 'made it to line 10: '.$_POST['submit'].'<br />';
 
         $count = 0;
         foreach ($questions as $q) {
-echo 'made it to line 22: '.var_dump($q).'<br />';
             $key = "question_" . $q['id'];
             $question_ids[$count] = $q['id'];
             $answer_ids[$count] = $_POST[$key];
@@ -34,7 +47,7 @@ echo 'made it to line 22: '.var_dump($q).'<br />';
             $statement->bindValue(':answer_id', $_POST[$key]);
             $statement->bindValue(':survey_id', $_POST['survey']);
             $statement->bindValue(':now', $now);
-echo 'made it to line 37: '.var_dump($statement).'<br />';
+
             if ($statement->execute()) {
 
             } else {
@@ -50,8 +63,6 @@ echo 'made it to line 37: '.var_dump($statement).'<br />';
         echo $e->getMessage();
     }
 }
-
-//echo 'this should be here:'. var_dump($statement);
 
 
 ?>

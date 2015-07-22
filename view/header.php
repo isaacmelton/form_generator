@@ -77,7 +77,8 @@ $path .= '';
                                         class="sr-only">(current)</span></a></li>
                             <li class="active"><a href="./view_statistics"><?php echo $fa->icon('bar-chart-o'); ?>&nbsp;View Statistics<span class="sr-only">(current)</span></a>
                             </li>
-
+                            <li class="active"><a href="./create_widget"><?php echo $fa->icon('plus-circle'); ?>&nbsp;Create Widget<span class="sr-only">(current)</span></a>
+                            </li>
                             <li class="active">
                                 <?php if (!isset($_SESSION['logged_in'])): ?>
                                 <div class="dropdown-menu" style="padding: 15px; padding-bottom: 5px;">
