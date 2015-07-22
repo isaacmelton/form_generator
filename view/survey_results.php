@@ -1,6 +1,9 @@
 <div id="main">
 
-    <h2>Survey Results</h2>
+    <div class="row">
+        <div class="col-md-1"></div>
+        <div class="col-md-8"><h2>Survey Results</h2></div>
+    </div>
 
     <div class="container">
         <!-- display a table of surveys -->
