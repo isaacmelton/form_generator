@@ -1,7 +1,5 @@
 <?php
 
-include_once('model/statistics_db.php');
-
 class StatisticsTest extends PHPUnit_Extensions_Selenium2TestCase 
 {
     static private $conn = null;
@@ -32,7 +30,7 @@ class StatisticsTest extends PHPUnit_Extensions_Selenium2TestCase
         return $this->createMySQLXMLDataSet('seed.xml');
     }
 
-
+//    public function eh(){include('model/statistics_db.php');}
 
     protected function setUp()
     {
