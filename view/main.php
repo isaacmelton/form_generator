@@ -8,5 +8,8 @@ include './view/img_display.php';
         <p>
             Create surveys, use them to display data and TAKE OVER THE WORLD!
         </p>
-        <img class="img-rounded" src="<?php echo getRandomImage(); ?>">
+        <div>
+            <img src="<?php echo getRandomImage(); ?>" class="img-responsive center-block" />
+        </div>
+
 </div>
