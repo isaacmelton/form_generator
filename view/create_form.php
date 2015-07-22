@@ -10,7 +10,7 @@
     }
 
     function removeAnswerFromQuestion(answerID) {
-        $("table").remove(answerID);
+        $("div").remove(answerID);
     }
 
     function removeQuestionFromSurvey(questionID) {
@@ -19,35 +19,37 @@
 
     function getQuestion(count) {
         return "<div class='container-fluid'>" +
-            "<div class='col-md-2'></div>" +
-            "<div class='col-md-4 text-center' id='question_" + count + "'>" +
-            "<tr>" +
-            "<td class='col-sm-2 control-label' colspan='2'>" +
-            "Question:" +
-            "<input class='form-control' type='text' name='question[]' required>" +
-            "</td>" +
-            "<td><br>" +
-            "<input type='button' class='btn btn-default' value='Remove' onclick='removeQuestionFromSurvey(\"#question_" + count + "\")' />" +
-            "&nbsp;<input type='button' class='btn btn-default add_answer' value='Add an Answer' id='question_" + count + "' onclick='addAnswerToQuestion(this.id);'/>" +
-            "</td>" +
-            "</tr>" +
-            "</div></div><br>";
+                    "<div class='col-md-2'></div>" +
+                    "<div class='col-md-6 text-center' id='question_" + count + "'>" +
+                        "<tr>" +
+                            "<td class='col-sm-2 control-label' colspan='2'>" +
+                                "Question:" +
+                                "<input class='form-control' type='text' name='question[]' required>" +
+                            "</td>" +
+                            "<td><br>" +
+                            "<input type='button' class='btn btn-default' value='Remove' onclick='removeQuestionFromSurvey(\"#question_" + count + "\")' />" +
+                            "&nbsp;<input type='button' class='btn btn-default add_answer' value='Add an Answer' id='question_" + count + "' onclick='addAnswerToQuestion(this.id);'/>" +
+                            "</td>" +
+                        "</tr>" +
+                    "</div>"+
+                "</div><br>";
     }
     function getAnswer(count) {
         answer_counter++;
         return "<div class='container-fluid'>" +
-            "<div class='text-center'><br>" +
-            "<table class='col-md-12' id='answer_" + answer_counter + "'>" +
-            "<tr class='col-md-12'>" +
-            "<td>" +
-            "<input class='form-control' type='text' placeholder='Enter Answer Here' name='answer[" + count + "][]' required>" +
-            "</td>" +
-            "<td>" +
-            "<input type='button' class='btn btn-default' value='Remove' onclick='removeAnswerFromQuestion(\"#answer_" + answer_counter + "\")' required />" +
-            "</td>" +
-            "</tr>" +
-            "</table>" +
-            "</div></div>";
+                    "<div class='text-center'><br>" +
+                        "<div class='col-md-12' id='answer_" + answer_counter + "'>" +
+                        "<tr class='col-md-11'>" +
+                            "<td>" +
+                                "<input class='form-control' type='text' placeholder='Enter Answer Here' name='answer[" + count + "][]' required>" +
+                            "</td>" +
+                            "<td>" +
+                                "<input type='button' class='btn btn-default' value='Remove' onclick='removeAnswerFromQuestion(\"#answer_" + answer_counter + "\")' required />" +
+                            "</td>" +
+                        "</tr>" +
+                        "</div>" +
+                    "</div>"+
+                "</div>";
     }
 
     $(document).ready(function () {
@@ -76,14 +78,14 @@
 
                 <div class="form-group">
                     <br>
-                    <label class="col-sm-2 control-label">Survey Name: </label>
+                    <label class="col-sm-1 control-label">Survey Name: </label>
 
-                    <div class="col-sm-4">
+                    <div class="col-sm-8">
                         <input type="text" class="form-control" name="survey_title" required><br>
                     </div>
                 </div>
                 <div class="form-group">
-                    <div class="col-sm-4 col-sm-offset-2">
+                    <div class="col-sm-8 col-sm-offset-2">
                         <input type="button" class="btn btn-default" id="add_question" value="Add a Question"><br><br>
                     </div>
                 </div>
