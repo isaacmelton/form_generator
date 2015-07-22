@@ -6,7 +6,7 @@ require_once('db/question_db.php');
 require_once('db/answer_db.php');
 
 // if ($_POST['submitted'] == false) {
-        $id = $_GET['survey'];
+        $id = $_GET['s'];
         $survey = get_survey($id);
         $questions = get_questions($id);
         $question_ids = get_question_ids_per_survey($id);
