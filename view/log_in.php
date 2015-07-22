@@ -36,7 +36,7 @@
                 </label>
 
                 <div class="col-sm-4">
-                    <input type="submit" name="submit" value="Log In">
+                    <input class="btn btn-default" type="submit" name="submit" value="Log In">
                 </div>
             </div>
             <div class="form-group">
