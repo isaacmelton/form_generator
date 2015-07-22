@@ -52,7 +52,7 @@ else: ?>
     </p>
     <form action="" method="post" id="aligned">
         <input type="hidden" name="action" value="surveys" />
-        <select name="survey_id">
+        <select class="form-control" name="survey_id">
             <?php foreach ($surveys as $survey): ?>
                 <option value="<?php echo $survey['id']; ?>">
                     <?php echo $survey['title']; ?>
@@ -61,7 +61,7 @@ else: ?>
         </select>
         <br />
         <br />
-        <input type="submit" value="Inspect" />
+        <input class="btn btn-default" type="submit" value="Inspect" />
     </form>
     <br />
 </div>
@@ -73,7 +73,7 @@ else: ?>
     </p>
     <form action="" method="post" id="aligned">
         <input type="hidden" name="action" value="authors" />
-        <select name="author_id">
+        <select class="form-control" name="author_id">
             <?php foreach ($authors as $author): ?>
                 <option value="<?php echo $author['id']; ?>">
                     <?php echo $author['email']; ?>
@@ -82,7 +82,7 @@ else: ?>
         </select>
         <br />
         <br />
-        <input type="submit" value="Investigate" />
+        <input class="btn btn-default" type="submit" value="Investigate" />
     </form>
     <br />
 </div>
@@ -95,7 +95,7 @@ else: ?>
     </p>
     <form action="" method="post" id="aligned">
         <input type="hidden" name="action" value="general" />
-        <input type="submit" value="Show Me" />
+        <input class="btn btn-default" type="submit" value="Show Me" />
     </form>
     <br />
 </div>
