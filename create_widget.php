@@ -9,14 +9,16 @@ require_once('db/login_db.php');
 
 $surveys = get_surveys();
 ?>
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 <script type="text/javascript">
 
 $(document).ready(function() {
-    $("select").change(function() {
-        var val = $(this).text();
-        $("#widget_code").text("<div id=\"the_widget_area\"></div><script type=\"text/javascript\" src=\"http://localhost/cs6290_webform_generator/js/widget.js\"><\/script><script type=\"text/javascript\">init_widget(" + val + ")<\/script>'");
-    }).change();
+    $("select").each(function() {
+        $(this).change(function() {
+            var val = $(this).val();
+            $("#widget_code").text("<div id=\"the_widget_area\"></div><script type=\"text/javascript\" src=\"http://localhost/cs6290_webform_generator/js/widget.js\"><\/script><script type=\"text/javascript\">init_widget(" + val + ")<\/script>");
+        });
+    });
 });
 </script>
 
