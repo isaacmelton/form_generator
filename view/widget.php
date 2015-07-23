@@ -28,7 +28,6 @@ $(document).ready(function() {
                 },
                 success: function(data) {
                     $("#the_widget_area").html("Your survey has been received.  Thank you for participating.");
-                    alert(data);
                 }
             });
         });
