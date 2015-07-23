@@ -21,7 +21,6 @@ require_once('../db/login_db.php');
 
 
 if (isset($_POST['submit'])) {
-echo 'made it this far: '.$_POST['submit'].'<br />'.'Oh and...'.$_POST['survey'];
     $questions = get_question_ids_per_survey($_POST['survey']);
     $now = date("Y-m-d H:i:s");
     $result_data = array();
