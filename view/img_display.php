@@ -8,4 +8,5 @@ function getRandomImage() {
     $random = array_rand( $images );
 
     return $images[$random];
+	
 }
